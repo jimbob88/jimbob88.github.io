@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Argand Diagrams</title>
+  </head>
+  <body>
+    <h1>Argand Diagrams</h1>
+    <p>
+      This guide already assumes you have a basic understanding of what a
+      complex number is!
+    </p>
+    <p>
+      We already know that there are two parts to a complex number, the "Real"
+      part and the "Imaginary" part. On CASIO Calculators, this is denoted by
+      the commands ReP and ImP respectively. This shorthand will be used in this
+      guide, as it is a nice shorthand.
+    </p>
+    <p>Let's take the following Complex Numbers:</p>
+
+    <code>
+      z1=1+1i <br />
+      z2=1+3i <br />
+      z3=−3+2i <br />
+      z4=−3+−2i <br />
+      z5=−2i <br />
+    </code>
+
+    <p>But, what is the easiest way to represent this data?</p>
+    <p>What if I were to rewrite z5 as:</p>
+    <code> z5=0+−2i </code>
+
+    <p>
+      Can you see, how every single complex number has two data points? The ReP
+      and the ImP!
+    </p>
+    <p>And, what is another way of storing 2-dimensional data?</p>
+    <p>A coordinate! i.e: (3,4), (−1,4), (1.31,√2)</p>
+
+    <pre>
+      +--  --+  +--  --+  +--  --+ 
+      |  01  |  | -14  |  |  -3  | 
+      |      |  |      |  |      | 
+      |  02  |  |   3  |  |  06  | 
+      +--  --+  +--  --+  +--  --+ 
+    </pre>
+
+    <p>
+      Or even in ij notation. (NOTE: I am hesitant to put this example in,
+      because some people may confuse the term i with the imaginary part i. I
+      have left this here anyway): x = i - j [WARNING: IN THIS NOTATION i IS THE
+      X-AXIS, THIS IS THE OPPOSITE FOR ARGAND DIAGRAMS!]
+    </p>
+
+    <p>But, how do we go about drawing these? A quick definition:</p>
+    <code>
+      Cartesian coordinates are coordinates in the form (x,y) <br />
+      Cartesian equations are equations in the form y=mx+c or x^2+y^2=r^2
+    </code>
+
+    <p>
+      Firstly:
+      <br />
+      - The ReP corresponds to the x-axis in a cartesian coordinate. <br />
+      - The ImP corresponds to the y-axis in a cartesian coordinate.
+    </p>
+
+    <pre>
+    Im |
+       |
+       |
+       |      Re
+-------+-------
+       |
+       |
+       |
+       |
+    </pre>
+
+    <p>
+      Now, let's look at the different ways that we can represent complex
+      numbers on a graph!
+    </p>
+    <h2>Using Cartesian Coordinates</h2>
+    <p>
+      The first way is to convert the complex number into a cartesian
+      coordinate! <br />
+      This is done in the following way: <br />
+      Let z be any complex number, as a cartesian coordinate this would be
+      (ReP(z),ImP(z)) .
+      <br />
+      This creates a new general way of writing complex numbers:<br />
+    </p>
+
+    <code>z=x+iy</code>
+    <p>
+      This form is extremely important later on, so you had better get used to
+      it!
+    </p>
+    <p>
+      A common way for an exam question to tell you to draw as a coordinate:<br />
+      > A complex number z is represented by the point P in the Argand Diagram
+    </p>
+
+    <pre>
+        Im  |                                       
+            | 2                                     
+            |                                       
+      3     |                                       
+            |                                       
+            | 1                                     
+            |                                       
+------------x-----------------                      
+            |              Re                       
+            |                                       
+            |                                       
+      4     5                                       
+            |                                       
+            |                                       
+            |                  
+
+    </pre>
+
+    <h2>Using vectors</h2>
+    <p>
+      The other way of representing a Complex Number is by drawing it as a
+      vector! <br />
+      This can be done using the form:
+    </p>
+    <pre>
+      +--    --+
+      | ReP(z) |
+      |        |
+      | ImP(z) |
+      +--    --+
+    </pre>
+    <p>
+      It is actually rather useful to show complex numbers in complex form,
+      because they follow a lot of the same rules as vectors!
+    </p>
+    <pre>
+   Im |     
+      | ^   
+      |/    
+ -----|-----
+      |   Re  
+      |     
+      |  z1 = 1 + 1i   
+    </pre>
+    <p>
+      So, you may be wondering, what is so good about representing this as a
+      vector?<br />
+      Well, what if I wanted to add two complex numbers?<br />
+
+      Let's create two new complex numbers: <br />
+    </p>
+
+    <code>
+      zA= 1 + 2i <br />
+      zB=-2 + 1i
+    </code>
+
+    <p>
+      Now, I warn you, this doesn't look very good in ASCII. I recommend
+      checking out the image-based version of this site, if you want to
+      understand it more easily!
+    </p>
+
+    <pre>
+        |     
+        | ^   
+        | |   
+    <-  |/    
+      \-||    
+--------|-----
+        |     
+        |     
+        |     
+    </pre>
+    <p>Adding these two complex numbers gives:</p>
+    <code>zA+zB=(1+2i)+(-2+1i)=(-1+3i)</code>
+    <p>Let's define this as zL</p>
+    <p>I warn you, the ascii art is about to get even worse!</p>
+    <pre>
+        |        
+      ^ |        
+      | |        
+      | | ^      
+       \| |      
+    <- ||/       
+      \|||       
+--------|--------
+        |        
+        |        
+        |        
+        |        
+        |        
+    </pre>
+
+    <p>
+      Can you see how this is just simple vector addition? <br />
+      No? <br />
+      Well, you probably can't tell this, because you are looking at ASCII art,
+      but I will ask you to do something. Go get a piece of squared paper, and
+      draw out these vectors! <br />
+      I still really recommend looking at the images for this area of maths,
+      because it will make your life 4000x easier (don't sue me if it doesn't)
+      <br />
+      Now that you've drawn the vectors, draw lines from the tip of your zA and
+      the tip of your zB to the tip of your zL vector! <br />
+      Can you see how the line you draw from zA to zL is the same as zB? <br />
+      And how the line from zB to zL is the same as zA? <br />
+      Hopefully you can see that it doesn't matter which way you add the complex
+      numbers, you get an end result that's the same!
+    </p>
+
+    <pre>
+      __
+      z = 1 + 1i  :  z = 1 - 1i
+       1              1
+                     __
+      z = 1 + 3i  :  z = 1 - 3i
+       2              2
+                     __
+      z =-3 + 2i  :  z =-3 - 2i
+       3              3
+                     __
+      z =-3 - 2i  :  z =-3 + 2i
+       4              4
+                     __
+      z = 0 - 2i  :  z = 0 + 2i
+       5              5
+    </pre>
+    <p>
+      Can you see what happened there? <br />
+
+      That's right, the conjugate of a complex number, is a reflection in the
+      x-axis!<br />
+
+      Also, notice that z4 is the conjugate of z3<br />
+
+      Therefore, given we put z5 into a vector c->:
+    </p>
+    <pre>
+      +--  --+
+      |  00  |
+  c = |      |
+      |  -2  |
+      +--  --+
+      
+      +--    --+ +--  --+    +--  --+
+      | 1    0 | |  00  |    |  00  |
+      |        |*|      | =  |      |
+      | 0   -1 | |  -2  |    |  +2  |
+      +--    --+ +--  --+    +--  --+
+    </pre>
+    <p>Therefore the conjugate of z5 is 2i.</p>
+    <h2>The Modulus Function</h2>
+    <p>
+      The Modulus Function |z| is quite simply a fancy way to write the
+      pythagorean theorem. Let's have a look at z2 (and |z2| respectively)
+    </p>
+    <p>It is exactly the same as vector mathematics!</p>
+    <pre>
+                    ^ 
+                   /| 
+                  / | 
+      √(3^2+1^2) /  | 
+                /   |3
+               /    | 
+              /     | 
+             /------- 
+                 1    
+    </pre>
+    <p>
+      As you can see, this is simply pythagoras completed on the right-angled
+      triangle of height 3, width 1. <br />
+
+      Knowing this, we can do this calculation for any complex number, without
+      needing to use a graph.
+    </p>
+    <code>
+      |z1| = √(1^2+1^2) = √2 <br />
+      |z2| = √(1^2+3^2) = √10<br />
+      |z3| = √[(-3)^2+2^2] = √13<br />
+      |z4| = √[(-3)^2+(-2)^2] = √13<br />
+      |z5| = √[0^2+(-2)^2] = 2
+    </code>
+
+    <p>
+      It is important to notice that both |z3| and |z4| are equal, even though
+      their complex numbers are different!
+    </p>
+    <p>Therefore, |z| = |conj z|</p>
+    <h2>The Argument Function</h2>
+    <p>
+      The argument of a complex number, often written as Arg or arg. <br />
+
+      This can be understood as the angle of the vector. Let's take the example
+      of our previous z2 complex! <br />
+
+      And our question is: What is Arg(z2)?<br />
+    </p>
+    <pre>
+              ^ 
+              /| 
+             / | 
+ √(3^2+1^2) /  | 
+           /   |3
+          /    | 
+         /\?   | 
+        /--\---- 
+            1  
+    </pre>
+    <p>The argument is the calculation of what angle is at "?"</p>
+    <p>
+      Well, if you have a look at it, it's just a right angled triangle.<br />
+      After seeing this, you may've been tempted to do this on your calculator:
+      <br />
+      NOTE: tan^-1 = arctan
+    </p>
+    <code>
+      tan x = 3/1 <br />
+      arctan 3/1 = x <br />
+      71.565... x
+    </code>
+    But, you'd be very slightly wrong. The actual answer is:
+    <code> 1.249... = x </code>
+    <p>
+      At this point, you've probably started to cry tears of pain. "WHY IS THE
+      NUMBER SO SMALL?" I hear you cry. <br />
+
+      Welcome to the world of radians! <br />
+
+      You are probably used to the following facts: <br />
+    </p>
+    <code>
+      1 circle=360 deg <br />
+      1 square=360 deg <br />
+      1 triangle=180 deg <br />
+    </code>
+    <p>The "conversion rate" for radians is the following:</p>
+    <code>
+      1 circle=pi rad <br />
+      1 square=pi rad <br />
+      1 triangle=pi/2 rad <br />
+    </code>
+    <p>
+      The symbol we use is ^c, don't ask me why we don't use ^r. NOTE: CASIO
+      calculators use ^r.
+    </p>
+    <p>
+      The most important conversion rate here is π rad = 180 deg. You will most
+      likely use this conversion every time you draw an Argand Diagram, so try
+      and memorise it!
+    </p>
+    <p>
+      Now for something slightly confusing, we need to look at the way angles
+      are measured on an argand diagram!
+    </p>
+    <pre> > All the angles are measured from the POSITIVE X-AXIS.</pre>
+    <p>But what does this actually mean???</p>
+    <p>
+      Firstly, draw one of your complex numbers as a vector! <br />
+      Then draw the shortest angle you can, from the point (1,0) on the diagram!
+      <br />
+      When the angle goes underneath the x-axis (the complex number has a
+      negative y-value), the radian will be -. <br />
+      When it is above, the radian is positive!
+    </p>
+    <h2>Using Dot Products to calculate the angle!</h2>
+    <p>
+      A lot of teachers have different ways to teach this next section, but I
+      will use my own method, because it's what I find easiest!
+    </p>
+    <pre>
+         (x  * x )*(y  * y )
+           a    b    a    b
+cos x = --------------------
+               |a|*|b|
+    </pre>
+    <pre>
+               +-                   -+
+               | (x  * x )*(y  * y ) |
+        -1     |   a    b    a    b  |
+x =  cos       |-------------------- |
+               |       |a|*|b|       |
+               +-                   -+
+    </pre>
+    <p>Let's try this with some actual numbers!</p>
+    <pre>
+      +--  --+      +--  --+
+      |  01  |      |  -3  |
+  a = |      |, b = |      |
+      |  02  |      |   3  |
+      +--  --+      +--  --+
+    </pre>
+    <p>
+      Now, we know that |a|=√[x^2+y^2] and |b|=√[x^2+y^2] (REMEMBER: it's just
+      pythagoras)
+    </p>
+    <pre>
+               +-                   -+
+               | (x  * x )*(y  * y ) |
+        -1     |   a    b    a    b  |
+x =  cos       |-------------------- |
+               |√[x^2+y^2]*√[x^2+y^2]|
+               |   a   a      b   b  |
+               +-                   -+
+    </pre>
+    <p>Now let's subsititute the numbers we have from the vertex</p>
+    <pre>
+               +-                    -+
+        -1     |(1  * -3 )*(2  * 3 )  |
+x =  cos       |--------------------- |
+               |√[1^2+2^2]*√[-3^2+2^2]|
+               +-                    -+
+x = arccos(3/10)
+x = ~75.242... deg = ~1.266... rad (~ is shorthand for roughly)
+    </pre>
+    <p>
+      "But James!!! This is longer and harder than what my teacher has taught
+      me???" I hear you again! <br />
+
+      Do you remember how I said earlier that all the calculations are done
+      based off the angle between the positive x-axis, and the complex? <br />
+
+      Well, what vector represents the x-axis? <br />
+    </p>
+    <pre>
+      +--  --+
+      |  01  |
+  x = |      |
+      |  00  |
+      +--  --+
+    </pre>
+    <code> Now let's let a=x </code>
+    <pre>
+               +-                   -+
+               | (1  * x )*(0  * y ) |
+        -1     |        b         b  |
+x =  cos       |-------------------- |
+               |√[1^2+0^2]*√[x^2+y^2]|
+               |              b   b  |
+               +-                   -+
+    </pre>
+    <p>This can then be simplified</p>
+    <pre>
+               +-        -+
+        -1     |    x     |     
+x =  cos       |----------|
+               |√[x^2+y^2]|
+               |   b   b  |
+               +-        -+
+    </pre>
+    <p>
+      Voila! James' fancy formula!<br />
+
+      For example, the angle for z3 was found using the following formula:
+    </p>
+    <pre>
+               +-         -+
+        -1     |    -3     |     
+x =  cos       |-----------|
+               |√[-3^2+2^2]|
+               +-         -+
+x = 2.55359... rad
+    </pre>
+  </body>
+</html>
