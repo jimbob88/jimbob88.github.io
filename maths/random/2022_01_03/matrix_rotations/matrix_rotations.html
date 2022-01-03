@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Matrix Rotations</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<!-- xhtml,svg,html --> 
+<meta name="src" content="matrix_rotations.tex" /> 
+<link rel="stylesheet" type="text/css" href="matrix_rotations.css" /> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead">Matrix Rotations</h2>
+<div class="author" ><span 
+class="cmr-12">James Blackburn</span></div><br />
+<div class="date" ><span 
+class="cmr-12">January 2022</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Using the angle between two vectors</h3>
+<!--l. 12--><p class="noindent" >First of all, we can define the 2x2 matrix inversion in the variable <span 
+class="cmmib-10">R</span> as:
+</p><table 
+class="gather"><tr><td class="gather1"><img 
+src="matrix_rotations0x.svg" alt="Where &#x03B8; is the anti- clockwise angle of rotation.
+               [cos&#x03B8;  - sin&#x03B8;]
+           R =  sin&#x03B8;   cos &#x03B8;
+"  /><a 
+ id="x1-1003r1"></a><a 
+ id="x1-1004r2"></a></td><td class="equation-label"><br />(1)<br /><br />(2)<br /></td></tr></table>The general form of vectors is:
+   <table 
+class="gather"><tr><td class="gather1"><img 
+src="matrix_rotations1x.svg" alt="    [ ]
+     x
+&#x20D7;v =  y
+"  /><a 
+ id="x1-1006r3"></a></td><td class="equation-label"><br />(3)<br /></td></tr></table>Now let&#8217;s take the identity matrix:
+   <table 
+class="gather"><tr><td class="gather1"><img 
+src="matrix_rotations2x.svg" alt="    [   ]
+I =  1 0
+     0 1
+"  /><a 
+ id="x1-1008r4"></a></td><td class="equation-label"><br />(4)<br /></td></tr></table>Now, let&#8217;s take the vector of the positive x-axis and the positive y-axis:
+                                                                  
+
+                                                                  
+   <table 
+class="gather"><tr><td class="gather1"><img 
+src="matrix_rotations3x.svg" alt="    [ ]
+&#x20D7;a =  1
+     0
+&#x20D7;   [0]
+b =  1
+"  /><a 
+ id="x1-1011r5"></a><a 
+ id="x1-1012r6"></a></td><td class="equation-label"><br />(5)<br /><br />(6)<br /></td></tr></table>And rotate this by the matrix <span 
+class="cmmib-10">R</span>:
+   <table 
+class="gather"><tr><td class="gather1"><img 
+src="matrix_rotations4x.svg" alt="    [           ][ ]   [    ]
+&#x20D7;c = cos&#x03B8;  - sin&#x03B8; 1  =  cos&#x03B8;
+     sin &#x03B8;  cos&#x03B8;   0     sin &#x03B8;
+&#x20D7;  [cos&#x03B8;  - sin&#x03B8;] [0]  [- sin &#x03B8;]
+d = sin&#x03B8;   cos&#x03B8;   1 =   cos&#x03B8;
+"  /><a 
+ id="x1-1015r7"></a><a 
+ id="x1-1016r8"></a></td><td class="equation-label"><br />(7)<br /><br />(8)<br /></td></tr></table>
+<!--l. 40--><p class="indent" >   Using this function, we can give evidence of the dot product between two vectors.
+<br 
+class="newline" />The dot product is defined as such (where <span 
+class="cmmi-10">a </span>and <span 
+class="cmmi-10">b </span>are random variables):
+</p>
+   <div 
+class="gather-star"><img 
+src="matrix_rotations5x.svg" alt="cos&#x03B8; = xa &#x00D7;-xb +-ya &#x00D7;-yb
+           |a|&#x00D7; |b| "  /></div>This
+can be re-arranged to find <span 
+class="cmmi-10">&#x03B8; </span>(theta): <div 
+class="gather-star"><img 
+src="matrix_rotations6x.svg" alt="         (               )
+&#x03B8; = cos-1  xa &#x00D7;-xb +-ya &#x00D7;-yb
+               |&#x20D7;a|&#x00D7; |&#x20D7;b| "  /><a 
+ id="x1-10001"></a></div>Now
+let&#8217;s find the rotation between <img 
+src="matrix_rotations7x.svg" alt="&#x20D7;a"  class="vec"  /> &amp; <img 
+src="matrix_rotations8x.svg" alt="&#x20D7;c"  class="vec"  /> and <img 
+src="matrix_rotations9x.svg" alt="&#x20D7;b"  class="vec"  /> &amp; <img 
+src="matrix_rotations10x.svg" alt="&#x20D7;d"  class="vec"  /> : <table 
+class="gather"><tr><td class="gather1"><img 
+src="matrix_rotations11x.svg" alt="          (                            )
+        -1  -----1&#x00D7;-cos&#x03B8;-+-0&#x00D7;-sin&#x03B8;------
+ &#x03B8;1 = cos   &#x221A;12-+-02 &#x00D7; &#x2218; (cos-&#x03B8;)2 +-(sin-&#x03B8;)2
+             (                         )
+      = cos-1  ----------c&#x2218;os&#x03B8;----------
+               &#x221A;12-+-02 &#x00D7;  cos2 &#x03B8;+ sin2&#x03B8;
+                                 (cos&#x03B8; )
+                          = cos-1  -----
+                                  1 &#x00D7;1
+                            = cos- 1(cos&#x03B8;)
+                                     = &#x03B8;
+          (                            )
+&#x03B8;2 = cos-1  &#x221A;----0-&#x00D7;--s&#x2218;in&#x03B8;+-1-&#x00D7;cos&#x03B8;------
+             02 + 12 &#x00D7; (- sin&#x03B8;)2 + (cos&#x03B8;)2
+              (           cos&#x03B8;         )
+       = cos-1  &#x221A;---------&#x2218;-------------
+                  02 + 12 &#x00D7; sin2&#x03B8; +( cos2&#x03B8; )
+                               -1  cos&#x03B8;-
+                           = cos    1&#x00D7; 1
+                             = cos-1 (cos&#x03B8;)
+
+                                      = &#x03B8;
+"  /><a 
+ id="x1-1019r9"></a><a 
+ id="x1-1020r10"></a></td><td class="equation-label"><br />(9)<br /><br />(10)<br /></td></tr></table>Therefore, we have proved that the rotation matrix <span 
+class="cmmib-10">R</span> rotates a vector by the
+angle <span 
+class="cmmi-10">&#x03B8;</span>.
+                                                                  
+
+                                                                  
+   <div class="minipage"><!--l. 70--><p class="noindent" >Alongside this proof, we have also managed to prove another fact: Given any
+2d matrix, one can instantly tell if it&#8217;s a rotation matrix by the following test:
+</p>
+<table 
+class="gather"><tr><td class="gather1"><img 
+src="matrix_rotations12x.svg" alt="     [    ]
+A  =  a  b
+&#x2218; ----c- d
+  a2 + c2 = 1
+&#x2218; -2---2
+  b + d = 1
+"  /><a 
+ id="x1-1024r11"></a><a 
+ id="x1-1025r12"></a><a 
+ id="x1-1026r13"></a></td><td class="equation-label"><br />(11)<br /><br />(12)<br /><br />(13)<br /></td></tr></table><div 
+class="gather-star"><img 
+src="matrix_rotations13x.svg" alt="Because:
+"  /></div><table 
+class="gather"><tr><td class="gather1"><img 
+src="matrix_rotations14x.svg" alt="&#x2218; ------------
+&#x2218; cos2&#x03B8;+-sin2&#x03B8;-= 1
+  sin2&#x03B8;+ cos2&#x03B8; = 1
+"  /><a 
+ id="x1-1029r14"></a><a 
+ id="x1-1030r15"></a></td><td class="equation-label"><br />(14)<br /><br />(15)<br /></td></tr></table>
+</div>
+<!--l. 87--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>Clockwise or anti-clockwise</h3>
+<!--l. 89--><p class="noindent" >Considering that a rotation is always going to be in the range 0 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>360 and
+considering the 3 functions we use in the matrix <span 
+class="cmmib-10">R</span> are sin<span 
+class="cmmi-10">&#x03B8;</span>, cos<span 
+class="cmmi-10">&#x03B8; </span>and <span 
+class="cmsy-10">-</span>sin<span 
+class="cmmi-10">&#x03B8;</span>, we can
+plot these functions onto a graph:
+                                                                  
+
+                                                                  
+</p><!--l. 120--><p class="indent" >            <img 
+src="matrix_rotations15x.svg" alt="      sin &#x03B8;
+      cos&#x03B8;
+0611233--001&#x03B8;f028406 1 0.5(00000.&#x03B8;5)  -sin&#x03B8;  "  />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Domain: 0 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>360, Range: <span 
+class="cmsy-10">-</span>1 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">f</span>(<span 
+class="cmmi-10">&#x03B8;</span>) <span 
+class="cmsy-10">&#x2264; </span>1</span></div><!--tex4ht:label?: x1-20011 -->
+   <div class="minipage"><!--l. 124--><p class="noindent" >Now, let&#8217;s consider what an anti-clockwise and clockwise rotation actually is.
+Because we know that the matrix <span 
+class="cmmib-10">R</span> gives an anti-clockwise rotation, we know
+that 0 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>180 is anti-clockwise, hence 180 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>360 is clockwise.
+</p></div>
+   Let&#8217;s zoom in to the cos<span 
+class="cmmi-10">&#x03B8; </span>graph:
+<!--l. 152--><p class="indent" >            <img 
+src="matrix_rotations16x.svg" alt="        cos&#x03B8; acw
+0611233--001&#x03B8;f028406 1 0.5(&#x03B8;00000.)5    cos&#x03B8; cw  "  />
+                                                                  
+
+                                                                  
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">Domain: 0 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>360, Range: <span 
+class="cmsy-10">-</span>1 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">f</span>(<span 
+class="cmmi-10">&#x03B8;</span>) <span 
+class="cmsy-10">&#x2264; </span>1</span></div><!--tex4ht:label?: x1-20022 -->
+   Can you see how it doesn&#8217;t matter whether the rotation is clockwise or
+anti-clockwise? It is negative or positive in either of these cases. This means
+we can forget about the cosine graph for now! Let&#8217;s move onto sin<span 
+class="cmmi-10">&#x03B8; </span>and
+<span 
+class="cmsy-10">-</span>sin<span 
+class="cmmi-10">&#x03B8;</span>!
+<!--l. 181--><p class="indent" >            <img 
+src="matrix_rotations17x.svg" alt="      sin &#x03B8;
+0611233--001&#x03B8;f028406 1 0.5(&#x03B8;00000.)5  -sin&#x03B8;  "  />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;3: </span><span  
+class="content">Domain: 0 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>360, Range: <span 
+class="cmsy-10">-</span>1 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">f</span>(<span 
+class="cmmi-10">&#x03B8;</span>) <span 
+class="cmsy-10">&#x2264; </span>1</span></div><!--tex4ht:label?: x1-20033 -->
+   Can you see how the graphs converge at 180<sup><span 
+class="cmmi-7">o</span></sup>? This means that in the domain
+0 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>180 (anti-clockwise), 0 <span 
+class="cmsy-10">&#x2264;</span> sin<span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>1 and <span 
+class="cmsy-10">-</span>1 <span 
+class="cmsy-10">&#x2264;-</span>sin<span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>0. Hence, for the
+domain 180 <span 
+class="cmsy-10">&#x2264; </span><span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>360 (clockwise), <span 
+class="cmsy-10">-</span>1 <span 
+class="cmsy-10">&#x2264;</span> sin<span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264; </span>0 and 0 <span 
+class="cmsy-10">&#x2264;-</span>sin<span 
+class="cmmi-10">&#x03B8; </span><span 
+class="cmsy-10">&#x2264;-</span>1.
+<!--l. 186--><p class="indent" >   But what does this actually mean for a mathematician? Well, it means, given the
+following rotation matrix:
+</p><!--l. 188--><p class="indent" >
+</p>
+   <div class="math-display" >
+<img 
+src="matrix_rotations18x.svg" alt="    &#x230A;       &#x221A;-&#x230B;
+      1   - -3-
+B = &#x2308; 2&#x221A;-    2 &#x2309;
+      23-   12
+" class="math-display"  /></div>
+<!--l. 190--><p class="indent" >   We can see that <span 
+class="cmmib-10">B</span><sub><span 
+class="cmr-7">12</span></sub> (the top right corner) is negative. Therefore, it is an
+anticlockwise rotation!
+</p><!--l. 192--><p class="indent" >   Now let&#8217;s take another matrix <span 
+class="cmmib-10">C</span>:
+</p><!--l. 194--><p class="indent" >
+</p>
+   <div class="math-display" >
+<img 
+src="matrix_rotations19x.svg" alt="    [  1--  1-]
+       &#x221A;2   &#x221A;2
+C =   -&#x221A;1-  1&#x221A;--
+         2   2
+" class="math-display"  /></div>
+<!--l. 196--><p class="indent" >   We can see that <span 
+class="cmmib-10">C</span><sub><span 
+class="cmr-7">21</span></sub> (the bottom left corner) is negative. Therefore, it is a
+clockwise rotation!
+</p>
+    
+</body></html> 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+
