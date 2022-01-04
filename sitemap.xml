@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://jimbob88.github.io/</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/random/index.html</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/fp/index.html</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/fd/index.html</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/programming/python.html</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/random/2022_01_03/matrix_rotations/matrix_rotations.html</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/random/2022_01_03/matrix_rotations/matrix_rotations.pdf</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/random/2022_01_03/quadratics/quadratics.html</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/random/2022_01_03/quadratics/quadratics.pdf</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/fp/cn_f/index.html</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/fp/ad_f/index_clean.html</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/fp/ad_f/index.html</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://jimbob88.github.io/maths/fd/nn_programming/index.html</loc>
+  <lastmod>2022-01-04T18:24:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
