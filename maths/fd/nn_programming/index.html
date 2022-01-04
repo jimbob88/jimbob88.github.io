@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Programming Nearest Neighbour</title>
+  </head>
+  <body>
+    <h1>Programming the Nearest Neighbour Algorithm</h1>
+    <h2>CBASIC</h2>
+    <h3>The Code</h3>
+    <p>
+      This code was written on an fx-9860gii using the
+      <a
+        href="https://egadget2.web.fc2.com/CBasic/Interpreter/CBasic_interpreter.html"
+        >C-Basic software</a
+      >
+    </p>
+    <pre>
+    <code>
+'ProgramMode:RUN
+[[1Exp6,27,12,23,74][27,1Exp6,47,15,71][12,47,1Exp6,28,87][23,15,28,1Exp6,75][74,71,87,75,1Exp6]]->Mat A
+Mat A
+1->S
+5->L
+Mat A->Mat B
+{2,L}->Dim Mat V
+Fill(0,Mat V)
+
+For 1->J To L
+1Exp6->Mat B[S,J]
+Next
+1->V
+S->Mat V[1,V]
+Lbl R
+1Exp6->T
+For 1->I To L
+If Mat B[I,Mat V[1,V]]&lt;=T
+Then 
+Mat B[I,Mat V[1,V]]->T
+I->n
+IfEnd
+Next
+V+1->V
+n->Mat V[1,V]
+T->Mat V[2,V]
+For 1->J To L
+1Exp6->Mat B[Mat V[1,V],J]
+Next
+V=L=>Goto E
+Goto R
+Lbl E
+Mat V
+Stop
+        
+    </code>
+    </pre>
+    <h3>Code Breakdown</h3>
+    <code>
+      'ProgramMode:RUN<br />
+      [[1Exp6,27,12,23,74][27,1Exp6,47,15,71][12,47,1Exp6,28,87][23,15,28,1Exp6,75][74,71,87,75,1Exp6]]->Mat
+      A
+    </code>
+    <p>This code defines a distance matrix that looks like so:</p>
+    <pre>
+        A  B  C  D  E     
+        +---------------   
+       A|-  27 12 23 74    
+       B|27 -  47 15 71    
+       C|12 47 -  28 87    
+       D|23 15 28 -  75    
+       E|74 71 87 75 - 
+    </pre>
+    <p>
+      I substituted the "-" with 1x10^6 because this is a reasonably large
+      number, that won't be exceeded by common distance matrices.
+    </p>
+    <code>
+      1->S <br />
+      5->L <br />
+      Mat A->Mat B
+    </code>
+    <p>
+      Defines the starting vertex (S) as 1. Defines the length of the square
+      distance matrix (L) to be 5. Creates a back-up of Matrix A into Matrix B
+    </p>
+    <code>
+      {2,L}->Dim Mat V<br />
+      Fill(0,Mat V)
+    </code>
+    <p>
+      Creates a 2xL (dimension length) matrix, which will store the order of
+      visited vertices. Makes all the values equal to 0.
+    </p>
+    <code>
+      For 1->J To L <br />
+      1Exp6->Mat B[S,J] <br />
+      Next
+    </code>
+    <p>
+      "Crosses" out the starting vertex row, essentially making all its values
+      too big to be chosen!
+    </p>
+    <code>
+      1->V<br />
+      S->Mat V[1,V]
+    </code>
+    <p>
+      Counts the number of visited vertices in the variable V. Clearly, when
+      starting at a vertex, the number of visited vertices is 1. It stores the
+      first vertex into the first row of the Mat V
+    </p>
+    <code>
+      Lbl R <br />
+      1Exp6->T<br />
+      For 1->I To L<br />
+      If Mat B[I,Mat V[1,V]]&lt;=T<br />
+      Then <br />
+      Mat B[I,Mat V[1,V]]->T<br />
+      I->n<br />
+      IfEnd<br />
+      Next
+    </code>
+    <p>
+      - Creates a new subroutine labeled "R". <br />
+      - Sets the lowest value of the list to be 1e6. <br />
+      - Iterates through all the variables in the most recently visited vertex.
+      <br />
+      - Stores the smallest value in T, and it's position as n.
+    </p>
+    <code>
+      V+1->V <br />
+      n->Mat V[1,V] <br />
+      T->Mat V[2,V]
+    </code>
+    <p>
+      - Increases the number of visited vertices by 1. <br />
+      - Stores the vertex which was visited in the matrix V, row 1 <br />
+      - Stores the distance in the matrix V, row 2
+    </p>
+    <code>
+      For 1->J To L <br />
+      1Exp6->Mat B[Mat V[1,V],J] <br />
+      Next
+    </code>
+    <p>"Crosses out" the last vertex to be visited</p>
+    <code>
+      V=L=>Goto E <br />
+      Goto R <br />
+      Lbl E <br />
+      Mat V <br />
+      Stop
+    </code>
+    <p>
+      If all vertices have been visited, finish loop and print the algorithm's
+      result, else repeat
+    </p>
+  </body>
+</html>
