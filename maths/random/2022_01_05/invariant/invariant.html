@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Invariant Points and Lines</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<!-- xhtml,svg,html --> 
+<meta name="src" content="invariant.tex" /> 
+<link rel="stylesheet" type="text/css" href="invariant.css" /> 
+</head><body 
+>
+   <div class="maketitle">
+
+
+
+<h2 class="titleHead">Invariant Points and Lines</h2>
+<div class="author" ><span 
+class="cmr-12">James Blackburn</span></div><br />
+<div class="date" ><span 
+class="cmr-12">January 2022</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Definitions</h3>
+<!--l. 13--><p class="noindent" >
+     </p><dl class="description"><dt class="description">
+     <!--l. 14--><p class="noindent" >
+<span 
+class="cmbx-10">Matrix Transformation</span> </p></dt><dd 
+class="description">
+     <!--l. 14--><p class="noindent" >A linear transformation represented by a 2x2 matrix.
+     </p></dd><dt class="description">
+     <!--l. 15--><p class="noindent" >
+<span 
+class="cmbx-10">Invariant Point</span> </p></dt><dd 
+class="description">
+     <!--l. 15--><p class="noindent" >A point (coordinate) that is not changed by a matrix transformation.
+     </p></dd><dt class="description">
+     <!--l. 16--><p class="noindent" >
+<span 
+class="cmbx-10">Invariant Line</span> </p></dt><dd 
+class="description">
+     <!--l. 16--><p class="noindent" >A  line  (in  the  form  <span 
+class="cmmi-10">y  </span>=  <span 
+class="cmmi-10">mx </span>+ <span 
+class="cmmi-10">c</span>),  which  is  not  effected  by  a  matrix
+     transformation.
+     </p></dd><dt class="description">
+     <!--l. 17--><p class="noindent" >
+<span 
+class="cmbx-10">Line of invariant points</span> </p></dt><dd 
+class="description">
+     <!--l. 17--><p class="noindent" >A line of points which are individually all invariant points.</p></dd></dl>
+
+<!--l. 20--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>Calculating matrix transformations</h3>
+<!--l. 21--><p class="noindent" >Matrix transformations are extremely simple and can be done in the following
+way:
+     </p><ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-2002x1">
+     <!--l. 23--><p class="noindent" >Define the transformation matrix i.e.: <img 
+src="invariant0x.svg" alt="    [       ]
+T =   0  - 1
+     - 1  0 "  class="math"  /> (reflection in the
+     line <span 
+class="cmmi-10">y </span>= <span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">x</span>)
+     </p></li>
+<li 
+  class="enumerate" id="x1-2004x2">
+     <!--l. 25--><p class="noindent" >Multiply this by a point i.e.: <img 
+src="invariant1x.svg" alt="     [  ]
+v&#x20D7;1 =  2
+      - 1 "  class="math"  />
+     </p></li>
+<li 
+  class="enumerate" id="x1-2006x3">
+     <!--l. 26--><p class="noindent" >Multiply the two values <img 
+src="invariant2x.svg" alt="         [      ] [  ]   [  ]
+T &#x00D7; v&#x20D7; =  0   - 1  2   =  1
+     1    - 1  0   - 1    - 2 "  class="math"  /></p></li></ol>
+<!--l. 29--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-30003"></a>Finding invariant points</h3>
+<!--l. 30--><p class="noindent" >First of all, the origin <img 
+src="invariant3x.svg" alt="[ ]
+ 0
+ 0"  class="left" align="middle" /> is never effected by a linear transformation. Why?
+</p><div class="minipage">     <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-3002x1">
+     <!--l. 33--><p class="noindent" >Define the transformation: <img 
+src="invariant4x.svg" alt="    [a  b]
+T =  c  d "  class="math"  />
+     </p></li>
+<li 
+  class="enumerate" id="x1-3004x2">
+     <!--l. 35--><p class="noindent" >Define the vertex <img 
+src="invariant5x.svg" alt="[ ]
+ 0
+ 0"  class="left" align="middle" />
+     </p></li>
+<li 
+  class="enumerate" id="x1-3006x3">
+     <!--l. 36--><p class="noindent" >Multiply the matrix by the vertex: <img 
+src="invariant6x.svg" alt="[    ][ ]   [           ]  [ ]
+ a  b  0  =  a&#x00D7; 0 +b &#x00D7; 0 =  0
+ c  d  0     c&#x00D7; 0+ d &#x00D7; 0    0 "  class="math"  /></p></li></ol>
+</div> <br 
+class="newline" />To find a line of invariant poins from the matrix <img 
+src="invariant7x.svg" alt="[       ]
+  0   - 1
+ - 1  0"  class="left" align="middle" /> (reflection in the line
+<span 
+class="cmmi-10">y </span>= <span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">x</span>)
+     <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-3008x1">
+     <!--l. 42--><p class="noindent" >Define the equation: <img 
+src="invariant8x.svg" alt="[       ]
+  0  - 1
+ - 1  0"  class="left" align="middle" /><img 
+src="invariant9x.svg" alt=" [ ]
+ x
+ y"  class="left" align="middle" /> = <img 
+src="invariant10x.svg" alt="[ ]
+ x
+ y"  class="left" align="middle" />
+     </p></li>
+<li 
+  class="enumerate" id="x1-3010x2">
+     <!--l. 43--><p class="noindent" >Multiply it out to give: <img 
+src="invariant11x.svg" alt="[- y]
+ - x"  class="left" align="middle" /> = <img 
+src="invariant12x.svg" alt="[x]
+ y"  class="left" align="middle" />
+     </p></li>
+<li 
+  class="enumerate" id="x1-3012x3">
+     <!--l. 44--><p class="noindent" >Then expand that to the equations: <span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">y </span>= <span 
+class="cmmi-10">x </span>and <span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">x </span>= <span 
+class="cmmi-10">y</span>
+     </p></li>
+<li 
+  class="enumerate" id="x1-3014x4">
+     <!--l. 45--><p class="noindent" >Rearrange this to give: <span 
+class="cmmi-10">y </span>= <span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">x </span>and <span 
+class="cmmi-10">y </span>= <span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">x</span>.
+     </p></li>
+<li 
+  class="enumerate" id="x1-3016x5">
+     <!--l. 46--><p class="noindent" >Clearly these are both the same, therefore, all the points are not effected
+     by the reflection in the line <span 
+class="cmmi-10">y </span>= <span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">x </span>(this makes logical sense)</p></li></ol>
+
+   <div class="minipage"><h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-40004"></a>Finding invariant lines</h3>
+<!--l. 51--><p class="noindent" >Invariant lines are different to &#8221;lines of invaraint points&#8221; because the individual
+points on the line can move, but the line itself remains the same!
+</p><!--l. 53--><p class="noindent" >The best way to work this out (in my opinion):
+</p><!--l. 55--><p class="noindent" >
+       </p><ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-4002x1">
+       <!--l. 56--><p class="noindent" >Define the matrix transformation in the variable <span 
+class="cmmib-10">T</span>:
+       </p><!--l. 58--><p class="noindent" ><img 
+src="invariant13x.svg" alt="    [     ]
+T =  - 1 1
+     - 4 3 "  class="math"  />
+    </p></li>
+<li 
+  class="enumerate" id="x1-4004x2">
+    <!--l. 59--><p class="noindent" >Multiply the transformation by the general formula for lines <span 
+class="cmmi-10">y </span>= <span 
+class="cmmi-10">mx </span>+ <span 
+class="cmmi-10">c</span>
+      and <span 
+class="cmmi-10">y </span>= <span 
+class="cmmi-10">mx</span><sup><span 
+class="cmsy-7">&#x2032;</span></sup> + <span 
+class="cmmi-10">c</span>.
+       </p></li>
+<li 
+  class="enumerate" id="x1-4006x3">
+       <!--l. 61--><p class="noindent" >
+       </p><!--l. 62--><p class="noindent" ><img 
+src="invariant14x.svg" alt="[- 1 1][   x  ]   [  x&#x2032;  ]
+ - 4 3  mx  + c =  mx &#x2032; + c "  class="math"  />
+    </p></li>
+<li 
+  class="enumerate" id="x1-4008x4">
+    <!--l. 64--><p class="noindent" ><img 
+src="invariant15x.svg" alt="              &#x2032;                    &#x2032;
+- x + mx + c = x - 4x + 3(mx + c) = mx + c  "  class="math"  />
+      </p></li>
+<li 
+  class="enumerate" id="x1-4010x5">
+      <!--l. 66--><p class="noindent" >Substitute the value <span 
+class="cmmi-10">x</span><sup><span 
+class="cmsy-7">&#x2032;</span></sup> into the second formula!
+</p>
+       <table 
+class="equation"><tr><td>
+<div class="math-display" >
+<img 
+src="invariant16x.svg" alt="    - 4x + 3(mx + c) = m(- x+ mx + c)+ c
+                             2
+    - 4x+ 3mx + 3c = - mx + m x+ mc + c
+            2c - mc = - 4mx + m2x + 4x
+           c(2 - m) = x(- 4m + m2 + 4)
+                        2
+           c(2 - m) = x(m  - 4m + 4)
+           c(2 - m) = x(m  - 2)2
+x(m - 2)2 - c(2 - m) = 0
+        2
+x(m - 2) + c(m  - 2) = 0
+" class="math-display"  /><a 
+ id="x1-4011r1"></a></div>
+       </td><td class="equation-label">(1)</td></tr></table>
+       <!--l. 78--><p class="nopar" >
+       </p></li>
+<li 
+  class="enumerate" id="x1-4013x6">
+       <!--l. 79--><p class="noindent" >You can see, to solve this formula for <span 
+class="cmmi-10">m</span>, <span 
+class="cmmi-10">m </span>= 2
+       </p></li>
+<li 
+  class="enumerate" id="x1-4015x7">
+       <!--l. 80--><p class="noindent" >Rewrite the formula with the value <span 
+class="cmmi-10">m </span>= 2
+       </p></li>
+<li 
+  class="enumerate" id="x1-4017x8">
+       <!--l. 81--><p class="noindent" >Therefore, we can write the following formula: <span 
+class="cmmi-10">y </span>= 2<span 
+class="cmmi-10">x </span>+ <span 
+class="cmmi-10">c</span>
+      </p></li>
+<li 
+  class="enumerate" id="x1-4019x9">
+      <!--l. 82--><p class="noindent" >Where <span 
+class="cmmi-10">c </span>is any value!
+       </p></li>
+<li 
+  class="enumerate" id="x1-4021x10">
+       <!--l. 83--><p class="noindent" >Therefore there is an invariant line for all lines with the gradient 2</p></li></ol>
+
+</div>
+    
+</body></html> 
+
+
+

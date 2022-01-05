@@ -1,0 +1,92 @@
+\documentclass{article}[12pt]
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{pgfplots, capt-of}
+%\pgfplotsset{width=10cm,compat=1.9}
+\title{Invariant Points and Lines}
+\author{James Blackburn}
+\date{January 2022}
+\begin{document}
+\maketitle
+\section{Definitions}
+\begin{description}
+\item[Matrix Transformation] A linear transformation represented by a 2x2 matrix.
+\item[Invariant Point] A point (coordinate) that is not changed by a matrix transformation.
+\item[Invariant Line] A line (in the form $y=mx+c$), which is not effected by a matrix transformation.
+\item[Line of invariant points] A line of points which are individually all invariant points.
+\end{description}
+
+\section{Calculating matrix transformations}
+Matrix transformations are extremely simple and can be done in the following way:
+\begin{enumerate}
+\item Define the transformation matrix i.e.:
+ \(\boldsymbol{T} = \begin{bmatrix} 0 & -1 \\ -1 & 0\end{bmatrix}\) (reflection in the line $y=-x$)
+\item Multiply this by a point i.e.: \(\vec{v_1} = \begin{bmatrix} 2 \\ -1\end{bmatrix}\)
+\item Multiply the two values \(\boldsymbol{T} \times \vec{v_1} = \begin{bmatrix} 0 & -1 \\ -1 & 0\end{bmatrix}\begin{bmatrix} 2 \\ -1\end{bmatrix} = \begin{bmatrix} 1 \\ -2\end{bmatrix}\)
+\end{enumerate}
+
+\section{Finding invariant points}
+First of all, the origin $\begin{bmatrix}0\\0\end{bmatrix}$ is never effected by a linear transformation. Why?
+\begin{minipage}{\textwidth}
+\begin{enumerate}
+\item Define the transformation:
+\(\boldsymbol{T} = \begin{bmatrix} a & b \\ c & d\end{bmatrix}\)
+\item Define the vertex $ \begin{bmatrix} 0 \\ 0\end{bmatrix}$
+\item Multiply the matrix by the vertex: \(\begin{bmatrix} a & b \\ c & d\end{bmatrix}\begin{bmatrix} 0 \\ 0\end{bmatrix} = \begin{bmatrix} a \times 0 + b \times 0 \\ c \times 0 + d \times 0\end{bmatrix} = \begin{bmatrix} 0 \\ 0\end{bmatrix}\)
+\end{enumerate}
+\end{minipage}
+\\
+To find a line of invariant poins from the matrix $\begin{bmatrix} 0 & -1 \\ -1 & 0\end{bmatrix}$ (reflection in the line $y=-x$)
+\begin{enumerate}
+    \item Define the equation: $\begin{bmatrix} 0 & -1 \\ -1 & 0\end{bmatrix}\begin{bmatrix} x \\ y\end{bmatrix}=\begin{bmatrix} x \\ y\end{bmatrix}$
+    \item Multiply it out to give: $\begin{bmatrix} -y \\ -x\end{bmatrix}=\begin{bmatrix} x \\ y\end{bmatrix}$
+    \item Then expand that to the equations: $-y = x$ and $-x = y$
+    \item Rearrange this to give: $y = -x$ and $y = -x$.
+    \item Clearly these are both the same, therefore, all the points are not effected by the reflection in the line $y=-x$ (this makes logical sense)
+\end{enumerate}
+
+\begin{minipage}{\textwidth}
+\section{Finding invariant lines}
+Invariant lines are different to "lines of invaraint points" because the individual points on the line can move, but the line itself remains the same!
+
+The best way to work this out (in my opinion):
+
+\begin{enumerate}
+    \item Define the matrix transformation in the variable $\boldsymbol{T}$: 
+    
+    \(\boldsymbol{T} = \begin{bmatrix} -1 & 1 \\ -4 & 3 \end{bmatrix}\)
+    \item Multiply the transformation by the general formula for lines $y = mx + c$ and $y = mx^{'}+c$.
+    \item 
+    
+    \(\begin{bmatrix} -1 & 1 \\ -4 & 3 \end{bmatrix}\begin{bmatrix} x \\ mx+c \end{bmatrix} = \begin{bmatrix} x^{'} \\ mx^{'}+c \end{bmatrix}\)
+    \item 
+    \(-x + mx+c = x^{'} \\
+    -4x + 3(mx+c) = mx^{'} + c\)
+    \item Substitute the value $x^{'}$ into the second formula!
+    \begin{equation}
+        \begin{aligned}
+        -4x + 3(mx+c) &= m(-x + mx+c) + c \\
+        -4x + 3mx + 3c &= -mx + m^{2}x+mc + c \\
+        2c - mc &= -4mx + m^{2}x + 4x \\
+        c(2-m) &= x(-4m + m^{2} + 4) \\ 
+        c(2-m) &= x(m^{2} - 4m + 4) \\
+        c(2-m) &= x(m-2)^2 \\
+        x(m-2)^2 - c(2-m) &= 0 \\
+        x(m-2)^2 + c(m-2) &= 0 
+        \end{aligned}
+    \end{equation}
+    \item You can see, to solve this formula for $m$, $m = 2$
+    \item Rewrite the formula with the value $m = 2$
+    \item Therefore, we can write the following formula: $y = 2x + c$
+    \item Where $c$ is any value!
+    \item Therefore there is an invariant line for all lines with the gradient $2$
+\end{enumerate}
+\end{minipage}
+% First of all, we can define the 2x2 matrix inversion in the variable $\boldsymbol{R}$ as:
+% \begin{gather} 
+% \text{Where }\theta \text{ is the anti-clockwise angle of rotation.} \\
+% \boldsymbol{R}  = \begin{bmatrix}\cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix} 
+% \end{gather} 
+
+\end{document}
