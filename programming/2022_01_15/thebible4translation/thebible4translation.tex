@@ -1,0 +1,119 @@
+\documentclass{report}
+\usepackage[english]{babel}
+\usepackage[super,comma,sort&compress]{natbib}
+\usepackage{geometry}
+\usepackage[hyphens]{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{bibleref}
+\usepackage{cleveref}
+\hypersetup{breaklinks=true}
+\urlstyle{same}
+\bibliographystyle{abbrvnat}
+\geometry{a4paper, left=35mm, right=35mm, top=51mm, bottom=30mm}
+\title{Using the bible for translation}
+\author{James Blackburn}
+\date {\today\\v1.1}
+
+
+\newcommand{\bible}{{\emph{The Holy Bible }}}
+\renewcommand{\thefootnote}{\roman{footnote}}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    A look into the advantages and disadvantages of using \bible for translation
+\end{abstract}
+
+\section{Introduction}
+I have seen people suggesting online that using \bible for translation is a good idea.\cite{livemintwebsite} I personally disagree with this and would like to talk about the advantages and disadvantages of this method!
+
+\section{The Advantages}
+\subsection{Multiplicity}
+The key advantage of using \bible for translations is that there is a multiplicty of translations for it. \cite{ebibledownload,crosswiremodules}
+Theoretically \footnote{The reason this isn't true is discussed in \nameref{disadvantages}}, this also means one could create a translation AI for almost any language pair! 
+Take, for example, two non-widely spoken languages, "Algonquin" and "Awa-Cuaiquer". They both have Bible Translations!\cite{algonquinbible,awabible} \footnote{These bibles only have translations for the New Testament}
+Therefore one could theoretically create a translation AI between these two texts simply by comparing the respective verses!
+
+Let's simplify this by looking at two more common languages, English \& German! Although it's somewhat for simplicity, I have also chosen these because \LaTeX\   doesn't work well with Unicode!
+\begin{table}[h!]
+\centering
+\begin{tabular}{||p{0.1\linewidth} | p{0.4\linewidth} | p{0.4\linewidth}||} 
+    \hline
+    Verse & Luther 1912 \cite{lutherbible} &  World English Bible \cite{webbible} \\ [0.5ex] 
+    \hline\hline
+    \bibleverse{John}(3:1) & Es war aber ein Mensch unter den Pharisäern mit Namen Nikodemus, ein Oberster unter den Juden. & Now there was a man of the Pharisees named Nicodemus, a ruler of the Jews. \\ 
+    \hline
+    \bibleverse{Gen}(1:1) & Am Anfang schuf Gott Himmel und Erde. & In the beginning, God created the heavens and the earth. \\ 
+    \hline
+    \bibleverse{Gen}(4:7) & Ist's nicht also? Wenn du fromm bist, so bist du angenehm; bist du aber nicht fromm, so ruht die Sünde vor der Tür, und nach dir hat sie Verlangen; du aber herrsche über sie.  & If you do well, won't it be lifted up? If you don't do well, sin crouches at the door. Its desire is for you, but you are to rule over it.” \\ [1ex] 
+    \hline
+\end{tabular}
+\label{table:germanvsenglish}
+\caption{A comparison of the verses from Schalter's 1912 Bible \& The World English Bible}
+\end{table}
+
+As you can see from Table \ref{table:germanvsenglish}, \bible is extremely useful for translation! 
+The bible has a lot of verses! The 1545 German Luther Bible has 31164 verses!\cite{versecountergist} That's a rather large dataset for a simple translation AI!
+\section{The Disadvantages}
+\label{disadvantages}
+
+\subsection{Versification}
+The disadvantages become clearer when one looks at "Versification". 
+
+\begin{description}
+    \item[Versification] is the way \bible is written, the way Chapters and Verses are ordered and written
+\end{description}
+
+The problem is, not all bibles are created equally! Take, for example, the German Luther Bible 1545 \cite{gerbolut}, and let's compare it with The King James Bible! 
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{||p{0.1\linewidth} | p{0.4\linewidth} | p{0.4\linewidth}||} 
+        \hline
+        Verse & German Luther Bible 1545 \cite{gerbolut} &  King James Bible\\ [0.5ex] 
+        \hline\hline
+        \bibleverse{Gen}(32:1) & Des Morgens aber stund Laban frühe auf, küssete seine Kinder und Tochter und segnete sie; und zog hin und kam wieder an seinen Ort.         &  And Jacob went on his way, and the angels of God met him. 
+        \\ 
+        \hline
+        \bibleverse{Gen}(31:55) & N/A & And early in the morning Laban rose up, and kissed his sons and his daughters, and blessed them: and Laban departed, and returned unto his place.         \\ 
+        \hline
+        \bibleverse{Num}(17:2) & Sage Eleasar, dem Sohn Aarons, des Priesters, daß er die Pfannen aufhebe aus dem Brande und streue das Feuer hin und her.         & Speak unto the children of Israel, and take of every one of them a rod according to the house of their fathers, of all their princes according to the house of their fathers twelve rods: write thou every man’s name upon his rod.         \\ [1ex] 
+        \hline
+    \end{tabular}
+    \label{table:kjvvsgerbolut}
+    \caption{A comparison of the verses from The German Luther Bible 1545 \& The King James Bible}
+\end{table}
+    
+If you speak any German, you should be able to notice that these translations don't match up at all! 
+And if you don't speak German, you can see how the German Luther Bible doesn't have a translation for \bibleverse{Gen}(31:55)!
+
+So, what happens with these verses? The following table illustrates where these verses correctly align:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{||p{0.2\linewidth} | p{0.4\linewidth} | p{0.4\linewidth}||} 
+        \hline
+        Verse & German Luther Bible 1545 \cite{gerbolut} &  King James Bible\\ [0.5ex] 
+        \hline\hline
+        \raggedright \bibleverse{Gen}(32:1){[LUTH1545]} $\leftrightarrow$ \bibleverse{Gen}(31:55){[KJV]} & Des Morgens aber stund Laban frühe auf, küssete seine Kinder und Tochter und segnete sie; und zog hin und kam wieder an seinen Ort.         &  And early in the morning Laban rose up, and kissed his sons and his daughters, and blessed them: and Laban departed, and returned unto his place.  
+        \\ 
+        \hline
+        \raggedright \bibleverse{Num}(17:2){[LUTH1545]} $\leftrightarrow$ \bibleverse{Num}(16:37){[KJV]} & Sage Eleasar, dem Sohn Aarons, des Priesters, daß er die Pfannen aufhebe aus dem Brande und streue das Feuer hin und her.         & Speak unto Eleazar the son of Aaron the priest, that he take up the censers out of the burning, and scatter thou the fire yonder; for they are hallowed.        \\ [1ex] 
+        \hline
+    \end{tabular}
+    \label{table:fixedversification}
+    \caption{A comparison of the Versification from The German Luther Bible 1545 \& The King James Bible}
+\end{table}
+    
+But, how can this be solved? An open source solution to finding where these errors exists is called "BibleMultiConverter".\cite{biblemulticonverter}
+It does suffer from some issues\footnote{See issue \#52 on his GitHub}, but it is extremely useful for seeing these errors in versification alignment!
+
+
+
+\medskip
+
+\bibliography{thebible4translation}
+
+\end{document}
