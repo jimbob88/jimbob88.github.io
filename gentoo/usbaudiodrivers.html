@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Installing USB Audio Drivers on the Linux Kernel</title>
+  </head>
+  <body>
+    <h1>Installing USB Audio Drivers on the Linux Kernel</h1>
+    <p>
+      This guide was written using gentoo on 2022_02_22. Using the following
+      system:
+    </p>
+    <code>
+      $ uname -a <br />
+      Linux annic-gentoo 5.16.8-gentoo20220222131635 #4 SMP PREEMPT Tue Feb 22
+      13:16:54 -00 2022 x86_64 AMD Ryzen 7 2700X Eight-Core Processor
+      AuthenticAMD GNU/Linux
+    </code>
+    <p>
+      This code <i>should</i>&trade; work on other Linux installations (other
+      than gentoo) but the location of your kernel will probably be different!
+    </p>
+    <p>
+      Commands written in square brackets [] are entirely optional. Often, the
+      sudo command is placed in <code>[sudo]</code> because if you are
+      <i>root</i> you don't need this command. Don't know if you are
+      <i>root</i>? Type: <code>whoami</code>
+    </p>
+    <ol>
+      <li>
+        <p>
+          If you don't already have them, download the linux kernel sources:
+        </p>
+        <code> [sudo] emerge [--ask] sys-kernel/gentoo-sources </code>
+      </li>
+      <li>
+        <p>Enter the directory containing the linux kernel source:</p>
+        <code> cd /usr/src/linux </code>
+      </li>
+      <li>
+        <p>
+          If you haven't compiled your kernel before, you will need to grab your
+          current config file, this can be done with the following command:
+        </p>
+        <code> [sudo] cp /boot/config-$(uname -r) .config </code>
+      </li>
+      <li>
+        <p>Now we will configure the Linux Kernel</p>
+        <code> [sudo] make menuconfig </code>
+      </li>
+      <li>
+        <p>
+          Now you will need to navigate through the submenus to make the
+          following changes:<br />
+          Scroll down to: <br />
+          <code>Device Drivers --&gt;</code> <br />
+          And press enter <br />
+          Now scroll down a while until you see Sound Card Support:
+          <code>Sound Card Support --&gt;</code>
+          Highlight it and press <i>m</i>. THis will make it a module. <br />
+          Now press enter on it. <br />
+          Scroll to <code>Advanced linux Sound Architecture ---&gt;</code> and
+          press <i>m</i> on it. <br />
+          Now press ENTER on it, and scroll down to <i>Enable OSS Emulation</i>
+          <br />
+          Press SPACE on it until it turns to an asterisk:
+          <i>[*] Enable OSS Emulation</i>. <br />
+          A new submenu should have appeared, press <i>m</i> on both
+          <i>OSS Mixer API</i> amd <i>OSS PCM (digital audio) API</i>. <br />
+          Scroll down more until you reach <i>USB Sound devices</i>. Press SPACE
+          on it, until it converts to <i>[*] USB sound devices</i>. <br />
+          Press ENTER on it, and scroll down to <i>USB Audio/Midi Driver</i> and
+          press <i>m</i> on it!
+        </p>
+        <p>
+          If you found that difficult to follow, my source writes it cleaner:
+          <a
+            href="https://www.linuxtopia.org/online_books/linux_kernel/kernel_configuration/ch09s02.html"
+            >SOURCE</a
+          >
+        </p>
+        <p>It reads:</p>
+        <code>
+          Device Drivers<br />
+          &emsp;Sound<br />
+          &emsp;&emsp;[M] Sound Card Support<br />
+          &emsp;&emsp;&emsp;[M] Advanced Linux Sound Architecture<br />
+          &emsp;&emsp;&emsp;&emsp;[M] OSS Mixer API<br />
+          &emsp;&emsp;&emsp;&emsp;[M] OSS PCM (digital audio) API<br />
+          &emsp;&emsp;&emsp;&emsp;[ ] OSS PCM (digital audio) API - Include
+          plugin system
+        </code>
+      </li>
+      <li>
+        <p>Press save and save it as <i>.config</i></p>
+      </li>
+      <li>
+        <code>[sudo] make [-j8]</code> <br />
+        <p>
+          If you don't know what the [-j8] command is for, ignore it and don't
+          use it.
+        </p>
+      </li>
+      <li>
+        <code> [sudo] make modules_install </code>
+      </li>
+      <li>
+        <code> [sudo] make install </code>
+        <p>
+          <i
+            >NOTE TO SELF (don't run the next command (in red) unless
+            <b>YOU KNOW WHAT YOU'RE DOING!</b>):</i
+          >If you have ran out of space in your system, and your only linux
+          install is gentoo:
+          <br />
+          <mark style="background-color: red"
+            ><code>
+              read -p "YOU MIGHT BREAK YOUR SYSTEM! ARE YOU SURE? " -n 1 -r;
+              echo; if [[ $REPLY =~ ^[Yy]$ ]]; then rm /boot/System.map*
+              /boot/vmlinuz*; else echo "Phew"; fi
+            </code></mark
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          If you use <i>initramfs</i> and <i>dracut</i>. Get the version name of
+          your newly installed directory:
+        </p>
+        <code> ls /lib/modules -l </code>
+        <p>
+          The kernel version is probably the most recently created folder (so at
+          the bottom of the list)
+        </p>
+        <code>
+          [sudo] dracut --kver=<mark>(kernel version you just copied)</mark>
+        </code>
+        <p>An example of this code being run is like this:</p>
+        <code> $ sudo dracut --kver=5.16.8-gentoo20220222131635 </code>
+      </li>
+      <li>
+        <p>If you use grub:</p>
+        <code> [sudo] grub-mkconfig -o /boot/grub/grub.cfg </code>
+      </li>
+      <li>
+          <code>
+              [sudo] reboot
+          </code>
+      </li>
+    </ol>
+    <p>Voila! You should now have USB Audio</p>
+  </body>
+</html>
