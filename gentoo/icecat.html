@@ -44,25 +44,72 @@
         <code> pip install jsonschema [--user] </code>
 
         <p>
-        <b>NOTE: </b> If you use the [--user] option, then you should add <i>$HOME/.local/bin</i> to your path!
-        <br/>
-        If you are using BASH this is pretty easy (bash is the default, so if you haven't changed it, this is what you are using! Add to the end of the <i>~/.bashrc</i> file:
-        <br/>
-        <code>
-            export PATH="$HOME/.local/bin:$PATH"
-        </code>
+          <b>NOTE: </b> If you use the [--user] option, then you should add
+          <i>$HOME/.local/bin</i> to your path!
+          <br />
+          If you are using BASH this is pretty easy (bash is the default, so if
+          you haven't changed it, this is what you are using! Add to the end of
+          the <i>~/.bashrc</i> file:
+          <br />
+          <code> export PATH="$HOME/.local/bin:$PATH" </code>
         </p>
       </li>
       <li>
-          <p>We will now open cpan: </p>
+        <p>We will now open cpan:</p>
+        <code> cpan </code>
+        <p>
+          You should now see a new blinking cursor that says:
+          <code>[cpan]&gt;"</code>
+        </p>
+        <p>
+          From here we will install the latest
+          <code>/File-Rename/</code> because the gentoo version is rather
+          outdated (2022/02/22)!
+        </p>
+        <code>
+          install /File-Rename/ <br />
+          exit
+        </code>
+      </li>
+      <li>
+        <p>Now we will check that we have all the correct dependencies!</p>
+        <code>
+          cd gnuzilla <br />
+          ./makeicecat
+        </code>
+        <p>
+          This should give you some warnings if anything "makeicecat" needs is
+          missing (you will be installing more dependencies later down the road)
+        </p>
+      </li>
+      <li>
+        <p>
+          Now that you have ran the above command, we can move to the
+          <i>output</i> folder and create a new <i>objdir</i> folder
+        </p>
+        <code>
+          cd ./output <br />
+          mkdir objdir <br />
+          cd objdir
+        </code>
+      </li>
+      <li>
+          <p>If you <b>DO NOT</b> have <mark>pulseaudio</mark> installed you will need <i>media-libs/libpulse</i> because this will give you some sound output (with systemd)! I would recommend you use a full pulseaudio install with the <i>USE="pulseaudio"</i> flag (because it gives a lot more control and a lot of supported devices).</p>
           <code>
-              cpan
+              [sudo] emerge media-libs/libpulse
+          </code>
+      </li>
+      <li>
+          <p>Now we need to install even more dependencies (using cargo). If you <b>DO NOT</b> already have <i>cargo</i> installed you will need rust</p>
+          <code>
+              [sudo] emerge dev-lang/rust
+          </code>
+          <p>When you have rust, you can then install via cargo:</p>
+          <code>
+              cargo install cbindgen
           </code>
           <p>
-          You should now see a new blinking cursor that says: <code>[cpan]&gt;"</code>
-          </p>
-          <p>
-          From here we will install the latest <code>/File-Rename/</code> because the gentoo version is rather outdated!
+          If you have not done so already, you will need to add "~/.cargo/bin" to your path, this can be done by adding <code>export PATH="$HOME/.cargo/bin:$PATH"</code> to your <i>.bashrc</i>
           </p>
       </li>
     </ol>
