@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Installing Icecat on gentoo</title>
+  </head>
+  <body>
+    <h1>Installing icecat on gentoo</h1>
+
+    <p>
+      This guide uses commands surrounded in square brackets "[]", to indicate
+      commands that are optional. I.e. if you are the superuser you don't need
+      to run the "[sudo]" command. If you are a normal user, just remove the
+      square brackets and type "sudo".
+    </p>
+
+    <ol>
+      <li>
+        First of all we need to download a copy of <i>gnuzilla</i>: <br />
+
+        <code>
+          git clone https://git.savannah.gnu.org/<mark>git</mark>/gnuzilla.git
+        </code>
+
+        <br />
+
+        <p>
+          <b>NOTE:</b> I specifically highlighted the fact it says
+          <mark>git</mark> here instead of <mark>cgit</mark>, "cgit" is the
+          default URL for <i>viewing</i> git not cloning it.
+        </p>
+      </li>
+      <li>
+        <p>For the next stage we will need a couple of packages from emerge:</p>
+
+        <code>
+          [sudo] emerge mercurial perl dev-lang/python dev-python/pip
+        </code>
+      </li>
+      <li>
+        <p>We will now install jsonschema using pip:</p>
+
+        <code> pip install jsonschema [--user] </code>
+
+        <p>
+        <b>NOTE: </b> If you use the [--user] option, then you should add <i>$HOME/.local/bin</i> to your path!
+        <br/>
+        If you are using BASH this is pretty easy (bash is the default, so if you haven't changed it, this is what you are using! Add to the end of the <i>~/.bashrc</i> file:
+        <br/>
+        <code>
+            export PATH="$HOME/.local/bin:$PATH"
+        </code>
+        </p>
+      </li>
+      <li>
+          <p>We will now open cpan: </p>
+          <code>
+              cpan
+          </code>
+          <p>
+          You should now see a new blinking cursor that says: <code>[cpan]&gt;"</code>
+          </p>
+          <p>
+          From here we will install the latest <code>/File-Rename/</code> because the gentoo version is rather outdated!
+          </p>
+      </li>
+    </ol>
+  </body>
+</html>
