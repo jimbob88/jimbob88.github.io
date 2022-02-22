@@ -94,23 +94,106 @@
         </code>
       </li>
       <li>
-          <p>If you <b>DO NOT</b> have <mark>pulseaudio</mark> installed you will need <i>media-libs/libpulse</i> because this will give you some sound output (with systemd)! I would recommend you use a full pulseaudio install with the <i>USE="pulseaudio"</i> flag (because it gives a lot more control and a lot of supported devices).</p>
-          <code>
-              [sudo] emerge media-libs/libpulse
-          </code>
+        <p>
+          If you <b>DO NOT</b> have <mark>pulseaudio</mark> installed you will
+          need <i>media-libs/libpulse</i> because this will give you some sound
+          output (with systemd)! I would recommend you use a full pulseaudio
+          install with the <i>USE="pulseaudio"</i> flag (because it gives a lot
+          more control and a lot of supported devices).
+        </p>
+        <code> [sudo] emerge media-libs/libpulse </code>
       </li>
       <li>
-          <p>Now we need to install even more dependencies (using cargo). If you <b>DO NOT</b> already have <i>cargo</i> installed you will need rust</p>
-          <code>
-              [sudo] emerge dev-lang/rust
-          </code>
-          <p>When you have rust, you can then install via cargo:</p>
-          <code>
-              cargo install cbindgen
-          </code>
-          <p>
-          If you have not done so already, you will need to add "~/.cargo/bin" to your path, this can be done by adding <code>export PATH="$HOME/.cargo/bin:$PATH"</code> to your <i>.bashrc</i>
-          </p>
+        <p>
+          Now we need to install even more dependencies (using cargo). If you
+          <b>DO NOT</b> already have <i>cargo</i> installed you will need rust
+        </p>
+        <code> [sudo] emerge dev-lang/rust </code>
+        <p>When you have rust, you can then install via cargo:</p>
+        <code> cargo install cbindgen </code>
+        <p>
+          If you have not done so already, you will need to add "~/.cargo/bin"
+          to your path, this can be done by adding
+          <code>export PATH="$HOME/.cargo/bin:$PATH"</code> to your
+          <i>.bashrc</i>
+        </p>
+      </li>
+      <li>
+        <p>
+          The next install (the installation of clang, which I seem to remember
+          took quite a long time, even on my R7 2700x) requires you add a new
+          value to your <i>USE</i> flag. If you haven't done this before, don't
+          worry it isn't <i>hard</i>. <br />
+          First we will open the "/etc/portage/make.conf" file, I will be using
+          nano, because it is easy for beginners (if you don't have it
+          installed: <code>[sudo] emerge nano</code>
+        </p>
+        <code> [sudo] nano /etc/portage/make.conf </code>
+        <p>
+          Now look for the line that says <code>USE="........"</code>. Inside
+          the strings, add a space, and type <i>abi_x86_32</i>
+        </p>
+        <p>For example, my use variable currently reads:</p>
+        <code>
+          USE="X nvidia postproc <mark>abi_x86_32</mark> pulseaudio openh264
+          alsa minizip gtk"
+        </code>
+      </li>
+      <li>
+        <p>
+          Install the clang compiler (and make a couple of cups of tea), due to
+          how long this takes, you may want to combine this command with the
+          next one, so it does it all in one go
+        </p>
+        <code> [sudo] emerge clang </code>
+      </li>
+      <li>
+        <p>Now for even more dependencies!</p>
+        <code>
+          [sudo] emerge net-libs/nodejs app-arch/zip dev-libs/dbus-glib
+        </code>
+      </li>
+      <li>
+        <p>
+          Double-check you are in the ./gnuzilla/output/objdir directory. If you
+          aren't <i>cd</i> there!
+        </p>
+        <p>Now for the configuration of icecat</p>
+        <code>
+          ../icecat-(ver-num)/configure.in
+          --with-l10-base=../icecat-(ver-num)/l10n
+          --with-libclang-path=/usr/lib/llvm/13/lib64/
+        </code>
+        <p>
+          Replace (ver-num) with the version you are installing, the original
+          command I wrote was:
+        </p>
+        <code>
+          ./icecat-91.6.0/configure.in --with-l10n-base=../icecat-91.6.0/l10n
+          --with-libclang-path=/usr/lib/llvm/13/lib64/
+        </code>
+        <p>
+          <b>NOTE:</b> This may change with future versions due to changes in
+          the <i>llvm</i> directory, if the clang fails, try search your
+          <i>/usr/lib/llvm</i> to see if the number has changed.
+        </p>
+      </li>
+      <li>
+        <p>
+          Now we'll compile, I have 8 logical processors and 16gb of ram, so
+          I'll be sticking to <i>make -j8</i>, if you don't know what you have
+          (it'll take a long time) but you can be safe and simple type
+          <code>make</code>.
+        </p>
+        <code> make -j8 </code>
+      </li>
+      <li>
+        <p>
+          Now for the installation, installation isn't necessary, feel free to
+          use it in this build folder if you realy want to!
+        </p>
+
+        <code> [sudo] make install </code>
       </li>
     </ol>
   </body>
