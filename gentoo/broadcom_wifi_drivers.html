@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Broadcom Wifi Drivers on Gentoo</title>
+  </head>
+  <body>
+    <h1>Broadcom Wireless Drivers</h1>
+    <p>
+      Hi there! <br />
+      Recently I had some trouble getting my BCM4352 working (Asus 802.11ac),
+      here is a guide of how I fixed it!
+    </p>
+    <p>
+      As always, square brackets are used to show where commands are optional
+      depending on your system
+    </p>
+    <ol>
+      <li>
+        <h3>Get the drivers</h3>
+        <p>
+          The first thing I needed to do was make sure I had all the correct
+          drivers in my <code>/usr/src/linux/.config</code> file. Luckily, the
+          <a
+            href="https://packages.gentoo.org/packages/net-wireless/broadcom-sta"
+            >net-wireless/broadcom-sta</a
+          >
+          package warns you when settings are missing from your kernel.
+        </p>
+        <p>
+          The <code>net-wireless/broadcom-sta</code> package comes with the
+          following list of errors:
+        </p>
+        <code>
+          ERROR_B43: B43: If you insist on building this, you must blacklist it!
+          <br />
+          ERROR_BCMA: BCMA: If you insist on building this, you must blacklist
+          it! <br />
+          ERROR_SSB: SSB: If you insist on building this, you must blacklist it!
+          <br />
+          ERROR_MAC80211: MAC80211: If you insist on building this, you must
+          blacklist it! <br />
+          ERROR_LIB80211: LIB80211: Please enable it. If you can't find it:
+          enabling the driver for "Intel PRO/Wireless 2200BG" (IPW2100 or
+          IPW2200) should suffice. <br />
+          ERROR_PREEMPT_RCU: PREEMPT_RCU: Please do not set the Preemption Model
+          to "Preemptible Kernel"; choose something else. <br />
+          ERROR_LIB80211_CRYPT_TKIP: LIB80211_CRYPT_TKIP: You will need this for
+          WPA. <br />
+          ERROR_X86_INTEL_LPSS: X86_INTEL_LPSS: Please disable it. The module
+          does not work with it enabled. <br />
+        </code>
+        <p>
+          If you see any of these errors <i>Don't worry, we'll fix them!</i>
+        </p>
+
+        <p>Run the following command to install the drivers:</p>
+        <code> [sudo] emerge [--ask] net-wireless/broadcom-sta </code>
+      </li>
+      <li>
+        <p>Now we are going to debug the errors/warnings you receive</p>
+        <ol type="a">
+          <li>
+            <h6>ERROR: B43, BCMA, SSB, MAC80211</h6>
+            <p>
+              If you don't want to remove these from your kernel (I did this, by
+              going through and deselecting each one from my menuconfig), you
+              can add the following to your
+              <code>/etc/modprobe.d/blacklist.conf</code> file:
+            </p>
+            <code>
+              blacklist b43 <br />
+              blacklist bcma <br />
+              blacklist brcmsmac <br />
+              blacklist ssb <br />
+            </code>
+          </li>
+          <li>
+            <h6>ERROR: LIB80211</h6>
+            <p>
+              If you have just setup your gentoo kernel, this is the most likely
+              error you will see. In order to solve this problem, I'll teach you
+              the method of debugging it! <br />
+              We can see that the error is something related the Kernel. So what
+              we must do is change settings in the kernel! <br />
+              Let's go to the kernel configuration!
+            </p>
+            <code>
+              cd /usr/src/linux <br />
+              [sudo] make menuconfig
+            </code>
+
+            <p>
+              Now that we are in the main menu, we can press the
+              <code>/</code> (slash) key. You'll see a search box appear on your
+              screen. Let's type <i>LIB80211</i> and press enter. You should get
+              a result like this:
+            </p>
+            <code>
+              Symbol: LIB80211 [=m] Type : tristate <br />
+              Defined at net/wireless/Kconfig:206 <br />
+              Depends on: NET [=y] && WIRELESS [=y] <br />
+              Selected by [m]: <br />
+              <mark
+                >- HOSTAP [=m] && NETDEVICES [=y] && WLAN [=y] &&
+                WLAN_VENDOR_INTERSIL [=y]</mark
+              >
+              <br />
+              Selected by [n]: <br />
+              - IPW2100 [=n] && NETDEVICES [=y] && WLAN [=y] &&
+              WLAN_VENDOR_INTEL [=n] && PCI [=y] && CFG8021 <br />
+              - IPW2200 [=n] && NETDEVICES [=y] && WLAN [=y] &&
+              WLAN_VENDOR_INTEL [=n] && PCI [=y] && CFG8021 <br />
+              - LIBIPW [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL
+              [=n] && PCI [=y] && CFG80211 <br />
+              - LIBERTAS [=n] && NETDEVICES [=y] && WLAN [=y] &&
+              WLAN_VENDOR_MARVELL [=n] && CFG80211 [=y] <br />
+              - RTLLIB [=n] && STAGING [=n] && WLAN [=y] && m && MODULES [=y]
+              <br />
+              - R8188EU [=n] && STAGING [=n] && WLAN [=y] && USB [=y] &&
+              CFG80211 [=y] && m && MODULES [=y]
+            </code>
+            <p>
+              The highlighted line will have a key difference in your setup, not
+              all the letters in brackets will be [=m] or [=y], you need this
+              row to have [=y] or [=m] (ignore the other rows for now). For me,
+              the ones that were disabled [=n] were
+              <i>WLAN_VENDOR_INTERSIL</i> and <i>HOSTAP</i>. <br />
+              Press ENTER to exit, and do another search with the
+              <code>/</code> (slash) key. This time we will search for the value
+              which wasn't activated (e.g. WLAN_VENDER_INTERSIL).<br />
+              Searching for WLAN_VENDOR_INTERSIL results in the following:
+            </p>
+            <code>
+              Main menu <br />
+              &emsp;-> Device Drivers <br />
+              &emsp;&emsp;-> Network device support (NETDEVICES [=y]) <br />
+              &emsp;&emsp;&emsp;-> Wireless LAN (WLAN [=y]) <br />
+            </code>
+            <p>
+              Follow this route from the main menu (press enter to exit your
+              search). For me, I ended up in the "Wireless LAN section",
+              scrolled down to "Intersil Devices" and pressed space on it to
+              enable it (include it). A new sub-menu appeared, oh look the Host
+              AP option is there! That's convenient, I pressed [m] on this to
+              modularize it!
+            </p>
+            <p>
+              If you now press <code>/</code> (slash) and search again for
+              LIB80211, you should see that highlighted row is now full of [=y]
+              or [=m]. Perfect! You have successfully enable LIB80211 (in your
+              config file, you haven't installed it yet, use the right-arrow key
+              to go and save it to a <i>.config</i> file! We'll compile the
+              kernel later!)
+            </p>
+          </li>
+          <li>
+            <h6>ERROR: LIB80211_CRYPT_TKIP</h6>
+            <p>
+              We will follow the same process as the previous step (2.b.) to
+              solve this problem. Press <code>/</code> (slash) and search for
+              LIB80211_CRYPT_TKIP
+            </p>
+            <code>
+              Symbol: LIB80211_CRYPT_TKIP [=m] <br />
+              Type : tristate <br />
+              Defined at net/wireless/Kconfig:225 <br />
+              Depends on: NET [=y] && WIRELESS [=y] <br />
+              Selects: CRYPTO_LIB_ARC4 [=m] <br />
+              Selected by [m]: <br />
+              - HOSTAP [=m] && NETDEVICES [=y] && WLAN [=y] &&
+              WLAN_VENDOR_INTERSIL [=y] <br />
+              Selected by [n]: <br />
+              - LIBIPW [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL
+              [=n] && PCI [=y] && CFG80211<br />
+            </code>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </body>
+</html>
