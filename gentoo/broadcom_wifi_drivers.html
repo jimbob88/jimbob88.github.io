@@ -303,22 +303,143 @@
           CONFIG_WPS=y <br />
           CFLAGS += -I/usr/include/libnl3 <br />
         </code>
-        <p>Credit to the writer of <a href="https://www.linuxtopic.com/2017/08/compile-wpasupplicant-ubuntu.html">this guide</a>, even though it's for Ubuntu and it has some errors, it provided a good boilerplate. If you currently have wpa_supplicant installed, you should remove it with the following commands:</p>
+        <p>
+          Credit to the writer of
+          <a
+            href="https://www.linuxtopic.com/2017/08/compile-wpasupplicant-ubuntu.html"
+            >this guide</a
+          >, even though it's for Ubuntu and it has some errors, it provided a
+          good boilerplate. If you currently have wpa_supplicant installed, you
+          should remove it with the following commands:
+        </p>
         <code>
-            [sudo] emerge --deselect net-wireless/wpa_supplicant <br/>
-            [sudo] emerge --depclean
+          [sudo] emerge --deselect net-wireless/wpa_supplicant <br />
+          [sudo] emerge --depclean
         </code>
         <p>Now let's compile it:</p>
         <code>
-            cd wpa_supplicant <br/>
-            make <br/>
-            [sudo] make install <br/>
+          cd wpa_supplicant <br />
+          make <br />
+          [sudo] make install <br />
         </code>
         <p>Running <code>wpa_supplicant -v</code> should now return:</p>
         <code>
-            wpa_supplicant v2.8 <br/>
-            Copyright (c) 2003-2019, Jouni Malinen &lt;j@w1.fi&gt; and contributors
+          wpa_supplicant v2.8 <br />
+          Copyright (c) 2003-2019, Jouni Malinen &lt;j@w1.fi&gt; and
+          contributors
         </code>
+      </li>
+      <li>
+        <h3>Configure wpa_supplicant.conf</h3>
+        <p>
+          A handy reference for writing this file can be found on the
+          <a href="https://wiki.gentoo.org/wiki/Wpa_supplicant">Gentoo wiki</a>.
+          Personally, I'll show you my configuration, because it may just work
+          on your system (if you are connecting to a WPA Wireless Access Point)
+        </p>
+        <p>
+          Edit /etc/wpa_supplicant/wpa_supplicant.conf (you need superuser
+          acess)
+        </p>
+        <code>
+          update_config=1 <br />
+          ctrl_interface=/run/wpa_supplicant <br />
+          eapol_version=1 <br />
+          ap_scan=1 <br />
+          fast_reauth=1 <br />
+          network={ <br />
+          &emsp;ssid="&lt;SSID&gt;" <br />
+          &emsp;psk="&lt;PASSPHRASE&gt;" <br />
+          &emsp;priority=5 <br />
+          } <br />
+        </code>
+        <p>
+          Replace "&lt;SSID&gt;" and "&lt;PASSPHRASE&gt;" with your SSID and
+          Passphrase (password).
+        </p>
+      </li>
+      <li>
+        <h3>Configure conf.d</h3>
+        <p>
+          Edit /etc/conf.d/wpa_supplicant (with superuser) and add this line
+        </p>
+        <code>
+          wpa_supplicant_args="-B -M -c/etc/wpa_supplicant/wpa_supplicant.conf"
+        </code>
+      </li>
+      <li>
+        <h3>Configure system modules</h3>
+        <p>
+          You need to manually load the LIB80211_CRYPT_TKIP module, so create a
+          new file: <code>/etc/modules-load.d/lib80211_crypt_tkip</code> ad type
+          this in it:
+        </p>
+        <code> lib80211_crypt_tkip </code>
+      </li>
+      <li>
+        <h3>Configure <mark style="background-color: red">Systemd</mark></h3>
+        <p>The rest of this guide is for systemd users <b>ONLY</b></p>
+        <p>
+          The installation we did for our wpa_supplicant did not include a
+          systemd service, so we will make our own! This code is versatile, so
+          should work even if you have a non-standard wireless device (like
+          wlan0 vs wlp6s0)
+        </p>
+        <p>
+          Create a new file:
+          <code>/etc/systemd/system/network-wireless@.service</code> and type
+          the following in it:
+        </p>
+        <code>
+          [Unit] <br />
+          Description=Wireless network connectivity (%i) <br />
+          Wants=network.target <br />
+          Before=network.target <br />
+          BindsTo=sys-subsystem-net-devices-%i.device <br />
+          After=sys-subsystem-net-devices-%i.device <br />
+          <br />
+          [Service] <br />
+          Type=oneshot <br />
+          RemainAfterExit=yes <br />
+          TimeoutSec=30 <br />
+          Killmode=process <br />
+
+          ExecStart=/bin/ip link set dev %i up <br />
+          ExecStart=/usr/local/sbin/wpa_supplicant
+          -c/etc/wpa_supplicant/wpa_supplicant.conf -i %i -B <br />
+          <br />
+          ExecStop=/bin/ip link set dev %i down <br />
+          <br />
+          [Install] <br />
+          WantedBy=multi-user.target <br />
+        </code>
+        <p>
+          Feel free to change the TimeoutSec variable, I set it at such a low
+          value, so if anything breaks, I don't have to wait indefinitely after
+          each reboot (and then use a livecd to rescue my system)
+        </p>
+        <p>
+          If this doesn't work for you, double check the location of the ip
+          binary (by typing <code>whereis ip</code>) and the installation
+          location of wpa_supplicant (by typing
+          <code>whereis wpa_supplicant</code>) and substitute the /bin/ip with
+          your systems location.
+        </p>
+        <p>
+        Now we need to choose which Wireless device we are going to use, type <code>ifconfig</code> to see what name your wireless card has (clue: they normally start with a w, i.e. wlan0, wlp6s0, wlp3s0). Take this name and substitute the correct value in to the following command:
+        </p>
+        <code>
+            [sudo] ln -s /etc/systemd/system/network-wireless@.service /etc/systemd/system/multi-user.target.wants/network-wireless@<mark>wlp6s0</mark>.service
+        </code>
+        <p>
+        Now enable wpa_supplicant
+        </p>
+        <code>
+            [sudo] systemctl enable network-wireless@<mark>wlp6s0</mark>
+        </code>
+      </li>
+      <li>
+        <h3>Reboot</h3>
       </li>
     </ol>
   </body>
