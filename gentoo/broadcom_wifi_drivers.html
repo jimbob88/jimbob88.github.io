@@ -10,8 +10,20 @@
     <p>
       Hi there! <br />
       Recently I had some trouble getting my BCM4352 working (Asus 802.11ac),
-      here is a guide of how I fixed it!
+      here is a guide of how I fixed it! <br />
+      Personally I use systemd (this is not the default for a lot of gentoo
+      systems), some commands/steps may be different on your system, I will
+      indicate when something I am doing is specific to systemd! <br />
+      This guide requires internet access in parts, either use another computer
+      to download these things and copy them over, or use ethernet. If you don't
+      have ethernet either, I salute you for continuing to try o7.
     </p>
+    <p>This code was written on:</p>
+    <code>
+      Linux annic-gentoo 5.16.11-gentoo202202251339 #4 SMP PREEMPT Fri Feb 25
+      13:42:23 -00 2022 x86_64 AMD Ryzen 7 2700X Eight-Core Processor
+      AuthenticAMD GNU/Linux
+    </code>
     <p>
       As always, square brackets are used to show where commands are optional
       depending on your system
@@ -98,7 +110,9 @@
               a result like this:
             </p>
             <code>
-              Symbol: LIB80211 [=m] Type : tristate <br />
+              Symbol: LIB80211 <mark style="background-color: blue">[=m]</mark>
+              <br />
+              Type : tristate <br />
               Defined at net/wireless/Kconfig:206 <br />
               Depends on: NET [=y] && WIRELESS [=y] <br />
               Selected by [m]: <br />
@@ -122,10 +136,13 @@
               CFG80211 [=y] && m && MODULES [=y]
             </code>
             <p>
-              The highlighted line will have a key difference in your setup, not
-              all the letters in brackets will be [=m] or [=y], you need this
-              row to have [=y] or [=m] (ignore the other rows for now). For me,
-              the ones that were disabled [=n] were
+              The symbol highlighted in blue will be different on your system
+              (it'll be [=n]). <br />
+              The highlighted (yellow) line will have a key difference in your
+              setup, not all the letters in brackets will be [=m] or [=y], you
+              need this row to have [=y] or [=m] (ignore the other rows for
+              now). <br />
+              For me, the ones that were disabled [=n] were
               <i>WLAN_VENDOR_INTERSIL</i> and <i>HOSTAP</i>. <br />
               Press ENTER to exit, and do another search with the
               <code>/</code> (slash) key. This time we will search for the value
@@ -134,9 +151,9 @@
             </p>
             <code>
               Main menu <br />
-              &emsp;-> Device Drivers <br />
-              &emsp;&emsp;-> Network device support (NETDEVICES [=y]) <br />
-              &emsp;&emsp;&emsp;-> Wireless LAN (WLAN [=y]) <br />
+              &emsp;-&gt; Device Drivers <br />
+              &emsp;&emsp;-&gt; Network device support (NETDEVICES [=y]) <br />
+              &emsp;&emsp;&emsp;-&gt; Wireless LAN (WLAN [=y]) <br />
             </code>
             <p>
               Follow this route from the main menu (press enter to exit your
@@ -163,20 +180,145 @@
               LIB80211_CRYPT_TKIP
             </p>
             <code>
-              Symbol: LIB80211_CRYPT_TKIP [=m] <br />
+              Symbol: LIB80211_CRYPT_TKIP
+              <mark style="background-color: blue">[=m]</mark> <br />
               Type : tristate <br />
               Defined at net/wireless/Kconfig:225 <br />
               Depends on: NET [=y] && WIRELESS [=y] <br />
               Selects: CRYPTO_LIB_ARC4 [=m] <br />
               Selected by [m]: <br />
-              - HOSTAP [=m] && NETDEVICES [=y] && WLAN [=y] &&
-              WLAN_VENDOR_INTERSIL [=y] <br />
+              <mark
+                >- HOSTAP [=m] && NETDEVICES [=y] && WLAN [=y] &&
+                WLAN_VENDOR_INTERSIL [=y]
+              </mark>
+              <br />
               Selected by [n]: <br />
               - LIBIPW [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL
               [=n] && PCI [=y] && CFG80211<br />
             </code>
+            <p>
+              You should notice that the requirements of this is the exact same
+              as those for LIB80211, it should already have been selected if you
+              follow (2.1b)
+            </p>
+          </li>
+          <li>
+            <h6>ERROR: PREEMPT_RCU</h6>
+            <p>On my system, this error was safe to ignore.</p>
+          </li>
+          <li>
+            <h6>ERROR: X86_INTEL_LPSS</h6>
+            <p>
+              If you do get this issue, go the main menu of config and go [Main
+              Menu] -&gt; [Processor type and features] -&gt; [X86_INTEL_LPSS].
+              <br />
+              Press space until it is deselected
+            </p>
           </li>
         </ol>
+      </li>
+      <li>
+        <h3>Compile the linux kernel</h3>
+        <p>
+          I assume you know what you are doing here, you should be following
+          your own method for compiling, if you have never done this before, I
+          thoroughly recommend reading this first:
+          <a
+            href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Manual_configuration"
+            >Gentoo Installation AMD64 Handbook</a
+          >
+        </p>
+        <p>
+          For completeness, I will be posting the commands I ran here (these may
+          not work on your system....)
+        </p>
+        <code>
+          $ sudo make -j16 <br />
+          $ sudo make modules_install <br />
+          $ sudo make install <br />
+          $ sudo dracut --kver=5.16.11-gentoo <br />
+          $ sudo grub-mkconfig -o /boot/grub/grub.cfg <br />
+          $ sudo reboot
+        </code>
+      </li>
+      <li>
+        <h3>Use an old version of wpa_supplicant</h3>
+        <p>
+          After a long time of getting annoyed with the way iwd works (on my
+          system it was <i>NOT</i> stable, I can't say why, and this isn't
+          really meant to diss the work that went into creating it, I use it on
+          my laptop and it is 1000x better than wpa_supplicant, but for some
+          unknown reason it just doesn't work that well on my computer). <br />
+          Now for some bad news, the latest versions of wpa_supplicant (2.10 and
+          2.9 as of 2022) don't work well with broadcom-sta.
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=1703745"
+            >SOURCE</a
+          >
+          <br />
+          Even though redhat have marked this issue as closed, people have still
+          been having problems from 2019-04-28 to this day. Some of the fixes
+          noted might be interested to read if you really need the features of
+          wpa_supplicant-2.9+ (or are worried about the security issues related
+          to using old versions of software). A couple of these are related to
+          NetworkManager (I don't use this), if you use it, it's definitely
+          worth a read! <br />
+          In order to fix this, I used an old version of wpa_supplicant.
+        </p>
+        <code>
+          mkdir ~/compile <br />
+          cd compile <br />
+          wget https://w1.fi/releases/wpa_supplicant-2.8.tar.gz <br />
+          tar -xvf wpa_supplicant-2.8.tar.gz <br />
+          cd wpa_supplicant-2.8
+        </code>
+        <p>
+          Now we need to configure our supplicant, open
+          <code>./wpa_supplicant/.config</code> in your favourite editor, and
+          write this:
+        </p>
+        <code>
+          CONFIG_BACKEND=file <br />
+          CONFIG_CTRL_IFACE=y <br />
+          CONFIG_DEBUG_FILE=y <br />
+          CONFIG_DEBUG_SYSLOG=y <br />
+          CONFIG_DEBUG_SYSLOG_FACILITY=LOG_DAEMON <br />
+          CONFIG_DRIVER_NL80211=y <br />
+          CONFIG_DRIVER_WEXT=y <br />
+          CONFIG_DRIVER_WIRED=y <br />
+          CONFIG_EAP_GTC=y <br />
+          CONFIG_EAP_LEAP=y <br />
+          CONFIG_EAP_MD5=y <br />
+          CONFIG_EAP_MSCHAPV2=y <br />
+          CONFIG_EAP_OTP=y <br />
+          CONFIG_EAP_PEAP=y <br />
+          CONFIG_EAP_TLS=y <br />
+          CONFIG_EAP_TTLS=y <br />
+          CONFIG_IEEE8021X_EAPOL=y <br />
+          CONFIG_IPV6=y <br />
+          CONFIG_LIBNL32=y <br />
+          CONFIG_PEERKEY=y <br />
+          CONFIG_PKCS12=y <br />
+          CONFIG_READLINE=y <br />
+          CONFIG_SMARTCARD=y <br />
+          CONFIG_WPS=y <br />
+          CFLAGS += -I/usr/include/libnl3 <br />
+        </code>
+        <p>Credit to the writer of <a href="https://www.linuxtopic.com/2017/08/compile-wpasupplicant-ubuntu.html">this guide</a>, even though it's for Ubuntu and it has some errors, it provided a good boilerplate. If you currently have wpa_supplicant installed, you should remove it with the following commands:</p>
+        <code>
+            [sudo] emerge --deselect net-wireless/wpa_supplicant <br/>
+            [sudo] emerge --depclean
+        </code>
+        <p>Now let's compile it:</p>
+        <code>
+            cd wpa_supplicant <br/>
+            make <br/>
+            [sudo] make install <br/>
+        </code>
+        <p>Running <code>wpa_supplicant -v</code> should now return:</p>
+        <code>
+            wpa_supplicant v2.8 <br/>
+            Copyright (c) 2003-2019, Jouni Malinen &lt;j@w1.fi&gt; and contributors
+        </code>
       </li>
     </ol>
   </body>
