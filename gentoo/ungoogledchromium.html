@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Installing ungoogled-chromium on gentoo</title>
+    </head>
+    <body>
+        <h1>Installing ungoogled-chromium on gentoo</h1>
+        <p>
+        As always, commands written in square brackets are optional, the most common usecase for this is [sudo] which means you need super user (if you are root you obviously don't need sudo)
+        </p>
+        <ol>
+            <li>
+                <h3>Install layman</h3>
+                <p>Layman is a nice and easy manager for other "repositories" (gentoo overlays) on your gentoo system, we will be needing this because <code>ungoogled-chromium</code> is not in the official repositories</p>
+                <code>
+                    [sudo] emerge app-portage/layman
+                </code>
+            </li>
+            <li>
+                <h3>Setup layman</h3>
+                <p>
+                If you <i>haven't</i> used layman before update it with the following command:
+                </p>
+                <code>
+                    [sudo] layman-updater -R
+                </code>
+                <p>Now list the available repositories (overlays):</p>
+                <code>
+                    [sudo] layman -L
+                </code>
+                <p>Now add the <a>pf4public</a> overlay to your system</p>
+                <code>
+                    [sudo] layman -a pf4public
+                </code>
+            </li>
+            <li>
+                <h3>Double-check you have the latest package sources</h3>
+                <code>
+                    [sudo] emaint --auto sync
+                </code>
+            </li>
+            <li>
+                <h3>Install dependencies</h3>
+                <code>
+                    [sudo] emerge media-libs/lcms <br/>
+                    [sudo] emerge  media-libs/opus
+                </code>
+            </li>
+            <li>
+                <h3>Install ungoogled-chromium</h3>
+                <code>
+                    [sudo] emerge ungoogled-chromium
+                </code>
+            </li>
+        </ol>
+    </body>
+</html>
