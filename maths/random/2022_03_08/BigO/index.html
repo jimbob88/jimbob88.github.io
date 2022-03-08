@@ -16,7 +16,7 @@
         </script>
     <script type="text/javascript" charset="UTF-8"
         src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 </head>
 
 <body>
@@ -140,7 +140,7 @@ for row in x:
         As the value of \(x\) increases, the value of the \(x^2\) increases much more than the value of \(2x\). And the
         value of \(1\) will remain the same.
         <br />
-        In order to understand this better, let's plot it on a graph.
+        In order to understand this better, let's plot it on a graph:
     </p>
     <div id="box1" class="jxgbox" style="width:400px; height:400px;"></div>
     <script type="text/javascript">
@@ -155,6 +155,79 @@ for row in x:
             [function (x) { return 1; }, -50, 50], { strokeColor: 'green' }
         );
     </script>
+    <p>
+        If you can't see this graph, try plotting this on a bit of paper, trust me, it'll help.
+    </p>
+    <p>
+        As we zoom-out on this graph, we can see that the \(y = x^2\) graph (blue) gets bigger much quicker than the \(y
+        = 2x\) (red) graph. For this equation, we call its difficult just \(O(n^2)\) because as the value of x increases
+        it approaches infinity.
+    </p>
+    <p>
+        If you want to read up more about this, I'd thoroughly recommend looking at <a
+            href="https://www.math.ucdavis.edu/~kouba/CalcOneDIRECTORY/liminfsol1directory/LimInfSol1.html">fractional
+            limits of
+            infinity</a>.
+    </p>
+    <h2>
+        A quick dive into the limits of functions
+    </h2>
+    <p>
+        Let's take an example formula as a reference point:
+    </p>
+    <p>
+        $$
+        \Large
+        f(x) = \frac{x}{x^2-100},
+        x \neq -10, 10
+        $$
+    </p>
+    <p>
+        REMEMBER: \(x\) cannot equal to \(10, -10\) because that would make a division by 0.
+    </p>
+    <p>
+        Now let's say, we start increasing the value of \(x\) all the way up to \(\inf\). In mathematics we write this
+        as:
+    </p>
+    <p>
+        $$\Large\begin{gather}
+        \lim_{x \to +\infty} f(x)
+        \\
+        \text{or}
+        \\
+        \lim_{x \to \infty} f(x)
+        \end{gather}$$
+    </p>
+    <p>
+        So let's rewrite our formula, using this standard:
+    </p>
+    <p>
+        $$\Large\begin{gather}
+        \lim_{x \to \infty} f(x) = \frac{x}{x^2-100} \\
+        x \neq -10, 10
+        \end{gather}$$
+    </p>
+    <p>
+        Let's now plot this function, to give an idea of what it looks like!
+    </p>
+    <div id="box2" class="jxgbox" style="width:400px; height:400px;"></div>
+    <script type="text/javascript">
+        var board = JXG.JSXGraph.initBoard('box2', { boundingbox: [-1, 50, 20, -50], axis: true, grid: true });
+        var graph_quadratic = board.create('functiongraph',
+            [function (x) { return x / ((x ** 2) - 100); }, -50, 50]
+        );
+    </script>
+    <p>
+        Can you see, as it gets closer to infinity (as the value increases) it starts getting closer and closer to the
+        x-axis! <br />
+        This means the \(y\) value (\(f(x)\) value) is approaching 0. We can write this as:
+    </p>
+    <p>
+        $$\Large\begin{gather}
+        \lim_{x \to \infty} f(x) = \frac{x}{x^2-100} = 0 \\
+        x \neq -10, 10
+        \end{gather}$$
+    </p>
 </body>
 
 </html>
