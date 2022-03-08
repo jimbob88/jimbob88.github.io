@@ -14,6 +14,9 @@
     <script type="text/javascript" id="MathJax-script" async
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>
+    <script type="text/javascript" charset="UTF-8"
+        src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />>
 </head>
 
 <body>
@@ -134,8 +137,24 @@ for row in x:
         $$
     </p>
     <p>
-        As the value of x increases, the value of the x^2 v
+        As the value of \(x\) increases, the value of the \(x^2\) increases much more than the value of \(2x\). And the
+        value of \(1\) will remain the same.
+        <br />
+        In order to understand this better, let's plot it on a graph.
     </p>
+    <div id="box1" class="jxgbox" style="width:400px; height:400px;"></div>
+    <script type="text/javascript">
+        var board = JXG.JSXGraph.initBoard('box1', { boundingbox: [-1, 10, 10, -1], axis: true, grid: true });
+        var graph_quadratic = board.create('functiongraph',
+            [function (x) { return x ** 2; }, -50, 50]
+        );
+        var graph_linear = board.create('functiongraph',
+            [function (x) { return 2 * x; }, -50, 50], { strokeColor: 'red' }
+        );
+        var graph_line = board.create('functiongraph',
+            [function (x) { return 1; }, -50, 50], { strokeColor: 'green' }
+        );
+    </script>
 </body>
 
 </html>
