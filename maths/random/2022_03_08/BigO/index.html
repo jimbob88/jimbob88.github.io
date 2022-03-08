@@ -169,6 +169,51 @@ for row in x:
             limits of
             infinity</a>.
     </p>
+
+    <h2>
+        A look at estimating the performance of an algorithm
+    </h2>
+
+    <p>
+        This section of the guide is inspired by A-Level questions, even if you aren't taking A-level, it is still
+        hopefully interesting!
+    </p>
+    <p>
+        Example problem:
+    </p>
+    <p>
+        $$
+        \begin{gather}
+        \text{A list of length 100, takes 5s to be sorted using Bubble Sort.} \\
+        \text{Given that Bubble Sort is of complexity } O(n^2) \\
+        \text{Calculate the time take for a list of length 500}
+        \end{gather}
+        $$
+    </p>
+    <p>
+        First we need to look at the multiplier increase in size. To do this do: \(\frac{500}{100}\). This should give a
+        \(5\) times increase. Because the problem has a difficulty of \(O(n^2)\), we will assume it's the worst case,
+        and square this \(5\). \(5^2 = 25\). Then times this by the original time taken: \(25 \times 5 = 125\).
+    </p>
+    <p>
+        This gives an overall formula of (for \(O(n^2)\)): <br />
+        $$
+        \text{new time taken} = \left (\frac{\text{new length}}{\text{old length}} \right )^2 \times
+        \text{old time taken}
+        $$
+    </p>
+
+    <p>
+        What if it were for a difficulty of \(O(n!)\) (something we haven't looked at yet)?
+    </p>
+    <p>
+        $$
+        \text{new time taken} = \left (\frac{\text{new length}}{\text{old length}} \right )! \times
+        \text{old time taken}
+        $$
+    </p>
+
+
     <h2>
         A quick dive into the limits of functions
     </h2>
