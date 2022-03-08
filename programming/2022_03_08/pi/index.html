@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi in C</title>
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <h1>Calculating pi in c</h1>
+    <p>
+        The first attempt I made for calculating Pi was using Ramujan's formula in basically pure C. If you haven't seen Ramujan's formula before, it looks like this:
+    </p>
+    <pre>
+    <code class="language-c">
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+long double
+factorial (int x)
+{
+    return tgamma (x + 1);
+}
+
+int
+main ()
+{
+    long double pi;
+    int k;
+    long double summation;
+    summation = 0;
+    for (k = 0; k &lt; 15; k++)
+    {
+        printf ("%d\n", k);
+        printf ("%Lf\n", summation);
+        summation = summation + (factorial (4 * k) / (pow (factorial (k), 4))
+        * (1103 + 26390 * k) / (pow (396, 4 * k)));
+
+    }
+    pi = pow (((2 * sqrt (2)) / 9801) * summation, -1);
+    printf ("%Lf", pi);
+
+    return 0;
+}
+    </code>
+</pre>
+</body>
+</html>
