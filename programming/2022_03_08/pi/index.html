@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pi in C</title>
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-    </script>
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
 </head>
+
 <body>
     <h1>Calculating pi in c</h1>
     <p>
-        The first attempt I made for calculating Pi was using Ramujan's formula in basically pure C. If you haven't seen Ramujan's formula before, it looks like <a href="http://www.numberworld.org/y-cruncher/internals/formulas.html">this</a>:
+        If you haven't seen Ramujan's formula before, it looks like <a
+            href="http://www.numberworld.org/y-cruncher/internals/formulas.html">this</a>:
     </p>
     <p>
         $$
         \Large
         \frac{1}{\pi} = \frac{2\sqrt{2}}{9801} \sum_{k=0}^{\infty} \frac{(4k)!}{k!^4} \frac{1103 + 26390k}{396^{4k}}
         $$
+    </p>
+    <h3>Pure C</h3>
+    <p>
+        The first attempt I made for calculating Pi was using Ramujan's formula in basically pure C.
     </p>
     <pre>
     <code class="language-c">
@@ -59,5 +65,147 @@ main ()
 }
     </code>
 </pre>
+    <p>
+        You will quickly notice an issue with this function if you compile and run it on your system
+    </p>
+    <pre>
+        <code class="language-plaintext">
+$ gcc unoptimized.c -o unoptimized -lm
+$ ./unoptimized
+....
+3.141593
+        </code>
+    </pre>
+    <p>
+        Even though we have quite a few iterations of Ramujan's formula (which produces ~8 digits per iteration), we
+        only have 6 decimals of accuracy.
+        In order to improve this, we are going to need GMP (<a href="https://gmplib.org/">The GNU Multiple Precision
+            Arithmetic Library</a> )
+    </p>
+    <h3>Using GMP to calculate Pi</h3>
+    <p>
+        The first thing I needed to get right, was the correct rounding for floating point numbers, for this I will be
+        using the <a href="https://www.mpfr.org/">GNU MPFR library</a> (for multiple-precision floating-point
+        computation)
+    </p>
+    <pre>
+    <code class="language-c">
+// ramujan-gmp.c        
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;gmp.h&gt;
+#include &lt;mpfr.h&gt;
+
+const int acc = 5000;
+const int rev = 5000;
+
+int main()
+{
+    printf("LOADED\n");
+    unsigned int i;
+    mpfr_t s, t, u, d, g;
+
+    mpfr_init2(t, acc);
+    mpfr_set_d(t, 2.0, MPFR_RNDD);
+    mpfr_sqrt(t, t, MPFR_RNDD);
+    mpfr_mul_ui(t, t, 2, MPFR_RNDD);
+    mpfr_div_ui(t, t, 9801, MPFR_RNDD);
+
+    mpfr_init2(u, acc);
+    mpfr_set_d(u, 0, MPFR_RNDD);
+
+    mpfr_init2(d, acc);
+    mpfr_set_d(d, 0, MPFR_RNDD);
+
+    mpfr_init2(g, acc);
+    mpfr_set_d(g, 0, MPFR_RNDD);
+
+    mpfr_init2(s, acc);
+    mpfr_set_d(s, 0, MPFR_RNDD);
+
+    unsigned long int k4 = -4;
+
+    for (i = 0; i &lt; rev + 1; i++)
+    {
+
+        // printf("%d\n", i);
+        // mpfr_mul_ui(u, u, 4, MPFR_RNDD);
+
+        k4 += 4;
+
+        // u = (4k)!
+        mpfr_set_d(u, 4, MPFR_RNDD);
+        mpfr_mul_ui(u, u, i, MPFR_RNDD);
+        mpfr_fac_ui(u, k4, MPFR_RNDD);
+        // mpfr_out_str(stdout, 10, 0, u, MPFR_RNDD);
+        // putchar('\n');
+
+        // d = (k!)^4
+        mpfr_fac_ui(d, i, MPFR_RNDD);
+        mpfr_pow_ui(d, d, 4, MPFR_RNDD);
+
+        // u = (4k)!/((k!)^4)
+        mpfr_div(u, u, d, MPFR_RNDD);
+
+        // d = 26390k + 1103
+        mpfr_set_d(d, 26390, MPFR_RNDD);
+        mpfr_mul_ui(d, d, i, MPFR_RNDD);
+        mpfr_add_ui(d, d, 1103, MPFR_RNDD);
+
+        // g = (396)^(4k)
+        mpfr_set_d(g, 4, MPFR_RNDD);
+        mpfr_mul_ui(g, g, i, MPFR_RNDD);
+        mpfr_ui_pow(g, 396, g, MPFR_RNDD);
+
+        // d = (26390k + 1103) / (396 ^ (4k))
+        mpfr_div(d, d, g, MPFR_RNDD);
+
+        // u = (4k)!/((k!)^4) * (26390k + 1103) / (396 ^ (4k))
+        mpfr_mul(u, u, d, MPFR_RNDD);
+
+        // s = s + u
+        mpfr_add(s, s, u, MPFR_RNDD);
+    }
+
+    mpfr_mul(t, t, s, MPFR_RNDD);
+    mpfr_ui_div(t, 1, t, MPFR_RNDD);
+    // mpfr_rec (t,  MPFR_RNDD);
+    // mpfr_pow_ui (t, t, -1, MPFR_RNDD);
+
+    printf("PI is ");
+    mpfr_out_str(stdout, 10, 0, t, MPFR_RNDD);
+    putchar('\n');
+    // mpfr_clear (s);
+    mpfr_clear(t);
+    // mpfr_clear (u);
+    mpfr_free_cache();
+    return 0;
+}
+    </code>
+</pre>
+    <p>
+        A key disadvantage we can instantly see is that readability has plummeted massively, to such an extent I have
+        added step by step explanations for most of the maths
+    </p>
+    <p>
+        Running this program results in:
+    </p>
+    <pre>
+<code class="language-plaintext">
+$ gcc ramujan-gmp.c -o ramujan-gmp  -lm -lgmp -lmpfr 
+$ ./ramujan-gmp 
+LOADED
+PI is 3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141273724587006606315588174881520920962829254091715364367892590360011330530548820466521384146951941511609433057270365759591953092186117381932611793105118548074462379962749567351885752724891227938183011949129833673362440656643086021394946395224737190702179860943702770539217176293176752384674818467669405132000568127145263560827785771342757789609173637178721468440901224953430146549585371050792279689258923542019956112129021960864034418159813629774771309960518707211349999998372978049951059731732816096318595024459455346908302642522308253344685035261931188171010003137838752886587533208381420617177669147303598253490428755468731159562863882353787593751957781857780532171226806613001927876611195909216420198938095257201065485863278865936153381827968230301952035301852968995773622599413891249721775283479131515574857242454150695950829533116861727855889075098381754637464939319255060400927701671139009848824012858361603563707660104710181942955596198946767837449448255379774726847104047534646208046684259069491293313677028989152104752162056966024058038150193511253382430035587640247496473263914199272604269922796782354781636009341721641219924586315030286182974555706749838505494588586926995690927210797509302955325168
+</code>
+</pre>
+    <p>
+        This is clearly much better, as we are getting a proper result, the issue is, this takes a long time. And
+        because Ramjuan's formula is \(O(n \log(n)^3) \), this starts to slow up extremely quickly. So, how do we
+        improve this?
+    </p>
+    <p>Meet multiprocessing!</p>
+    <h3>Using multiprocessing to calculate Pi</h3>
+
 </body>
+
 </html>
