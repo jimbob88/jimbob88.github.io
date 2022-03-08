@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big O Notation</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
+</head>
+
+<body>
+    <h1>Big O Notation</h1>
+    <p>
+        Big O notation is probably something you have come across if you have ever done programming or looked at
+        mathematical algorithms. Many algorithms (i.e. Ramujan's Formula) list a Big O notation, examples of these
+        notations are:
+        $$
+        \Large
+        \begin{multline}
+        \\
+        O(1) \\
+        O(n) \\
+        O(n^2) \\
+        O(n \log(n)) \\ \\
+        \end{multline}
+        $$
+        But what do these things <i>actually</i> mean?
+    </p>
+    <h3>
+        A measure of speed
+    </h3>
+    <p>
+        Generally speaking, Big O notation can be treated as the "speed" of the algorithm. But this term isn't entirely
+        correct, it should instead be seen as "how much an increase in difficulty, increase time".
+    </p>
+    <h2>Programming Examples</h2>
+    <p>
+        Now that statement might not instantly make sense, but stick with me here, using these coding examples, I hope
+        to help you understand.
+    </p>
+    <h3>\(O(1)\) Complexity</h3>
+    <pre>
+    <code class="language-python">
+def get_item(l, n):
+    return l[n]
+
+x = [0, 1, 2, 3]
+get_item(x, 2)
+    </code>
+    
+</pre>
+    <p>
+        We call the algorithm <i>get_item</i> difficulty: \( O(1) \). This is because, even if the list is 10000s of
+        items long, the difficulty of accessing the "nth" term is no more complicated. I.e. finding item 1 and finding
+        item 10000 are equally as difficult.
+    </p>
+</body>
+
+</html>
