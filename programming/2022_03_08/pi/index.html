@@ -9,11 +9,22 @@
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
 </head>
 <body>
     <h1>Calculating pi in c</h1>
     <p>
-        The first attempt I made for calculating Pi was using Ramujan's formula in basically pure C. If you haven't seen Ramujan's formula before, it looks like this:
+        The first attempt I made for calculating Pi was using Ramujan's formula in basically pure C. If you haven't seen Ramujan's formula before, it looks like <a href="http://www.numberworld.org/y-cruncher/internals/formulas.html">this</a>:
+    </p>
+    <p>
+        $$
+        \Large
+        \frac{1}{\pi} = \frac{2\sqrt{2}}{9801} \sum_{k=0}^{\infty} \frac{(4k)!}{k!^4} \frac{1103 + 26390k}{396^{4k}}
+        $$
     </p>
     <pre>
     <code class="language-c">
