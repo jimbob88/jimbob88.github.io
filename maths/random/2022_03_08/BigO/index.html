@@ -62,6 +62,80 @@ get_item(x, 2)
         items long, the difficulty of accessing the "nth" term is no more complicated. I.e. finding item 1 and finding
         item 10000 are equally as difficult.
     </p>
+    <h3>\(O(n)\) Complexity</h3>
+    <p>
+        Now let us take a slightly different problem, what if I asked you to (non-pythonically) find an item in a list
+        that's equal to 1.
+    </p>
+    <pre>
+        <code class="language-python">
+x = [0, 1, 2, 3]
+for item in x:
+    if item == 1:
+        break
+        </code>
+    </pre>
+    <p>
+        We say this \(\text{has a worse case scenario of } O(n)\). But what does "worst case scenario" mean?
+    </p>
+    <p>
+        We say it has a worst case scenario, because the worst case scenario is that the list looks like this:
+    </p>
+    <code class="language-python">
+        x = [..., 1]
+    </code>
+    <p>
+        When the final item of the list is 1, the computer has to look through the whole list to find this item.
+        <br />
+        In a best case scenario, this problem has Complexity: \(O(1)\)
+    </p>
+    <code>
+        x = [1 ....]
+    </code>
+    <p>
+        When the algorithm finds the first value as the value "1", its best case is only needing to do one function.
+        This is no different to our first example of <i>get_item</i>.
+    </p>
+    <h3>\(O(n^2)\) Complexity</h3>
+    <p>
+        Let's take an example of a 2-dimensional (square) list of values, and try and do the same as before, where we
+        try and find the value that's equal to 1.
+    </p>
+    <pre>
+        <code class="language-python">
+x = [
+    [4, 3, 7, 3],
+    [9, 4, 3, 2],
+    [2, 1, 3, 5],
+    [6, 7, 1, 5]
+]
+for row in x:
+    for cell in row:
+        if cell == 1:
+            exit()
+        </code>
+    </pre>
+    <p>
+        So, as you can see, we now have two for-loops inside each other, this means that it has to go through every
+        single row, and then also go through each column of those rows (cell).
+        <br />
+        This problem has a worst case scenario of \(O(n^2)\) complexity, because if the value of 1 were in the far right
+        corner of this table, it would have to iterate over every single item in the list to reach there.
+    </p>
+
+    <h2>Big O notation in mathematics</h2>
+    <p>
+        We can find the complexity of a problem by simply looking at the formula that requires it. For example, let's
+        look at the following formula:
+    </p>
+    <p>
+        $$
+        y = x^2 + 2x + 1
+        $$
+    </p>
+    <p>
+        As the value of x increases, the value of the x^2 v
+    </p>
 </body>
 
 </html>
