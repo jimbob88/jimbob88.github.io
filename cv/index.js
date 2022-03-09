@@ -9,6 +9,7 @@ ${tab}${tab}- LEVEL2 <br/>
 ${tab}${tab}- EXTRACURRICULAR <br/>
  - PERSONALSTATEMENT: PRINT MY PERSONAL STATEMENT <br/>
  - RAMTEST.COM: RUN A RAMTEST <br/>
+ - ADDITIONALCOURSES: LIST ADDITIONAL COURSES AND QUALIFICATIONS <br/>
 `;
 
 var level2_table = `
@@ -80,6 +81,15 @@ Memory size detected = 512K <br/>
 </div>
 `
 
+var additional_courses = `
+<pre class="nicetext">
+ - Keele University: Problem Solving Course
+ - Udemy: Automate the boring stuff with Python
+ - Udemy: Mastering Data Visualization with R
+ - freeCodeCamp: Full React Course
+</pre>
+`
+
 var nameBuffer = '';
 var runningRamTest = false;
 
@@ -128,6 +138,9 @@ function execute() {
         } else {
             $(`<div>PROGRAM ALREADY RUNNING</div>`).insertBefore("#input-line");
         }
+    } else if (command == 'ADDITIONALCOURSES') {
+        console.log("ok");
+        $(`<div class="nicetext">${additional_courses}</div>`).insertBefore("#input-line");
     }
     nameBuffer = '';
     window.scrollTo(0,document.body.scrollHeight);
@@ -142,10 +155,12 @@ function tab_completion() {
         } else if (extracurric.includes(command)) {
             nameBuffer = extracurric;
         }
-    } else if ('PERSONALSTATEMENT'.includes(command)) {
+    } else if ('PERSONALSTATEMENT'.startsWith(command)) {
          nameBuffer = 'PERSONALSTATEMENT';
-    } else if ('RAMTEST.COM'.includes(command)) {
+    } else if ('RAMTEST.COM'.startsWith(command)) {
         nameBuffer = 'RAMTEST.COM';
+   } else if ('ADDITIONALCOURSES'.startsWith(command)) {
+       nameBuffer = 'ADDITIONALCOURSES';
    }
     draw();
 }
