@@ -1,0 +1,54 @@
+#input-line {
+  font-size: 0px;
+}
+
+#cursor,
+#text,
+#input-py {
+  font-size: 15px;
+}
+#input-line,
+#cursor,
+#text,
+#input-py {
+  display: inline-block;
+}
+
+div {
+  font-family: "Press Start 2P", sans-serif;
+}
+
+.nicetext {
+  font-family: "Press Start 2P", sans-serif;
+  white-space: pre-wrap;
+}
+
+.topinfo {
+  text-align: center;
+}
+
+.ramtest {
+  width: 100%;
+}
+
+.ramtest td {
+  text-align: center;
+}
+
+/* https://codemyui.com/crt-screen-text-flicker-animation-in-pure-css/ */
+#intro {
+  text-shadow: 0.06rem 0 0.06rem #ea36af, -0.125rem 0 0.06rem #75fa69;
+  letter-spacing: 0.125em;
+  animation-duration: 0.01s;
+  animation-name: textflicker;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes textflicker {
+  from {
+    text-shadow: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
+  }
+  to {
+    text-shadow: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
+  }
+}
