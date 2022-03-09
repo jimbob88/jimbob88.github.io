@@ -15,7 +15,8 @@ Some areas of this website rely on JavaScript for reliably showing things such a
 A list of JavaScript active pages can be seen below:
 
 | Site                                        | URL                                                                | Reason                                     |
-| ------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------ |
+|---------------------------------------------|--------------------------------------------------------------------|--------------------------------------------|
 | Further Pure / Argand Diagrams / Fancy HTML | https://jimbob88.github.io/maths/fp/ad_f/index.html                | Used for MathJax and JQuery                |
 | Programming / 2022_03_08 - Calculate PI     | https://jimbob88.github.io/programming/2022_03_08/pi/index.html    | Used for MathJax and Code Formatting       |
 | Random Maths / 2022_03_08 - Big O Notation  | https://jimbob88.github.io/maths/random/2022_03_08/BigO/index.html | Used for MathJax, Code Formatting & Graphs |
+| Personal CV                                 | https://jimbob88.github.io/cv/index.html                           | Used for JQuery and Input                  |
