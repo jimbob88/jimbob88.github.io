@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+    <h1>
+        Vector and Matrix Implementation in C++
+    </h1>
+    <pre>
+        <code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+class Vector
+{
+public:
+    int rows{0};
+    float *vct;
+    std::string multi = "dot";
+
+    // Allow init from blank slate
+    explicit Vector() {}
+
+    explicit Vector(int length, std::string multiply = "dot")
+    {
+        this-&gt;rows = length;
+        float *t_vct = new float[length];
+
+        int i;
+        for (i = 0; i &lt; length; i++)
+        {
+            t_vct[i] = 0;
+        }
+
+        this-&gt;vct = t_vct;
+
+        // Sets default multiplication method to cross or dot
+        this-&gt;multi = multiply;
+    }
+
+    // Allow init from an array
+    explicit Vector(float *arr, int length, std::string multiply = "dot")
+    {
+        this-&gt;rows = length;
+
+        float *t_vct = new float[length];
+
+        int i;
+        for (i = 0; i &lt; length; i++)
+        {
+            t_vct[i] = arr[i];
+        }
+
+        this-&gt;vct = t_vct;
+
+        // Sets default multiplication method to cross or dot
+        this-&gt;multi = multiply;
+    }
+
+    float magnitude()
+    {
+        float mag = 0;
+        int i;
+        for (i = 0; i &lt; this-&gt;rows; i++)
+        {
+            mag += pow(this-&gt;vct[i], 2);
+        }
+        return sqrt(mag);
+    }
+
+    // Allow adding of two vectors
+    Vector operator+(const Vector &amp;vct)
+    {
+        if (this-&gt;rows != vct.rows)
+        {
+            throw std::invalid_argument("trying to add two vectors of different dimensions");
+        }
+
+        // Init blank vector with same length as other two
+        Vector temp_vct{this-&gt;rows};
+        int i;
+        for (i = 0; i &lt; this-&gt;rows; i++)
+        {
+            temp_vct.vct[i] = this-&gt;vct[i] + vct.vct[i];
+        }
+        return temp_vct;
+    }
+
+    // Allow subtraction of two vectors
+    Vector operator-(const Vector &amp;vct)
+    {
+        if (this-&gt;rows != vct.rows)
+        {
+            throw std::invalid_argument("trying to subtract two vectors of different dimensions");
+        }
+
+        // Init blank vector with same length as other two
+        Vector temp_vct{this-&gt;rows};
+        int i;
+        for (i = 0; i &lt; this-&gt;rows; i++)
+        {
+            temp_vct.vct[i] = this-&gt;vct[i] - vct.vct[i];
+        }
+        return temp_vct;
+    }
+
+    // Allow multiplication of two vectors
+    float operator*(const Vector &amp;vct)
+    {
+        if (this-&gt;rows != vct.rows)
+        {
+            throw std::invalid_argument("trying to multiply two vectors of different dimensions");
+        }
+        float rtval;
+
+        if (this-&gt;multi == "dot")
+        {
+            rtval = 0;
+            int i;
+            for (i = 0; i &lt; this-&gt;rows; i++)
+            {
+                rtval += this-&gt;vct[i] * vct.vct[i];
+            }
+        }
+        else
+        {
+            throw std::invalid_argument("unknown multiplication type");
+        }
+
+        return rtval;
+    }
+
+    // Add std::cout support for vector type
+    friend auto operator&lt;&lt;(std::ostream &amp;os, Vector const &amp;v) -&gt; std::ostream &amp;
+    {
+        std::string rtstring = "[";
+        int i;
+        for (i = 0; i &lt; v.rows; i++)
+        {
+            if (i != 0)
+            {
+                rtstring += ", ";
+            }
+            rtstring += std::to_string(v.vct[i]);
+        }
+        rtstring += "]";
+        return os &lt;&lt; rtstring;
+    }
+
+    float operator[](int i) const
+    {
+        return this-&gt;vct[i];
+    }
+
+    float &amp;operator[](int i)
+    {
+        return this-&gt;vct[i];
+    }
+};
+
+class Matrix
+{
+public:
+    Vector *mtx;
+    int rows{0};
+    int cols{0};
+
+    explicit Matrix(int rows, int cols)
+    {
+        this-&gt;rows = rows;
+        this-&gt;cols = cols;
+
+        Vector *t_mtx = new Vector[cols];
+        int i;
+        for (i = 0; i &lt; cols; i++)
+        {
+            t_mtx[i] = Vector{rows};
+        }
+        this-&gt;mtx = t_mtx;
+    }
+
+    explicit Matrix(Vector *arr, int rows, int cols)
+    {
+        this-&gt;rows = rows;
+        this-&gt;cols = cols;
+
+        Vector *t_mtx = new Vector[cols];
+        int i;
+        for (i = 0; i &lt; cols; i++)
+        {
+            t_mtx[i] = arr[i];
+        }
+
+        this-&gt;mtx = t_mtx;
+    }
+
+    Matrix operator+(const Matrix &amp;mtx)
+    {
+        if (this-&gt;rows != mtx.rows || this-&gt;cols != mtx.cols)
+        {
+            throw std::invalid_argument("trying to add two matrices of different dimensions");
+        }
+        Matrix t_mtx{this-&gt;rows, this-&gt;cols};
+
+        int i, j;
+
+        for (i = 0; i &lt; this-&gt;cols; i++)
+        {
+            for (j = 0; j &lt; this-&gt;rows; j++)
+            {
+                t_mtx[i][j] = this-&gt;mtx[i][j] + mtx[i][j];
+            }
+        }
+        return t_mtx;
+    }
+
+    Vector operator[](int i) const
+    {
+        return this-&gt;mtx[i];
+    }
+
+    Vector &amp;operator[](int i)
+    {
+        return this-&gt;mtx[i];
+    }
+
+    friend auto operator&lt;&lt;(std::ostream &amp;os, Matrix const &amp;m) -&gt; std::ostream &amp;
+    {
+        std::string rtstring = "[\n";
+        int i, j;
+
+        for (i = 0; i &lt; m.cols; i++)
+        {
+            rtstring.append("[");
+            for (j = 0; j &lt; m.rows; j++)
+            {
+                if (j != 0)
+                {
+                    rtstring.append(", ");
+                }
+
+                rtstring.append(std::to_string(m.mtx[i][j]));
+            }
+            rtstring.append("]\n");
+        }
+
+        rtstring += "]";
+        return os &lt;&lt; rtstring;
+    }
+};
+
+int main()
+{
+    Vector vct{5};
+    float x[] = {1, 2, 3, 4, 5};
+    float y[] = {5, 32, 1, -4, 3.5};
+
+    Vector vct1{x, 5};
+    Vector vct2{y, 5};
+
+    // vct1 = vct1 + vct2;
+
+    float dotp = vct1 * vct2;
+
+    std::cout &lt;&lt; "Hello World" &lt;&lt; std::endl;
+    std::cout &lt;&lt; vct1 &lt;&lt; std::endl;
+    std::cout &lt;&lt; dotp &lt;&lt; std::endl
+              &lt;&lt; std::endl;
+
+    Vector VectorL[] = {vct1, vct2};
+    Vector VectorR[] = {vct2, vct1};
+
+    Matrix m{VectorL, 5, 2};
+    Matrix m2{VectorR, 5, 2};
+
+    std::cout &lt;&lt; m.rows &lt;&lt; std::endl;
+    std::cout &lt;&lt; m.cols &lt;&lt; std::endl;
+
+    std::cout &lt;&lt; m + m2;
+
+    return 0;
+}
+        </code>
+    </pre>
+
+
+</body>
+
+</html>
