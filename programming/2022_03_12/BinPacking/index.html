@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bin Packing Algorithms in CPP</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+    <h1>
+        Bin Packing Algorithms in C++
+    </h1>
+    <p>
+        This code implements both the First-Fit algorithm (from A-Level Further Decision) amd the First-Fit-Decreasing
+        algorithm.
+    </p>
+    <p>
+        The First-Fit decreasing algorithm also relies on a sorting algorithm, for this, I implemented the Bubble Sort
+        (warning, this has an O(n^2) difficulty, not for production workplaces)
+    </p>
+    <p>
+        Virtually the whole <i>main()</i> function can be ignore if you are going to use the different classes and
+        functions that I've written here!
+    </p>
+    <pre>
+    <code class="langauge-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+class Obj
+{
+public:
+    int size = 0;
+    std::string name = "0";
+    explicit Obj() {}
+    explicit Obj(int size, std::string name)
+    {
+        this-&gt;size = size;
+        this-&gt;name = name;
+    }
+};
+
+class Bin
+{
+public:
+    int capacity = 0;
+    int total_used = 0;
+    vector&lt;Obj&gt; objects = std::vector&lt;Obj&gt;(0);
+
+    explicit Bin() {}
+
+    explicit Bin(int capacity)
+    {
+        this-&gt;capacity = capacity;
+        this-&gt;total_used = 0;
+    }
+
+    template &lt;typename T&gt;
+    bool RoomFor(T obj)
+    {
+        if (total_used + obj.size &lt;= capacity)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool RoomForInt(int obj)
+    {
+        if (total_used + obj &lt;= capacity)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    template &lt;typename T&gt;
+    void Append(T obj)
+    {
+        if (!this-&gt;RoomFor(obj))
+        {
+            throw std::invalid_argument("No room left in bin.");
+        }
+
+        if (typeid(T) == typeid(int))
+        {
+            Obj temp_Obj = Obj(obj);
+            this-&gt;objects.push_back(obj);
+        }
+        else if (typeid(T) == typeid(obj))
+        {
+            this-&gt;objects.push_back(obj);
+        }
+    }
+
+    friend auto operator&lt;&lt;(std::ostream &amp;os, Bin const &amp;b) -&gt; std::ostream &amp;
+    {
+        std::string rtstring = "";
+        for (int i = 0; i &lt; b.objects.size(); i++)
+        {
+            if (i != 0)
+            {
+                rtstring += ", ";
+            }
+            rtstring += b.objects[i].name;
+        }
+
+        return os &lt;&lt; rtstring;
+    }
+};
+
+float lowerBound(vector&lt;Obj&gt; objs, int bin_size)
+{
+    int sum = 0;
+    for (int i = 0; i &lt; bin_size; i++)
+    {
+        sum += objs[i].size;
+    }
+    return (float)sum / (float)bin_size;
+}
+
+void FirstFitFunctioning(vector&lt;Obj&gt; objs, vector&lt;Bin&gt; bins)
+{
+    bool appended = false;
+    for (int i = 0; i &lt; objs.size(); i++)
+    {
+        appended = false;
+        std::cout &lt;&lt; objs[i].size &lt;&lt; std::endl;
+        for (int j = 0; j &lt; bins.size(); j++)
+        {
+            if (bins[j].RoomFor(objs[i]))
+            {
+                appended = true;
+                bins[j].Append(objs[i]);
+                break;
+            }
+        }
+        if (appended == false)
+        {
+            throw std::invalid_argument("ERROR COULDNT FIT");
+        }
+    }
+
+    for (int i = 0; i &lt; bins.size(); i++)
+    {
+        std::cout &lt;&lt; i &lt;&lt; ": " &lt;&lt; bins[i] &lt;&lt; std::endl;
+    }
+}
+
+vector&lt;Obj&gt; ReOrder(vector&lt;Obj&gt; objs)
+{
+    bool sorted = false;
+    int swapped = 0;
+    while (!sorted)
+    {
+        sorted = false;
+        swapped = 0;
+        for (int i = 0; i &lt; objs.size() - 1; i++)
+        {
+            if (objs[i].size &lt; objs[i + 1].size)
+            {
+                swapped += 1;
+                swap(objs[i], objs[i + 1]);
+            }
+        }
+        if (swapped == 0)
+        {
+            sorted = true;
+        }
+    }
+    return objs;
+}
+
+void FirstFitDecreasingFunctioning(vector&lt;Obj&gt; objs, vector&lt;Bin&gt; bins)
+{
+    objs = ReOrder(objs);
+    FirstFitFunctioning(objs, bins);
+}
+
+int main()
+{
+    std::cout &lt;&lt; "Hello World" &lt;&lt; std::endl;
+    std::cout &lt;&lt; "How many objects do you have? ";
+    int num_objs;
+    std::cin &gt;&gt; num_objs;
+    std::cout &lt;&lt; std::endl;
+    int temp_size;
+    std::string temp_size_str;
+    std::string temp_str_name;
+    vector&lt;Obj&gt; objects = std::vector&lt;Obj&gt;(0);
+    for (int i = 0; i &lt; num_objs; i++)
+    {
+        std::cout &lt;&lt; i &lt;&lt; ": ";
+        std::cin.ignore();
+        std::getline(std::cin, temp_str_name);
+        if (temp_str_name.empty())
+        {
+            temp_str_name = std::to_string(i);
+        }
+
+        std::cout &lt;&lt; i &lt;&lt; " size: ";
+        std::getline(std::cin, temp_size_str);
+        // https://www.systutorials.com/how-to-remove-newline-characters-from-a-string-in-c/
+        temp_size_str.erase(std::remove(temp_size_str.begin(), temp_size_str.end(), '\n'), temp_size_str.end());
+        temp_size = std::stoi(temp_size_str);
+
+        objects.push_back(Obj(temp_size, temp_str_name));
+    }
+
+    std::cout &lt;&lt; "How many bins do you have? ";
+    std::string bin_num_str;
+    std::getline(std::cin, bin_num_str);
+    int bin_num;
+    bin_num = std::stoi(bin_num_str);
+
+    std::cout &lt;&lt; "How big are the bins? ";
+    std::string bin_size_str;
+    std::getline(std::cin, bin_size_str);
+    int bin_size;
+    bin_size = std::stoi(bin_size_str);
+
+    vector&lt;Bin&gt; bins = std::vector&lt;Bin&gt;(0);
+    for (int i = 0; i &lt; bin_num; i++)
+    {
+        bins.push_back(Bin(bin_size));
+    }
+
+    std::cout &lt;&lt; "Total Capacity: " &lt;&lt; bin_size * bin_num &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Lower Bound: " &lt;&lt; lowerBound(objects, bin_size) &lt;&lt; std::endl;
+
+    std::cout &lt;&lt; "First Fit: " &lt;&lt; std::endl;
+
+    FirstFitFunctioning(objects, bins);
+
+    std::cout &lt;&lt; "First Fit: " &lt;&lt; std::endl;
+    FirstFitDecreasingFunctioning(objects, bins);
+
+    return 0;
+}
+    </code>
+</pre>
+</body>
+
+</html>
