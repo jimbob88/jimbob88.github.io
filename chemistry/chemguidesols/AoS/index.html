@@ -1,127 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Amount of Substance Problems</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script type="text/javascript" id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-        </script>
-</head>
+    <script
+      type="text/javascript"
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+    ></script>
+  </head>
 
-<body>
+  <body>
     <h1>Amount of Substance Problems</h1>
     <ul>
-        <li>
-            <h2>Challenge 1</h2>
-            <ol>
-                <li>
-                    <p>A mixture of anhydrous sodium carbonate and sodium hydrogencarbonate of mass 10.000g was heated
-                        until it reached a constant mass of 8.708g. Calculate the composition of the mixture in grams of
-                        each component. Sodium hydrogencarbonate thermally decomposes to form sodium carbonate.</p>
-                    <p>
-                        First of all, let's convert these names of compounds to their chemical formulas:
-                    </p>
-                    <p>
-                        $$
-                        \begin{gather}
-                        \text{Anhydrous Sodium Carbonate: } \ce{Na2CO3} \\
-                        \text{Sodium Hydrogen Carbonate: } \ce{NaHCO3}
-                        \end{gather}
-                        $$
-                    </p>
-                    <p>
-                        Now, let's look at the other information given to us. We are told that the \(\ce{NaHCO3}\)
-                        decomposes to form \(\ce{Na2CO3}\).
-                    </p>
-                    <p>
-                        Let's write a balanced equation for this:
-                    </p>
-                    <p>
-                        $$
-                        \begin{gather}
-                        \ce{NaHCO3 -> Na2CO3 + H2} \\
-                        \therefore \\
-                        \ce{2NaHCO3 -> Na2CO3 + H2 + CO2}
-                        \end{gather}
-                        $$
-                    </p>
-                    <p>
-                        Now let's talk about something important with decomposition reactions: The \(\ce{H2} +
-                        \ce{CO2}\) are both gases. Let's rewrite this formula:
-                    </p>
-                    <p>
-                        $$
-                        \ce{2NaHCO3 -> Na2CO3 + H2_{(g)} + CO2_{(g)}}
-                        $$
-                    </p>
-                    <p>
-                        This explains why the system has lost mass! Let's calculate how much mass we have lost:
-                    </p>
-                    <p>
-                        $$
-                        10g - 8.708g = 1.292g
-                        $$
-                    </p>
-                    <p>
-                        This means, the \(\ce{H2} + \ce{CO2}\) are of mass 1.292g.
-                    </p>
-                    <p>
-                        You may think we can now say that the \(\ce{Na2CO3}\) has mass 8.708g but we can't, because we
-                        don't know what percentage of the original mixture was anhydrous sodium carbonate (one of the
-                        reactants).
-                    </p>
-                    <p>
-                        What we can do though, is imagine the two gaseous products as "one compound". Let's say that the
-                        \(\ce{H2} + \ce{CO2}\) are in one system of \(\ce{H2CO2}\).
-                    </p>
-                    <p>
-                        Calculate the moles of \(\ce{H2CO2}\):
-                    </p>
-                    <p>
-                        $$
-                        \begin{gather}
-                        \text{moles} = \frac{\text{mass}}{\text{M}_\text{r}} \\\\
-                        \text{moles} = \frac{1.292g}{18+12+(16 \times 2)} \\
-                        \text{moles} \approx 0.020677 mol
-                        \end{gather}
-                        $$
-                    </p>
-                    <p>
-                        Calculate the molar ratio of \(\ce{H2CO2}\):\(\ce{NaHCO3}\).
-                        From the formula, we can see it is 1:2.
-                    </p>
-                    <p>
-                        $$
-                        \begin{gather}
-                        \therefore \text{mol}(\ce{NaHCO3}) = 2 \times \text{mol}(\ce{H2CO2}) \\
-                        \text{mol}(\ce{NaHCO3}) \approx 0.041355
-                        \end{gather}
-                        $$
-                    </p>
-                    <p>
-                        We can now calculate the mass of \(\ce{NaHCO3}\).
-                    </p>
-                    <p>
-                        $$
-                        \begin{gather}
-                        \text{mol} = \frac{\text{mass}}{\text{M}_\text{r}} \\
-                        \text{mol} \times \text{M}_\text{r} = \text{mass} \\
-                        \text{M}_\text{r}(\ce{NaHCO3}) = 23+1+12+(16 \times 3) \\
-                        \text{mass} \approx \text{M}_\text{r}(\ce{NaHCO3}) \times 0.041355 \\
-                        \text{mass} \approx 84 \times 0.041355 \\
-                        \text{mass} \approx 3.5g \\
-                        \end{gather}
-                        $$
-                    </p>
-                </li>
-
-            </ol>
-        </li>
+      <li>
+        <h2>Challenge 1</h2>
+        <ol>
+          <li>
+            <p>
+              A mixture of anhydrous sodium carbonate and sodium
+              hydrogencarbonate of mass 10.000g was heated until it reached a
+              constant mass of 8.708g. Calculate the composition of the mixture
+              in grams of each component. Sodium hydrogencarbonate thermally
+              decomposes to form sodium carbonate.
+            </p>
+            <p>
+              First of all, let's convert these names of compounds to their
+              chemical formulas:
+            </p>
+            <p>
+              $$ \begin{gather} \text{Anhydrous Sodium Carbonate: } \ce{Na2CO3}
+              \\ \text{Sodium Hydrogen Carbonate: } \ce{NaHCO3} \end{gather} $$
+            </p>
+            <p>
+              Now, let's look at the other information given to us. We are told
+              that the \(\ce{NaHCO3}\) decomposes to form \(\ce{Na2CO3}\).
+            </p>
+            <p>Let's write a balanced equation for this:</p>
+            <p>
+              $$ \begin{gather} \ce{NaHCO3 -> Na2CO3 + H2} \\ \therefore \\
+              \ce{2NaHCO3 -> Na2CO3 + H2 + CO2} \end{gather} $$
+            </p>
+            <p>
+              Now let's talk about something important with decomposition
+              reactions: The \(\ce{H2} + \ce{CO2}\) are both gases. Let's
+              rewrite this formula:
+            </p>
+            <p>$$ \ce{2NaHCO3 -> Na2CO3 + H2_{(g)} + CO2_{(g)}} $$</p>
+            <p>
+              This explains why the system has lost mass! Let's calculate how
+              much mass we have lost:
+            </p>
+            <p>$$ 10g - 8.708g = 1.292g $$</p>
+            <p>This means, the \(\ce{H2} + \ce{CO2}\) are of mass 1.292g.</p>
+            <p>
+              You may think we can now say that the \(\ce{Na2CO3}\) has mass
+              8.708g but we can't, because we don't know what percentage of the
+              original mixture was anhydrous sodium carbonate (one of the
+              reactants).
+            </p>
+            <p>
+              What we can do though, is imagine the two gaseous products as "one
+              compound". Let's say that the \(\ce{H2} + \ce{CO2}\) are in one
+              system of \(\ce{H2CO2}\).
+            </p>
+            <p>Calculate the moles of \(\ce{H2CO2}\):</p>
+            <p>
+              $$ \begin{gather} \text{moles} =
+              \frac{\text{mass}}{\text{M}_\text{r}} \\\\ \text{moles} =
+              \frac{1.292g}{18+12+(16 \times 2)} \\ \text{moles} \approx
+              0.020677 mol \end{gather} $$
+            </p>
+            <p>
+              Calculate the molar ratio of \(\ce{H2CO2}\):\(\ce{NaHCO3}\). From
+              the formula, we can see it is 1:2.
+            </p>
+            <p>
+              $$ \begin{gather} \therefore \text{mol}(\ce{NaHCO3}) = 2 \times
+              \text{mol}(\ce{H2CO2}) \\ \text{mol}(\ce{NaHCO3}) \approx 0.041355
+              \end{gather} $$
+            </p>
+            <p>We can now calculate the mass of \(\ce{NaHCO3}\).</p>
+            <p>
+              $$ \begin{gather} \text{mol} =
+              \frac{\text{mass}}{\text{M}_\text{r}} \\ \text{mol} \times
+              \text{M}_\text{r} = \text{mass} \\ \text{M}_\text{r}(\ce{NaHCO3})
+              = 23+1+12+(16 \times 3) \\ \text{mass} \approx
+              \text{M}_\text{r}(\ce{NaHCO3}) \times 0.041355 \\ \text{mass}
+              \approx 84 \times 0.041355 \\ \text{mass} \approx 3.5g \\
+              \end{gather} $$
+            </p>
+          </li>
+          <hr>
+          <li>
+            <p>
+              A mixture of calcium carbonate and magnesium carbonate with a mass
+              of 10.000g was heated to constant mass, with final mass being
+              5.096g.
+            </p>
+            <p>
+             Firstly, we will form the two decomposition reactions: 
+            </p>
+            <p>
+            $$
+            \begin{gather}
+            \ce{MgCO3 -> MgO + CO2} \\ 
+            \ce{CaCO3 -> CaO + CO2}
+            \end{gather}
+            $$
+            </p>
+            <p>
+            The next step, is to realise that we have no idea how many moles of each carbonate we have! The formulas we just wrote assume we have 1 mol of each. That means we should form a new set of equations using \(x\) and \(y\):
+            </p>
+            <p>
+            $$
+            \begin{gather}
+            x\ce{MgCO3 ->} x\ce{MgO} + x\ce{CO2} \\
+            y\ce{CaCO3 ->} y\ce{CaO} + y\ce{CO2}
+            \end{gather}
+            $$
+            </p>
+            <p>
+            Now let's join all of these together to make one huge formula, keeping this algebraic terms:
+            </p>
+            <p>
+            $$
+            x\ce{MgCO3} + y\ce{CaCO3 ->} x\ce{MgO} + y\ce{CaO} + x\ce{CO2} + y\ce{CO2} 
+            $$
+            </p>
+            <p>
+            Now let's go back to the question from before ad note down what the masses of these are!
+            </p>
+            <p>
+            We are told the mass of Calcium Carbonate and Magnesium Carbonate sums to 10.000g. <br/>
+            We are told the mass of the end product is 5.096g. Because \(CO2\) is a gas, we know that it has left the system. \(\therefore\) the Oxides sum to give 5.096g. <br/>
+            Leaving 4.904g for the CO2.
+            </p>
+            <p>
+            Using this, we can form a set of simultaneous equations:
+            </p>
+            <p>
+            $$
+            \begin{gather}
+            x\ce{CO2} + y\ce{CO2} = 4.904 \\ 
+            y\ce{MgO} + y\ce{CaO} = 5.096
+            \end{gather}
+            $$
+            </p>
+            <p>
+            We can then substitute the \(M_r\) of these compounds to form mathematical equations:
+            </p>
+            <p>
+            $$
+            \begin{gather}
+            (12+32)x + (12+32)y = 4.904 \\
+            (24.3+16)x + (40.1+16)y = 5.096
+            \end{gather}
+            $$
+            </p>
+            <p>
+            Solving on a calculator gives:
+            </p>
+            <p>
+            $$
+            \begin{gather}
+            x \approx 0.0732 \\
+            y \approx 0.0382
+            \end{gather}
+            $$
+            </p>
+            <p>
+            Now that we have the moles of \(\ce{MgCO3}\) (\(x\)) , we can calculate the mass of it, by first calculating the \(M_r\)
+            </p>
+            <p>
+            $$
+            \begin{gather}
+            \text{M}_\text{r}(MgCO3) = 24.3+12+16+16+16 = 84.3 \\
+            84.3 \times x = 6.17076 \\
+            \frac{6.17076}{10} \times 100 \approx 61.7\%
+            \end{gather}
+            $$
+            </p>
+          </li>
+        </ol>
+      </li>
     </ul>
-</body>
-
+  </body>
 </html>
