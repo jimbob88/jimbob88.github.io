@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floyd's Algorithm in CPP</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+    <h1>Floyd's Algorithm in CPP</h1>
+    <p>
+        This code is designed for windows only.
+    </p>
+    <p>
+        This code was used by myself to understand the complexity of the Floyd's algorithm for finding shortest
+        distances. As you can see from the 3 for loops (i, j, k) you can see that floyd's algorithm has a difficulty of
+        O(n^3). There is no checking for a more efficient way to do this, so it is not just a worst case scenario of
+        O(n^3) it also has a best case scenario of O(n^3).
+    </p>
+    <pre>
+        <code lang="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;limits&gt;
+#include &lt;windows.h&gt;
+#include &lt;iomanip&gt;
+
+using namespace std;
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+void print_2d(vector&lt;vector&lt;float&gt;&gt; mtx)
+{
+    for (int i = 0; i &lt; mtx.size(); i++)
+    {
+        std::cout &lt;&lt; "[";
+        for (int j = 0; j &lt; mtx[i].size(); j++)
+        {
+            if (j != 0)
+            {
+                std::cout &lt;&lt; ", ";
+            }
+            std::cout &lt;&lt; mtx[i][j];
+        }
+        std::cout &lt;&lt; "]" &lt;&lt; std::endl;
+    }
+}
+
+void print_2d_char(vector&lt;vector&lt;char&gt;&gt; mtx)
+{
+    for (int i = 0; i &lt; mtx.size(); i++)
+    {
+        std::cout &lt;&lt; "[";
+        for (int j = 0; j &lt; mtx[i].size(); j++)
+        {
+            if (j != 0)
+            {
+                std::cout &lt;&lt; ", ";
+            }
+            std::cout &lt;&lt; mtx[i][j];
+        }
+        std::cout &lt;&lt; "]" &lt;&lt; std::endl;
+    }
+}
+
+void print_2d_cols(vector&lt;vector&lt;float&gt;&gt; mtx, vector&lt;vector&lt;char&gt;&gt; char_mtx, int _x, int _y, int _z)
+{
+    for (int i = 0; i &lt; mtx.size(); i++)
+    {
+        // Print the number table
+        std::cout &lt;&lt; "[";
+        if (i == _x)
+        {
+            // system("Color 0A");
+            SetConsoleTextAttribute(hConsole, 13);
+        }
+        else
+        {
+            // system("Color 0F");
+            SetConsoleTextAttribute(hConsole, 15);
+        }
+        for (int j = 0; j &lt; mtx[i].size(); j++)
+        {
+            if (j != 0)
+            {
+                std::cout &lt;&lt; ", ";
+            }
+            if (j == _x || i == _x)
+            {
+                // system("Color 0A");
+                SetConsoleTextAttribute(hConsole, 13);
+            }
+
+            if (i == _y &amp;&amp; j == _z)
+            {
+                SetConsoleTextAttribute(hConsole, 14);
+            }
+
+            std::cout &lt;&lt; std::setfill('0') &lt;&lt; std::setw(3) &lt;&lt; mtx[i][j];
+            SetConsoleTextAttribute(hConsole, 15);
+        }
+        // Print the Character Table
+        std::cout &lt;&lt; "] [";
+        for (int j = 0; j &lt; mtx[i].size(); j++)
+        {
+            if (j != 0)
+            {
+                std::cout &lt;&lt; ", ";
+            }
+            std::cout &lt;&lt; char_mtx[i][j];
+        }
+        std::cout &lt;&lt; "]" &lt;&lt; std::endl;
+    }
+}
+
+int main()
+{
+    std::cout &lt;&lt; "Welcome to the Floyd's Algorithm Software" &lt;&lt; std::endl;
+    float inf = std::numeric_limits&lt;float&gt;::infinity();
+
+    vector&lt;char&gt; names{
+        'P', 'Q', 'R', 'S'};
+
+    vector&lt;vector&lt;float&gt;&gt; dist_mtx{
+        {0, 9, 5, 12},
+        {9, 0, 3, 7},
+        {5, 3, 0, inf},
+        {12, 7, inf, 0}};
+
+    print_2d(dist_mtx);
+
+    vector&lt;vector&lt;char&gt;&gt; route_mtx{
+        {'P', 'Q', 'R', 'S'},
+        {'P', 'Q', 'R', 'S'},
+        {'P', 'Q', 'R', 'S'},
+        {'P', 'Q', 'R', 'S'}};
+
+    print_2d_char(route_mtx);
+
+    std::cout &lt;&lt; "Vectors initalized" &lt;&lt; std::endl;
+
+    float sum;
+    // i iterates through each row of the distance matrix, it is equivalent to
+    // highlighting each row (each iteration)
+    for (int i = 0; i &lt; dist_mtx.size(); i++)
+    {
+        /* You can imagine j and k as a whole separate loop. This is the exact
+        same loop as you would use to iterate through every item in a 2d list.
+        */
+        std::cout &lt;&lt; i &lt;&lt; " iteration" &lt;&lt; std::endl;
+        // j stands for the row you are going to select from the matrix
+        for (int j = 0; j &lt; dist_mtx[i].size(); j++)
+        {
+            // k stands for the column you are checking against in the matrix
+            for (int k = 0; k &lt; dist_mtx[i].size(); k++)
+            {
+                // dist_mtx[j][i] = selects the iteration column, and goes through each row in it
+                // dist_mtx[i][k] = selects the iteration row, and goes through each column in it
+                // dist_mtx[j][k] selects the intercept of dist_mtx[j][i] &amp; dist_mtx[i][k]
+                if (dist_mtx[j][k] &gt; dist_mtx[j][i] + dist_mtx[i][k])
+                {
+                    dist_mtx[j][k] = dist_mtx[j][i] + dist_mtx[i][k];
+                    route_mtx[j][k] = names[i];
+                    print_2d_cols(dist_mtx, route_mtx, i, j, k);
+                    std::cout
+                        &lt;&lt; std::endl;
+                }
+            }
+        }
+    }
+
+    std::cout &lt;&lt; "Finished" &lt;&lt; std::endl;
+    print_2d(dist_mtx);
+    print_2d_char(route_mtx);
+    std::cout
+        &lt;&lt; std::endl;
+    return 0;
+}
+        </code>
+    </pre>
+    <hr>
+    <p>
+        An example of this code running can be seen below:
+    </p>
+    <pre>
+        <code class="language-plaintext">
+Welcome to the Floyd's Algorithm Software
+[0, 9, 5, 12]
+[9, 0, 3, 7]
+[5, 3, 0, inf]
+[12, 7, inf, 0]
+[P, Q, R, S]
+[P, Q, R, S]
+[P, Q, R, S]
+[P, Q, R, S]
+Vectors initalized
+0 iteration
+[000, 009, 005, 012] [P, Q, R, S]
+[009, 000, 003, 007] [P, Q, R, S]
+[005, 003, 000, 017] [P, Q, R, P]
+[012, 007, inf, 000] [P, Q, R, S]
+
+[000, 009, 005, 012] [P, Q, R, S]
+[009, 000, 003, 007] [P, Q, R, S]
+[005, 003, 000, 017] [P, Q, R, P]
+[012, 007, 017, 000] [P, Q, P, S]
+
+1 iteration
+[000, 009, 005, 012] [P, Q, R, S]
+[009, 000, 003, 007] [P, Q, R, S]
+[005, 003, 000, 010] [P, Q, R, Q]
+[012, 007, 017, 000] [P, Q, P, S]
+
+[000, 009, 005, 012] [P, Q, R, S]
+[009, 000, 003, 007] [P, Q, R, S]
+[005, 003, 000, 010] [P, Q, R, Q]
+[012, 007, 010, 000] [P, Q, Q, S]
+
+2 iteration
+[000, 008, 005, 012] [P, R, R, S]
+[009, 000, 003, 007] [P, Q, R, S]
+[005, 003, 000, 010] [P, Q, R, Q]
+[012, 007, 010, 000] [P, Q, Q, S]
+
+[000, 008, 005, 012] [P, R, R, S]
+[008, 000, 003, 007] [R, Q, R, S]
+[005, 003, 000, 010] [P, Q, R, Q]
+[012, 007, 010, 000] [P, Q, Q, S]
+
+3 iteration
+Finished
+[0, 8, 5, 12]
+[8, 0, 3, 7]
+[5, 3, 0, 10]
+[12, 7, 10, 0]
+[P, R, R, S]
+[R, Q, R, S]
+[P, Q, R, Q]
+[P, Q, Q, S]
+        </code>
+    </pre>
+</body>
+
+</html>
