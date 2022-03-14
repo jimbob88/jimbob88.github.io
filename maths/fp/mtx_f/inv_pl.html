@@ -57,10 +57,143 @@
         From this, we can then form a set of simultaneous equations:
     </p>
     <p>
+        $$
         \begin{gather}
         ax + bx = x \\
         cy + dy = y
         \end{gather}
+        $$
+    </p>
+    <p>
+        It is probably easiest to show this in an actual example!
+    </p>
+    <p>
+        Let's make the matrix (\(\boldsymbol{M}\)) a rotation of \(90^o\) anticlockwise:
+    </p>
+    <p>
+        $$
+        \begin{gather}
+        \boldsymbol{M} = \begin{bmatrix}cos \theta & -sin \theta \\sin \theta & cos \theta\end{bmatrix}\\
+        \text{where } \theta = 90 \\
+        \boldsymbol{M} = \begin{bmatrix}cos 90 & -sin 90 \\sin 90 & cos 90\end{bmatrix} \\
+        \boldsymbol{M} = \begin{bmatrix}0 & -1 \\1 & 0\end{bmatrix}
+        \end{gather}
+        $$
+    </p>
+    <p>
+        Now let's calculate the invariant points of this rotation!
+    </p>
+    <p>
+        $$
+        \begin{gather}
+        \begin{bmatrix}0 & -1 \\1 & 0\end{bmatrix} \begin{bmatrix}x\\y\end{bmatrix} = \begin{bmatrix}x\\y\end{bmatrix}
+        \\
+        \therefore \\
+        -y = x \\
+        x = y
+        \end{gather}
+        $$
+    </p>
+    <p>
+        Substituting the formula \(x=y\) into \(-y=x\) gives \(-x=x\). The <i>only</i> time \(-x=x\) is when \(x=0\).
+        Therefore, the only point for this rotation that's invariant is the origin (0, 0). This is true for all
+        rotations (other than full rotations, i.e. rotation by 360 or 0).
+    </p>
+    <h2>Invariant Lines</h2>
+    <p>
+        Invariant Lines are slightly different. The points on the line are allowed to move, but they always end up on
+        some other point on the line. Therefore, after a linear transformation, the line remains the same.
+    </p>
+    <p>
+        The way we can tackle this, is by forming another set of simultaneous equations, but instead of saying that the
+        vector \(\begin{bmatrix}x\\y\end{bmatrix}\) will remain the same. We want the line \(y=mx+c\) to remain the
+        same.
+    </p>
+    <p>
+        $$
+        \begin{gather}
+        \begin{bmatrix}a & b\\c & d\end{bmatrix} \begin{bmatrix}x\\mx+c\end{bmatrix} = \begin{bmatrix}x^` \\mx^` +
+        c\end{bmatrix}
+        \end{gather}
+        $$
+    </p>
+    <p>
+        The little tick (`) above the "x" means that the two values of x are different, we could have used any new
+        variable here, but keeping it as x is easier.
+    </p>
+    <p>
+        I will now jump straight into an example of using this method:
+    </p>
+    <p>
+        $$
+        \begin{bmatrix}2 & 1\\2 & 3\end{bmatrix} \begin{bmatrix}x\\mx+c\end{bmatrix} = \begin{bmatrix}x^` \\mx^` +
+        c\end{bmatrix}
+        $$
+    </p>
+    <p>
+        Now we will multiply the left-hand side:
+    </p>
+    <p>
+        $$
+        \begin{bmatrix}2x + 1(mx+c)\\2(x) + 3(mx+c)\end{bmatrix} = \begin{bmatrix}x^` \\mx^` +
+        c\end{bmatrix}
+        $$
+    </p>
+    <p>
+        We can then separate these into two simultaneous equations:
+    </p>
+    <p>
+        $$
+        \begin{gather}
+        2x + mx + c = x^` \\
+        2x + 3(mx+c) = mx^` + c
+        \end{gather}
+        $$
+    </p>
+    <p>
+        Brace yourself! This is about to get into algebraic hell territory! But don't fear, we'll make it through!
+    </p>
+    <p>
+        Because we have defined a value for \(x^`\) (that being \(2x + mx + c\)), we can substitute it's value into the
+        second equation to form a new equation with no \(x^`\).
+    </p>
+    <p>
+        \begin{align}
+        2x + 3(mx+c) &= m(2x + mx + c) + c \\
+        2x + 3mx + 3c &= 2mx + m^2x + mc + c \\
+        2x + 3mx + 2c &= 2mx + m^2x + mc \\
+        2x + 2c &= 2mx - 3mx + m^2x + mc \\
+        2x + 2c &= -1mx + m^2x + mc \\
+        -mc + 2c &= -1mx + m^2x + 2x \\
+        c(-m + 2) &= x(-1m + m^2 + 2) \\
+        c(-m + 2) &= x(m^2 - 1m + 2) \\
+        c(-m + 2) &= x((m -2 )(m + 1)) \\
+        c(-m + 2) &= x(m -2 )(m + 1) \\
+        0 &= x(m - 2)(m + 1) - c(-m + 2) \\
+        0 &= x(m - 2)(m + 1) + c(m - 2) \\
+        0 &= (m - 2)(x(m + 1) + c) \\
+        \end{align}
+    </p>
+    <p>
+        Now that we have this equation, we can solve it just like a quadratic. We can say the formula is equal to 0, so
+        when \(m = 2\).
+    </p>
+    <p>
+        Therefore there is the invariant line \(y = 2x\)
+    </p>
+    <p>
+        But, there is another! Let's look at the second to last formula and use that. Let's let m = -1:
+    </p>
+    <p>
+        \begin{gather}
+        x(m - 2)(m + 1) + c(m - 2) \\
+        x(-1 - 2)(-1 + 1) + c(-1 - 2) \\
+        -3c
+        \end{gather}
+    </p>
+    <p>
+        Can you see how we have a "c" variable left over, we can then say for all lines that follow the pattern: \(y =
+        -x + c\) are invariant lines!
     </p>
 
 </body>
