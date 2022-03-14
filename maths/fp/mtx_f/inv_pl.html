@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invariant Points & Lines</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+
+<body>
+    <h1>Invariant Points and Lines</h1>
+    <h2>Invariant Points</h2>
+    <p>
+        Invariant points can be defined as singular points on a graph that do not move after a linear transformations.
+        Linear transformations include, but are not limited to rotations, reflections and enlargements.
+    </p>
+    <p>
+        The most clear and obvious example of this is the point \((0, 0) \), the origin. Because the origin can be
+        described in the 2d vector \(\begin{bmatrix}0\\0\end{bmatrix}\). Whatever you multiply it by, it will always
+        give you \(\begin{bmatrix}0\\0\end{bmatrix}\). We know this, because all linear transformations can be described
+        as a 2x2 matrix multiplication!
+    </p>
+    <p>
+        $$
+        \begin{bmatrix}a & b\\c & d\end{bmatrix} \begin{bmatrix}0\\0\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix}
+        $$
+    </p>
+    <p>
+        Therefore, we can make the following statement: "For any linear transformation, the origin is an invariant
+        point."
+    </p>
+    <p>
+        In order to calculate invariant points, which aren't necessarily the origin, one needs to form a formula similar
+        to what we have just written! Simply substitute the origin for \(\begin{bmatrix}x\\y\end{bmatrix}\).
+    </p>
+    <p>
+        $$
+        \begin{bmatrix}a & b\\c & d\end{bmatrix} \begin{bmatrix}x\\y\end{bmatrix} = \begin{bmatrix}x\\y\end{bmatrix}
+        $$
+    </p>
+    <p>
+        Now let's multiply these matrices algebraically (if you can't remember how, I'd recommend reading <a
+            href="https://www.mathsisfun.com/algebra/matrix-multiplying.html">this</a>):
+    </p>
+    <p>
+        $$
+        \begin{gather}
+        \begin{bmatrix}a \times x + b \times x\\c \times y + d \times y\end{bmatrix} = \begin{bmatrix}x\\y\end{bmatrix}
+        \end{gather}
+        $$
+    </p>
+    <p>
+        From this, we can then form a set of simultaneous equations:
+    </p>
+    <p>
+        \begin{gather}
+        ax + bx = x \\
+        cy + dy = y
+        \end{gather}
+    </p>
+
+</body>
+
+</html>
