@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Djikstra's Algorithm in C++</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+    <h1>Djikstra's Algorithm</h1>
+    <p>
+        This piece of code is simply based off the top of my head and from reading the relevant sections of my D1
+        textbook, there is nothing too fancy here, just functionality.
+    </p>
+    <pre>
+        <code lang="language-cpp">
+// main.cpp
+#include <stdio.h>
+#include <iostream>
+// #include "graph.h"
+#include "graph.cpp"
+
+int main(void)
+{
+    std::vector<Node> node_list;
+    // Init nodes
+    node_list.push_back(Node("S"));
+    node_list.push_back(Node("A"));
+    node_list.push_back(Node("B"));
+    node_list.push_back(Node("C"));
+    node_list.push_back(Node("D"));
+    node_list.push_back(Node("T"));
+
+    // Connect nodes with arcs
+    // S->A = 5
+    node_list[0].connectNode(&node_list[1], 5);
+    // S->B = 6
+    node_list[0].connectNode(&node_list[2], 6);
+    // S->C = 2
+    node_list[0].connectNode(&node_list[3], 2);
+    // A->D = 4
+    node_list[1].connectNode(&node_list[4], 4);
+    // B->D = 4
+    node_list[2].connectNode(&node_list[4], 4);
+    // B->C = 2
+    node_list[2].connectNode(&node_list[3], 2);
+    // B->T = 8
+    node_list[2].connectNode(&node_list[5], 8);
+    // C->T = 12
+    node_list[2].connectNode(&node_list[5], 12);
+    // D->T = 3
+    node_list[4].connectNode(&node_list[5], 3);
+
+    int startNode = 0;
+    int visited = 0;
+
+    node_list[startNode].visited = true;
+    node_list[startNode].visited_num = visited;
+    node_list[startNode].visited_d = 0;
+
+    std::vector<Node> v_node_list;
+    v_node_list.push_back(node_list[startNode]);
+    float temp_d;
+    float shortest_temp_d;
+    Arc *shortest_arc_d;
+    while (visited < node_list.size() - 1)
+    {
+        shortest_temp_d = 1000000;
+        // For every visited node
+        for (int i = 0; i < v_node_list.size(); i++)
+        {
+            for (int j = 0; j < v_node_list[i].arcs.size(); j++)
+            {
+                std::cout << "Arc s: " << v_node_list[i].arcs[j].startingpoint->nodeName << " Arc e: " << v_node_list[i].arcs[j].endpoint->nodeName << std::endl;
+                // If node hasn't already been visited
+                if (!v_node_list[i].arcs[j].endpoint->visited)
+                {
+                    temp_d = v_node_list[i].visited_d + v_node_list[i].arcs[j].distance;
+                    if (temp_d <= v_node_list[i].arcs[j].endpoint->shortestD)
+                    {
+                        v_node_list[i].arcs[j].endpoint->shortestD = temp_d;
+                        if (temp_d < shortest_temp_d)
+                        {
+                            shortest_temp_d = temp_d;
+                            shortest_arc_d = &v_node_list[i].arcs[j];
+                        }
+                        // v_node_list[i].shortestA = v_node_list[i].arcs[j];
+                    }
+                }
+            }
+        }
+        visited += 1;
+        shortest_arc_d->endpoint->visited = true;
+        shortest_arc_d->endpoint->visited_d = shortest_temp_d;
+        shortest_arc_d->endpoint->visited_num = visited;
+        v_node_list.push_back(*shortest_arc_d->endpoint);
+        // break;
+    }
+
+    std::cout << "End of algorithm" << std::endl;
+    std::cout << "Order: " << std::endl;
+    for (int i = 0; i < v_node_list.size(); i++)
+    {
+        std::cout << v_node_list[i].nodeName;
+    }
+
+    return 0;
+}
+        </code>
+    </pre>
+    <pre>
+        <code lang="language-cpp">
+// graph.h
+#include <vector>
+#include <string>
+
+class Arc;
+
+class Node
+{
+public:
+    // std::vector<Node> connectedNodes;
+    // std::vector<float> connectedNodesD;
+    std::vector<Arc> arcs;
+    std::string nodeName;
+    float shortestD;
+    bool visited;
+    int visited_num;
+    float visited_d;
+
+    Node(std::string nodeName) : nodeName(nodeName)
+    {
+        shortestD = 1000000.0f;
+    };
+
+    Node()
+    {
+        shortestD = 1000000.0f;
+        visited = false;
+        visited_num = -1;
+    };
+
+    void addArc(Arc);
+    void connectNode(Node *, float);
+};
+
+class Arc
+{
+public:
+    Node *startingpoint;
+    Node *endpoint;
+    const float distance;
+
+    Arc(Node *pointA, Node *pointB, float distance) : startingpoint(pointA), endpoint(pointB), distance(distance){};
+};
+    
+        </code>
+    </pre>
+    <pre>
+        <code lang="language-cpp">
+#include "graph.h"
+
+void Node::addArc(Arc a)
+{
+    this->arcs.push_back(a);
+    a.endpoint->arcs.push_back(
+        Arc(a.endpoint, a.startingpoint, a.distance));
+}
+
+void Node::connectNode(Node *n, float d)
+{
+    this->addArc(Arc(this, n, d));
+    // n->connectedNodes.push_back();
+}
+    </code>
+</pre>
+</body>
+
+</html>
