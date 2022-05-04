@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequences</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
+
+    <style>
+        body {
+            margin-top: 20px;
+            margin-right: 20%;
+            margin-left: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Sequences</h1>
+    <h2>Why is this page needed?</h2>
+    <p>
+        In a lot of private schools, and even some state schools in the UK, the students will do the following:
+    <ol>
+        <li>
+            In their first year (lower 6th / year 12), they will study the full A-level Maths course (including the
+            modules)
+        </li>
+        <li>
+            In their second year (upper 6th / year13), they will get the option to study the A-Level Further Maths
+            course
+        </li>
+    </ol>
+
+    </p>
+    <p>
+        This makes a lot of sense to do, because a lot of the Further Maths has assumed knowledge from the A-Level maths
+        course. In my school though, due to the way Maths is taught in my area, you have to take both Further Maths and
+        A-Level Maths at the same time. But then a problem appears, if you want to take some of the University
+        Admissions Tests (i.e. the MAT), they are taken at the end of your Year 12 (with the exception of the STEP
+        paper, which is taken at the end of Year 13). So the questions in these papers assume you have learnt the full
+        mathematics course, but you haven't yet. So, this here is going to try and make sense of sequences, because I
+        too am trying to learn them by myself.
+    </p>
+
+    <h2>Arithmetic Series</h2>
+    <p>
+        We are going to start with some knowledge from the GCSEs. I recommend you read pages 2 &amp; 4 from <a
+            href="https://www.bbc.co.uk/bitesize/guides/zy6vcj6/revision/2">BBC Bitesize</a>. But I will also explain it
+        for you here:
+    </p>
+    <pre>
+1st 2nd 3rd 4th 5th
+
+ +10     +10
+ ┌──┐    ┌──┐
+ │  │    │  │
+20  30  40  50  60
+     │  │    │  │
+     └──┘    └──┘
+     +10     +10
+</pre>
+    <p>
+        And then if you look at the 10 times table, you can see that this has the formula: \(10n + 10\)
+    </p>
+
+    <p>
+        Now that you have remembered how to do this, we can look at an alternative way to do this.
+    </p>
+    <p>
+        Can you see how the starting term is \(20\). And from that you add \(10\) each time. So, could
+        we not say instead, that this is:
+    </p>
+    <p>
+        \(20+10 \times 0, 20+10 \times 1, 20+10 \times 2, 20+10 \times 3, 20+10 \times 4\)
+    </p>
+    <p>
+        This can be generalised as: \(20 + 10(n-1)\). (If you expand and simplify, that is \(10n + 10\), the same
+        formula from earlier)
+    </p>
+
+    <p>
+        To differentiate this from the \(n^{th} \text{ term}\) formula, we use the following notation:
+
+        $$
+        \Large
+        a_n = 20 + 10(n-1)
+        $$
+    </p>
+
+    <p>Or, more commonly, in its general form:</p>
+    <p>
+        $$
+        \Large
+        a_n = a_1 + (n - 1)d
+        $$
+    </p>
+    <p>
+        In english that means: The n<sup>th</sup> term is equal to the first term plus "n - 1" lots of the multiplier d.
+    </p>
+
+    <h3>The Summation of an Arithmetic Series</h3>
+    <p>
+        Now that we have this formula, we need to look at another important formula, which is the summation formula.
+        Most of the questions related to Arithmetic Series use this formula so I recommend you learn it off by heart.
+    </p>
+    <p>
+        Let's take the above example of the series: <code>20  30  40  50  60</code>. The summation of this is:
+        <code>200</code>. Therefore, we can say that the summation of the first 5 times of the sequence \(a_n = 20 +
+        10(n-1)\) is 200.
+    </p>
+    <p>
+        But how could we do this algebraically? Let's define a new variable \(S_k\) to be the summation of the first
+        \(k\) terms of our formula. Using the sigma notation that we've learnt from the Further Maths Core Pure, we can
+        say:
+    </p>
+    <p>
+        $$
+        \Large
+        S_k = \sum_{n=1}^{k} a_n
+        $$
+    </p>
+    <p>
+        We can then substitute our formula for \(a_n\):
+    </p>
+    <p>
+        $$
+        \Large
+        S_k = \sum_{n=1}^{k} a_1 + (n - 1)d
+        $$
+    </p>
+    <p>We can then create two separate equations:</p>
+    <p>
+        $$
+        \Large
+        S_k = \sum_{n=1}^{k} a_1 + \sum_{n=1}^{k} (n - 1)d
+        $$
+    </p>
+    <p>
+        Simplifying using the summation rules, this can be rewritten as:
+    </p>
+    <p>
+        $$
+        \Large
+        \begin{align}
+        S_k &= k \times a_1 + d \times \sum_{n=1}^{k} (n - 1) \\
+        S_k &= k \times a_1 + d \times \left ( \sum_{n=1}^{k} n - \sum_{n=1}^{k} 1 \right) \\
+        S_k &= k \times a_1 + d \times \left ( \frac{k(k+1)}{2} - k \right) \\
+        S_k &= k \times a_1 + \frac{1}{2}d \left ( k(k+1) - 2k \right) \\
+        S_k &= k \times a_1 + \frac{1}{2}dk \left ( k - 1 \right) \\
+        S_k &= k \times \left [a_1 + \frac{1}{2}d \left ( k - 1 \right) \right] \\
+        S_k &= \frac{1}{2} k \times \left [2a_1 + d \left ( k - 1 \right) \right] \\
+        \end{align}
+        $$
+    </p>
+    <p>
+        Voila! We have a new formula! Let's input the values we had earlier. We wanted the first 5 terms, so \(k = 5\).
+        Our starting value was \(20\), so \(a_1 = 20\). And our "increaser" (the bit we were adding on) was 10. So \(d =
+        10\).
+    </p>
+    <p>
+        $$
+        \Large
+        \begin{align}
+        S_5 &= \frac{1}{2} 5 \times \left [2(20) + 10 \left ( 5 - 1 \right) \right] \\
+        S_5 &= \frac{1}{2} 5 \times \left [40 + 40 \right] \\
+        S_5 &= \frac{1}{2} 5 \times \left [80 \right] \\
+        S_5 &= 5 \times 40 \\
+        S_5 &= 200 \\
+        \end{align}
+        $$
+    </p>
+    <p>
+        It works!
+    </p>
+
+
+    <h2>Geometric Series</h2>
+    <p>
+        First we'll start off with GCSE knowledge (<a
+            href="https://www.bbc.co.uk/bitesize/guides/zy6vcj6/revision/5">BBC Bitesize</a>.)
+        Let's take the following geometric series: 3, 9, 27, 81. We can find out the common multiplier (if you read the
+        bitesize page) by dividing each term by the term next to it.
+        $$
+        \frac{9}{3} = \frac{27}{9} = \frac{81}{27} = 3
+        $$
+    </p>
+    <p>
+        Therefore, we know the multiplier is 3.
+    </p>
+
+
+    <h4>Sources</h4>
+    <ul>
+        <li>
+            <a href="https://mathsmadeeasy.co.uk/a-level-maths-revision/arithmetic-series/">MathsMadeEasy</a>
+        </li>
+        <li>
+            <a
+                href="https://www.admissionstesting.org/Images/546501-test-of-mathematics-for-university-admission-2018-paper-1-hand-written-worked-answers.pdf">Admissions
+                Test</a>
+        </li>
+        <li>
+            <a href="https://mathworld.wolfram.com/ArithmeticSeries.html">Wolfram</a>
+        </li>
+    </ul>
+
+</body>
+
+</html>
