@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelling Salesman Problem</title>
+    <style>
+        dfn {
+            text-decoration: underline;
+        }
+
+        body {
+            margin-top: 20px;
+            margin-right: 20%;
+            margin-left: 20%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>The Travelling Salesman Problem</h1>
+    <h2>
+        What is it?
+    </h2>
+    <p>
+        Let's say you want to visit <a href="https://www.youtube.com/watch?v=RIsPZqdyyG8">all the cities</a> in England,
+        what is the shortest way of travelling to all the cities?
+    </p>
+
+    <h2>The Graph Theory Definition</h2>
+    <p><dfn><abbr>TSP</abbr> (The Travelling Salesman Problem)</dfn>:
+        An algorithm used to find the shortest cycle that visits every vertex in a network before returning to the
+        starting node.
+    </p>
+    <p>
+        It is important to note that this is <i><b>different</b></i> from the Route Inspection / Chinese Postman
+        problem, because route inspection is used to find the shortest way of visiting all the arcs/edges, <b>not</b>
+        the nodes (like in the TSP).
+    </p>
+
+    <h2>The two types of problem</h2>
+    <p>
+        There are two types of problem: The Classical & The Practical.
+    </p>
+    <ul>
+        <li>
+            <dfn>Classical</dfn>:
+            Each vertex must be visited <mark>exactly</mark> once before returning to the starting node.
+        </li>
+        <li>
+            <dfn>Practical</dfn>:
+            Each vertex must be visited <mark>at least</mark> once before returning to the starting node.
+        </li>
+    </ul>
+    <p>
+        In order to make both of these problems the same, we need to construct <b>a complete network of least
+            distances</b>.
+    </p>
+    <p>
+        <dfn>A complete network of least distances</dfn>:
+        A graph, often represented as a table, that shows the shortest distance between every node<sup><a
+                href="#note1">1</a></sup>
+    </p>
+    <p>
+        You will do this by inspection, so there is no need to use Floyd's Algorithm to solve this in your exam.
+    </p>
+
+    <h2>The Algorithm</h2>
+    <p>
+        Something that it is key to understand, is that there is <b>no</b> perfect algorithm that'll solve this problem.
+    </p>
+    <p>
+        Instead, what we are going to do, is find a Lower Bound and an Upper Bound. You should remember these terms from
+        GCSE and your frequency tables. You would have a class like: 13 &le; x &lt; 25. That would have a lower bound of
+        13, and an upper bound of 25. So we know that the value of x could be anything in between these two numbers.
+    </p>
+    <p>
+        <dfn>Upper Bound</dfn>:
+        The biggest number a variable could take
+    </p>
+    <p>
+        <dfn>Lower Bound</dfn>:
+        The smallest number a variable could take
+    </p>
+    <p>
+        What we need to find is the Lowest <i>Upper Bound</i> and the highest <i>Lower Bound</i>. You might be confused
+        by this, but what we are trying to do is close in on the smallest number of possible values. Let's say for 13
+        &le; x &lt; 25. There are 12 values it could take. So, if we wanted to guess what value x was, it would be a "1
+        in 12" chance. But if we were to have the bounds: 20 &le; x &lt; 22, we only have 2 values it could be, so we
+        have a "1 in 2" chance of guessing it.
+    </p>
+
+    <h2>The Upper Bound</h2>
+    <p>
+        There are two methods to find an upper bound:
+    <ul>
+        <li>
+            The Minimum Spanning Tree Method
+        </li>
+        <li>
+            The Nearest Neighbour Algorithm
+        </li>
+    </ul>
+    </p>
+
+    <p>
+        <dfn><abbr>MST</abbr> (Minimum Spanning Tree)</dfn>: A subgraph that has no cycles and contains every vertex
+    </p>
+
+    <h3>The MST Method</h3>
+    <ol>
+        <li>
+            Use Krushkal's or Prim's Algorithm to find the MST
+        </li>
+        <li>
+            Double the arcs
+        </li>
+        <li>
+            Seek shortcuts
+        </li>
+    </ol>
+
+    <h3>The Nearest Neighbour Algorithm<sup><a href="note2">2</a></sup></h3>
+    <ol>
+        <li>Select a starting node</li>
+        <li>Choose the smallest arc that is connected to a node that hasn't been visited yet</li>
+        <li>From that node, and only that node, select an arc</li>
+    </ol>
+    <p>This algorithm is virtually the same as Prim's algorithm, but in Prim's you always look back at every Arc you
+        have visited in the past, whereas in NN you only focus on the node you are currently visiting.</p>
+
+    <h2>The Lowest Bound</h2>
+    <p>There is one algorithm for the Lowest Bound and it has a very fancy name:</p>
+    <ul>
+        <li>
+            The Lowest Bound Algorithm
+        </li>
+    </ul>
+    <p>This algorithm is all about finding a Residual Minimum Spanning Tree</p>
+    <p>
+        <dfn><abbr>RMST</abbr> (Residual Minimum Spanning Tree)</dfn>: An MST of a subgraph with one vertex missing
+    </p>
+    <h3>The Lowest Bound Algorithm</h3>
+    <ol>
+        <li>
+            Choose a starting node, note down its two smallest arcs
+        </li>
+        <li>
+            Delete said node from the graph and all its arcs
+        </li>
+        <li>
+            Find the MST from this new subgraph
+        </li>
+        <li>
+            Add back the starting node, with only the two shortest nodes
+        </li>
+    </ol>
+
+    <h3>Extra notes</h3>
+    <ol>
+        <li id="note1">
+            Questions relating to this can be found on Page 103 / Exercise 5A in the Edexcel D1 Textbook
+        </li>
+        <li id="note2">
+            An implementation of the NN Algorithm can be found <a
+                href="https://jimbob88.github.io/maths/fd/nn_programming/index.html">here</a>
+        </li>
+    </ol>
+
+    <h3>Further Reading</h3>
+    <ul>
+        <li>
+            A good link for some questions + ans: <a
+                href="https://pmt.physicsandmathstutor.com/download/Maths/A-level/D2/Topic-Qs/Edexcel-Set-1/D2%20Travelling%20salesman%20problems.pdf">PMT</a>
+        </li>
+    </ul>
+
+    <p>
+        <i>A quick note:</i> This is not intended to teach you, it is instead intended to be a quick refresher to make
+        sure you understand what you are doing. I needed to write these so that I had a database of ways to
+        differentiate between the different types of problem.
+    </p>
+
+</body>
+
+</html>
