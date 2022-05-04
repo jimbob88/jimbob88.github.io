@@ -235,103 +235,140 @@
         Let's look at Q7 from D513/11:
     </p>
     <p>
+$$
+\begin{align}
+\text{The first three terms of an arithmetic progression are } p, q \text{ and } p^2 \text{ respectively, where
+} p < 0. \\ \text{The first three terms of a geometric progression are } p, p^2 \text{ and } q \text{
+    respectively.} \\ \text{Find the sum of the first 10 terms of the arithmetic progression} \end{align} $$
+    </p>
+    <p>
+        Let's rewrite the arithmetic progression first:
+    </p>
+    <p>
+        $$
+        a_n = p + (n - 1)d
+        $$
+    </p>
+    <p>
         $$
         \begin{align}
-        \text{The first three terms of an arithmetic progression are } p, q \text{ and } p^2 \text{ respectively, where
-        } p < 0. \\ \text{The first three terms of a geometric progression are } p, p^2 \text{ and } q \text{
-            respectively.} \\ \text{Find the sum of the first 10 terms of the arithmetic progression} \end{align} $$
-            </p>
-            <p>
-                Let's rewrite the arithmetic progression first:
-            </p>
-            <p>
-                $$
-                a_n = p + (n - 1)d
-                $$
-            </p>
-            <p>
-                $$
-                \begin{align}
-                p &= p + 0d \\
-                q &= p + d \\
-                p^2 &= p + 2d
-                \end{align}
-                $$
-            </p>
+        p &= p + 0d \\
+        q &= p + d \\
+        p^2 &= p + 2d
+        \end{align}
+        $$
+    </p>
 
-            <p>Now let's look at the geometric sequence:</p>
-            <p>
-                $$
-                a_n = p \times r ^ {n - 1}
-                $$
-            </p>
-            <p>
-                $$
-                \begin{align}
-                p &= p \times r^0 \\
-                p^2 &= p \times r^1 \\
-                q &= p \times r^2
-                \end{align}
-                $$
-            </p>
-            <p>
-                Because we know for a fact, that p can't be 0 (it's stated in the question). We now know the value of r,
-                because: \(p^2 = p \times r\). So the only value r can be, is p.
-            </p>
-            <p>
-                This means we now know that \(q = p \times p^2 = p^3\)
-            </p>
-            <p>
-                Substituting that back into the equation \(q = p + d\). We now have a set of simultaneous equations:
-            </p>
-            <p>
-                $$
-                \begin{align}
-                p^2 = p + 2d \\
-                p^3 = p + d
-                \end{align}
-                $$
-            </p>
-            <p>
-                We can then remove the d from this equation:
-            </p>
-            <p>
-                $$
-                \begin{align}
-                p^2 = p + 2d \\
-                - 2\times [p^3 = p + d] \\
-                \\
-                p^2 - p^3 &= -p \\
-                0 &=p^3 -p^2 -p \\
-                p^3 -p^2 -p &= 0\\
-                p(p^2 -p^1 - 1) &= 0\\
-                p(2p+1)(p-1) &= 0\\
-                p = 0, p = -\frac{1}{2}, p = 1
-                \end{align}
-                $$
-            </p>
-            <p>We are told that \(p < 0 \), so we can say \(p=-\frac{1}{2}\)</p>
-                    <p>
+    <p>Now let's look at the geometric sequence:</p>
+    <p>
+        $$
+        a_n = p \times r ^ {n - 1}
+        $$
+    </p>
+    <p>
+        $$
+        \begin{align}
+        p &= p \times r^0 \\
+        p^2 &= p \times r^1 \\
+        q &= p \times r^2
+        \end{align}
+        $$
+    </p>
+    <p>
+        Because we know for a fact, that p can't be 0 (it's stated in the question). We now know the value of r,
+        because: \(p^2 = p \times r\). So the only value r can be, is p.
+    </p>
+    <p>
+        This means we now know that \(q = p \times p^2 = p^3\)
+    </p>
+    <p>
+        Substituting that back into the equation \(q = p + d\). We now have a set of simultaneous equations:
+    </p>
+    <p>
+        $$
+        \begin{align}
+        p^2 = p + 2d \\
+        p^3 = p + d
+        \end{align}
+        $$
+    </p>
+    <p>
+        We can then remove the d from this equation:
+    </p>
+    <p>
+        $$
+        \begin{align}
+        p^2 = p + 2d \\
+        - 2\times [p^3 = p + d] \\
+        \\
+        p^2 - p^3 &= -p \\
+        0 &=p^3 -p^2 -p \\
+        p^3 -p^2 -p &= 0\\
+        p(p^2 -p^1 - 1) &= 0\\
+        p(2p+1)(p-1) &= 0\\
+        p = 0, p = -\frac{1}{2}, p = 1
+        \end{align}
+        $$
+    </p>
+    <p>We are told that \(p < 0 \), so we can say \(p=-\frac{1}{2}\)</p>
+    <p>
+        Our next step is to work out what \(d\) is, given that we have the value of p, we can simply substitute it.
+    </p>
+    <p>
+        $$
+        \begin{align}
+        p^2 &= p + 2d \\
+        (-\frac{1}{2})^2 &= -\frac{1}{2} + 2d \\
+        \frac{1}{4} + \frac{1}{2} &= 2d \\
+        \frac{3}{4} &= 2d \\
+        \frac{3}{8} &= d
+        \end{align}
+        $$
+    </p>
+    <p>
+        We can now write the first algorithmic progression as:
+    </p>
+    <p>
+        $$
+        \Large
+        \begin{align}
+        a_n = a_1 + (n-1)d \\
+        a_n = p + (n-1) \times \frac{3}{8}
+        \end{align}
+        $$
+    </p>
+    <p>We can then use the \(S_k\) rule</p>
+    <p>
+        $$
+        \Large
+        \begin{align}
+        S_k &= \frac{1}{2}k(a_1 + a_k) \\
+        S_k &= \frac{1}{2}k \left(p + p + (k-1)\frac{3}{8} \right) \\
+        S_{10} &= \frac{1}{2}10 \left(2 \times \frac{-1}{2} + 9\times\frac{3}{8} \right) \\
+        S_{10} &= 5\left(-1 + \frac{27}{8}\right) \\
+        S_{10} &= 5\left (\frac{19}{8} \right) \\
+        S_{10} &= \frac{95}{8} \\
+        \end{align}
+        $$
+    </p>
 
-                    </p>
 
 
-
-                    <h4>Sources</h4>
-                    <ul>
-                        <li>
-                            <a
-                                href="https://mathsmadeeasy.co.uk/a-level-maths-revision/arithmetic-series/">MathsMadeEasy</a>
-                        </li>
-                        <li>
-                            <a
-                                href="https://www.admissionstesting.org/Images/546501-test-of-mathematics-for-university-admission-2018-paper-1-hand-written-worked-answers.pdf">Admissions
-                                Test</a>
-                        </li>
-                        <li>
-                            <a href="https://mathworld.wolfram.com/ArithmeticSeries.html">Wolfram</a>
-                        </li>
-                    </ul>
+    <h4>Sources</h4>
+    <ul>
+        <li>
+            <a
+                href="https://mathsmadeeasy.co.uk/a-level-maths-revision/arithmetic-series/">MathsMadeEasy</a>
+        </li>
+        <li>
+            <a
+                href="https://www.admissionstesting.org/Images/546501-test-of-mathematics-for-university-admission-2018-paper-1-hand-written-worked-answers.pdf">Admissions
+                Test</a>
+        </li>
+        <li>
+            <a href="https://mathworld.wolfram.com/ArithmeticSeries.html">Wolfram</a>
+        </li>
+    </ul>
 
 </body>
 
