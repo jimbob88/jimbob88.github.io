@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Problem with Indices</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
+
+    <style>
+        body {
+            margin-top: 20px;
+            margin-right: 20%;
+            margin-left: 20%;
+        }
+    </style>
+</head>
+<body>
+    <h1>The Problem with Indices</h1>
+    <p>
+        This text is supposed to serve as both a lesson and a warning for how you read rules vs laws and how you implement these in your programs.
+    </p>
+    <p>
+        If you have been through the English schooling system, you have probably learnt 
+        the following set of rules in your GCSEs / O-Levels:
+    </p>
+    <p>
+        $$
+        \Large
+        \begin{gather}
+        a^n \times a^k = a^{n+k} \tag{a} \\
+        \frac{a^n}{a^k} = a^{n-k} \tag{b} \\
+        (a^n)^k = a^{n \times k} \tag{c}
+        \end{gather}
+        $$
+    </p>
+    <p>
+        I'd like to point out an issue with \(c\). How would you simplify the following equation?
+    </p>
+    <p>
+        $$
+        \Large
+        \sqrt{x^2}
+        $$
+    </p>
+    <p>
+        You would most likely reply by doing the following:
+    </p>
+    <p>
+    $$
+    \Large
+    \begin{gather}
+    \sqrt{x^2} = (x^2)^{\frac{1}{2}} = x
+    \end{gather}
+    $$
+    </p>
+    <p>
+        But, what if I were to ask you to put \(-1\) into this formula. Using the original formula:
+    </p>
+    <p>
+        $$
+        \sqrt{(-1)^2} = 1
+        $$
+    </p>
+    <p>
+        But with our answer, we get:
+    </p>
+    <p>
+        $$
+        x = -1
+        $$
+    </p>
+    <p>
+        This is wrong, right?
+    </p>
+    <p>
+        Which one is correct?
+    </p>
+    <p>
+        Well, the truth is, the formula \(\sqrt{x^2}\) is actually a mathematical identity, and it looks like this:
+    </p>
+    <p>
+        $$
+        \sqrt{x^2} = \lvert x \rvert
+        $$
+    </p>
+    <p>
+        If you studied an Advanced Level maths course you should probably recognise this as the <i>modulus</i> function.
+    </p>
+    <p>
+        <dfn>The Modulus Function</dfn>: The absolute value of a number. \(\lvert x \rvert \geq 0\)
+    </p>
+    <p>
+        But this actually depends who you ask. If you look at the first section of 
+        <a href="https://en.wikipedia.org/wiki/Square_root">the Wikipedia Article</a>, it states that the symbol
+         \(\sqrt{\quad}\) finds the "principal square root"
+         (the root that is positive) and one should specifically denote a square root function as: \(\pm\sqrt{\quad}\)  to mean both the negative and positive root. Therefore the function generates the non-negativity and in saying \((x^2)^{\frac{1}{2}}\) you are implying only positive values in itself. So the resultant value you get, will always be positive.
+    </p>
+    <p>
+        Let's take a step back, and actually read what the rule says. On "<a href="https://byjus.com/maths/laws-of-exponents/">byjus</a>", we see that it is actually defined as: "\((a^m)^n\) where a is a non-zero term and m and n are integers." 
+    </p>
+    <p>
+        This shows the key problem with the method of teaching children something as fact and then later on down the line saying that this rule isn't exactly as it was first taught. Although it gives people a step into the system, to help them understand a certain percentage of mathematics. I believe there should always be links provided to students explaining exactly how these things work and how to deal with them in real, pure mathematics. 
+    </p>
+    <p>
+        This isn't supposed to be a dig at any of these CAS because they are genuinely all works of art and massive feats and I fully respect anybody who could develop a system such as these, they have my greatest respect. I merely wished to point out a few things about the different CAS systems I have used in the past.
+        <br/>
+        Take for example, a computer algebra system, like, for example:
+        <ul>
+            <li>
+                <a href="https://www.symbolab.com/solver?or=gms&query=(n^2)^{0.5}" style="color:green;">Symbolab</a>: This system does it correctly by adding on to the rule that "assuming a >= 0".
+            </li>
+            <li>
+                <a href="https://en.wikipedia.org/wiki/Xcas" style="color:green;">Xcas</a>: This system does it correctly by converting it to the modulus of \(\lvert x \rvert ^1\)
+            </li>
+            <li>
+                <a href="https://www.wolframalpha.com/input?i=simplify+%28x%5E2%29%5E0.5" style="color:green;">WolframAlpha</a>: Correctly uses the modulus function.
+            </li>
+            <li>
+                <a href="https://www.mathway.com/Calculus" style="color:red">Mathway</a>: This system just simplifies it to x.
+            </li>
+
+        </ul> 
+    </p>
+
+
+    
+</body>
+</html>
