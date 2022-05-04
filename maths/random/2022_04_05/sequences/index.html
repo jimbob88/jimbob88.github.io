@@ -186,7 +186,7 @@
     <h2>Geometric Series</h2>
     <p>
         First we'll start off with GCSE knowledge (<a
-            href="https://www.bbc.co.uk/bitesize/guides/zy6vcj6/revision/5">BBC Bitesize</a>.)
+            href="https://www.bbc.co.uk/bitesize/guides/zy6vcj6/revision/4">BBC Bitesize</a>.)
         Let's take the following geometric series: 3, 9, 27, 81. We can find out the common multiplier (if you read the
         bitesize page) by dividing each term by the term next to it.
         $$
@@ -194,24 +194,144 @@
         $$
     </p>
     <p>
-        Therefore, we know the multiplier is 3.
+        Therefore, we know the multiplier is 3 and we know the first term of the sequence is 3. Let's write out what is
+        actually happening here:
+    </p>
+    <p>
+        $$
+        3 \times 1, 3 \times 3, 3 \times 3 \times 3, 3 \times 3 \times 3 \times 3
+        $$
+    </p>
+    <p>
+        Let's convert these into indices and see what we get:
+    </p>
+    <p>
+        $$
+        3 \times 3^0, 3 \times 3^1, 3 \times 3^2, 3 \times 3^3
+        $$
+    </p>
+    <p>
+        Can you see how there is a general pattern here? This is often written as:
+    </p>
+    <p>
+        $$
+        \Large
+        a_n = a_1 \times r ^ {n - 1}
+        $$
+    </p>
+    <p>
+        So for our pattern, the multiplier is 3, so \(r = 3 \) and the first term is 3, so \(a_1 = 3\):
+    </p>
+    <p>
+        $$
+        \Large
+        a_n = 3 \times 3^{n-1}
+        $$
     </p>
 
 
-    <h4>Sources</h4>
-    <ul>
-        <li>
-            <a href="https://mathsmadeeasy.co.uk/a-level-maths-revision/arithmetic-series/">MathsMadeEasy</a>
-        </li>
-        <li>
-            <a
-                href="https://www.admissionstesting.org/Images/546501-test-of-mathematics-for-university-admission-2018-paper-1-hand-written-worked-answers.pdf">Admissions
-                Test</a>
-        </li>
-        <li>
-            <a href="https://mathworld.wolfram.com/ArithmeticSeries.html">Wolfram</a>
-        </li>
-    </ul>
+    <h2>Applying all of the knowledge we just gained</h2>
+    <p>
+        Let's look at Q7 from D513/11:
+    </p>
+    <p>
+        $$
+        \begin{align}
+        \text{The first three terms of an arithmetic progression are } p, q \text{ and } p^2 \text{ respectively, where
+        } p < 0. \\ \text{The first three terms of a geometric progression are } p, p^2 \text{ and } q \text{
+            respectively.} \\ \text{Find the sum of the first 10 terms of the arithmetic progression} \end{align} $$
+            </p>
+            <p>
+                Let's rewrite the arithmetic progression first:
+            </p>
+            <p>
+                $$
+                a_n = p + (n - 1)d
+                $$
+            </p>
+            <p>
+                $$
+                \begin{align}
+                p &= p + 0d \\
+                q &= p + d \\
+                p^2 &= p + 2d
+                \end{align}
+                $$
+            </p>
+
+            <p>Now let's look at the geometric sequence:</p>
+            <p>
+                $$
+                a_n = p \times r ^ {n - 1}
+                $$
+            </p>
+            <p>
+                $$
+                \begin{align}
+                p &= p \times r^0 \\
+                p^2 &= p \times r^1 \\
+                q &= p \times r^2
+                \end{align}
+                $$
+            </p>
+            <p>
+                Because we know for a fact, that p can't be 0 (it's stated in the question). We now know the value of r,
+                because: \(p^2 = p \times r\). So the only value r can be, is p.
+            </p>
+            <p>
+                This means we now know that \(q = p \times p^2 = p^3\)
+            </p>
+            <p>
+                Substituting that back into the equation \(q = p + d\). We now have a set of simultaneous equations:
+            </p>
+            <p>
+                $$
+                \begin{align}
+                p^2 = p + 2d \\
+                p^3 = p + d
+                \end{align}
+                $$
+            </p>
+            <p>
+                We can then remove the d from this equation:
+            </p>
+            <p>
+                $$
+                \begin{align}
+                p^2 = p + 2d \\
+                - 2\times [p^3 = p + d] \\
+                \\
+                p^2 - p^3 &= -p \\
+                0 &=p^3 -p^2 -p \\
+                p^3 -p^2 -p &= 0\\
+                p(p^2 -p^1 - 1) &= 0\\
+                p(2p+1)(p-1) &= 0\\
+                p = 0, p = -\frac{1}{2}, p = 1
+                \end{align}
+                $$
+            </p>
+            <p>We are told that \(p < 0 \), so we can say \(p=-\frac{1}{2}\)</p>
+                    <p>
+
+                    </p>
+
+
+
+                    <h4>Sources</h4>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://mathsmadeeasy.co.uk/a-level-maths-revision/arithmetic-series/">MathsMadeEasy</a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.admissionstesting.org/Images/546501-test-of-mathematics-for-university-admission-2018-paper-1-hand-written-worked-answers.pdf">Admissions
+                                Test</a>
+                        </li>
+                        <li>
+                            <a href="https://mathworld.wolfram.com/ArithmeticSeries.html">Wolfram</a>
+                        </li>
+                    </ul>
 
 </body>
 
