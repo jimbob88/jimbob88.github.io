@@ -126,8 +126,50 @@
             <li>
                 <a href="https://www.mathway.com/Calculus" style="color:red">Mathway</a>: This system just simplifies it to x.
             </li>
-
         </ul> 
+    </p>
+
+    <h3>Further Accuracy Test</h3>
+    <p>
+        Due to the fact we know that \((x^2)^{\frac{1}{2}} = \lvert x \rvert \), let's check the chain rule for differentiation, and see if it works for this.
+    </p>
+    <p>
+        The \(\frac{d}{dx}\) of \(\lvert x \rvert\) is \(\frac{x}{\lvert x \rvert }\) where \(x \neq 0\). If you <a href="https://www.desmos.com/calculator/znplgwcurd">plot this graph</a> it is very obvious. If you want to really be specific the differentiation of the modulus is actually <a href="https://en.wikipedia.org/wiki/Sign_function">signum / sgn(x)</a>.
+    </p>
+    <p>
+        Let's have a look at applying the chain rule to the following function: \(y = (x^2)^{\frac{1}{2}}\).
+    </p>
+    <p>
+        $$
+        \Large
+        \begin{align}
+        y &= (u)^{\frac{1}{2}} \text{ where } u = x^2 \\
+        \frac{dy}{dx} &=  \frac{1}{2} \times (x^2)^{-\frac{1}{2}} \times 2x \\
+        &= x(x^2)^{-\frac{1}{2}} \\ 
+        &= \frac{x}{(x^2)^{\frac{1}{2}}} \\ 
+        &= \frac{x}{\lvert x \rvert} \\ 
+        \end{align}
+        $$
+    </p>
+    <p>
+        Let's test this against some Computer Algebra Systems:
+    </p>
+    <p>
+        <ul>
+            <li>
+                <a href="https://www.symbolab.com/solver/step-by-step/%5Cfrac%7Bd%7D%7Bdx%7D%5Cleft(%20%5Cleft(x%5E%7B2%7D%5Cright)%5E%7B%5Cfrac%7B1%7D%7B2%7D%7D%5Cright)?or=input" style="color:red">Symbolab</a>: This differentiates it as \(\frac{1}{2x}\) which is wrong.
+            </li>
+            <li>
+                <a href="https://en.wikipedia.org/wiki/Xcas" style="color:green;">Xcas</a>: This gives the perfect answer of \(sgn(x)\)
+            </li>
+            <li>
+                <a href="https://www.wolframalpha.com/input?i=differentiate+%28x%5E2%29%5E0.5" style="color:green;">WolframAlpha</a>: This is genuinely an awesome result with the answer of \(sgn(x)\) and also extra information
+            </li>
+            <li>
+                <a href="https://www.mathway.com/Calculus" style="color:orange;">Mathway</a>: The result that mathway gave was "1", I have marked this as orange because it isn't entirely correct, but it is obvious to see that under the hood, because they define it as having been done with the "power rule" that they are assuming for values of \(x > 0\) so to be honest, their answer is correct for their case.
+            </li>
+        </ul>
+        
     </p>
 
 
