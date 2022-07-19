@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Questions</title>
+</head>
+
+<body>
+    <h1>Things to consider before using sentiment analysis</h1>
+    <ul>
+        <li>How do you handle irony?</li>
+        <li>What is the age group you are surveying? (Different datasets are targeted at different age groups)</li>
+        <li>What slang words will the dataset not understand? And on the flip-side what technical language may be
+            confused?
+            <ul>
+                <li>Do certain slang terms mean different things in different countries? (e.g. "fag" in Britain means
+                    cigarette, but in America can be used as a derogatory term for homosexuals) </li>
+            </ul>
+        </li>
+        <li>What are the differences in culture between those who are being surveyed? (i.e. certain colours may have
+            different connotations in different areas)</li>
+        <li>How will you deal with compound sentences? (i.e. "This problem was making me so angry, thanks for fixing
+            it")</li>
+        <li>How will it cope with emojis?
+            <ul>
+                <li>How will you cope with differences in culture? &#128591; can mean prayer in Western, Christian
+                    societies but simply high-five in others.</li>
+                <li>Might some emojis get confused based on your age group? &#128128; can be used ironically by younger
+                    people but quite literally for those of an older generation</li>
+                <li>Do you trust the emoji labels given by companies? &#x1F625; is labelled as "DISAPPOINTED BUT
+                    RELIEVED FACE" by <a
+                        href="https://www.quackit.com/character_sets/emoji/emoji_v3.0/unicode_emoji_v3.0_characters_all.cfm">quackit.com</a>
+                    but it could easily be confused as "disappointed and crying"</li>
+            </ul>
+        </li>
+        <li>
+            If you are making a training dataset, who are you creating the dataset for? What kind of people do you want
+            to target in your survey?
+        </li>
+        <li>
+            Is it ethical to make decisions based off "mined" sentiment? (i.e. from using Twitter or other social media
+            platforms)
+        </li>
+        <li>
+            Does tone or content affect sentiment polarity the most?
+        </li>
+        <li>
+            How might your system cope with idioms?
+        </li>
+        <li>
+            How might you deal with spelling errors? It is unlikely a sentiment system will notice that "hapy" is
+            "happy"
+        </li>
+        <li>
+            How might it deal with phrases that come down purely to tone of voice? "It's not amazing" can be both used
+            as something that is okay/quite good, or can come across as incredibly rude
+        </li>
+        <li>
+            What functions will you apply to your polarity scores? If you read 3.5.1 of <a href="#fr1">[1]</a> you can
+            see some techniques you might use
+        </li>
+        <li>
+            At what cut-off point does polarity become positive or negative?
+        </li>
+        <li>
+            What sentences are difficult for simple sentiment analysers to work?
+            <ul>
+                <li>
+                    "He is using you" Negative (marked as neutral, connotation not understood)
+                </li>
+                <li>
+                    "He is using the computer" Neutral
+                </li>
+                <li>
+                    "Sample mean." Neutral (marked as negative because of "mean")
+                </li>
+            </ul>
+        </li>
+        <li>
+            Would analysing a likert scale make more sense? 
+        </li>
+    </ul>
+    <h2>Further Reading</h2>
+    <ol>
+        <li id="#fr1">
+            <a href="https://arxiv.org/pdf/2207.07954.pdf">On the Subjectivity of Emotions in Software Projects: How
+                Reliable are Pre-Labeled Data Sets for Sentiment Analysis?</a>
+        </li>
+    </ol>
+</body>
+
+</html>
