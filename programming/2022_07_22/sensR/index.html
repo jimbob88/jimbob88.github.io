@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installing sensR on the latest R</title>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+    <div class="stackedit__html">
+        <h1 id="installing-sensr-on-the-latest-r">Installing <code>sensR</code> on the latest R</h1>
+        <p>This guide assumes you are using Windows.</p>
+        <h2 id="check-your-r-version">1. Check your R version</h2>
+        <ul>
+            <li>Open <code>Rstudio</code> and type in the console <code>version</code>. For example:</li>
+        </ul>
+        <pre><code>&gt; version
+_                                
+platform       x86_64-w64-mingw32               
+arch           x86_64                           
+os             mingw32                          
+crt            ucrt                             
+system         x86_64, mingw32                  
+status                                          
+major          4                                
+minor          2.1                              
+year           2022                             
+month          06                               
+day            23                               
+svn rev        82513                            
+language       R                                
+version.string R version 4.2.1 (2022-06-23 ucrt)
+nickname       Funny-Looking Kid
+</code></pre>
+        <ul>
+            <li>Note the Major and the Minor values. Joined together, in my example, this is <code>4.2.1</code> (as of
+                22/07/2022, this is the latest version of R). If your version of R is not <code>&gt;=4.2.0</code>.
+                Follow <a
+                    href="https://bootstrappers.umassmed.edu/bootstrappers-courses/courses/rCourse/Additional_Resources/Updating_R.html">this</a>
+                guide (as it helps you make sure you save your packages alongside your update) to update to the latest
+                version of R.</li>
+        </ul>
+        <h2 id="download-and-install-rtools">2 - Download and install Rtools</h2>
+        <ul>
+            <li>Now that you have a version of <code>R&gt;=4.2.0</code> head to the <a
+                    href="https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html">Rtools42 site</a> and
+                download the Rtools42 installer. For the latest version as of 22/07/2022, you can click <a
+                    href="https://cran.r-project.org/bin/windows/Rtools/rtools42/files/rtools42-5253-5107-signed.exe">this
+                    download link</a>.</li>
+            <li>Go to the newly downloaded <code>.exe</code> file (e.g. <code>rtools42-5253-5107-signed.exe</code>) and
+                double-click it to run. A window should appear asking for administrative privileges, click yes.</li>
+            <li>A window like the following should appear:</li>
+        </ul>
+        <p><img src="rtools.png" alt="Rtools installer"></p>
+        <ul>
+            <li>Click “Next” twice and then press “Install”.</li>
+        </ul>
+        <h2 id="open-rstudio-or-r-itself">3. Open Rstudio (or R itself)</h2>
+        <ul>
+            <li>Run the following commands to install <code>sensR</code> and all its dependencies (Note: these commands
+                are in order, running these out of order will <em>not work</em> and the install will
+                <strong>fail</strong>)
+            </li>
+        </ul>
+        <pre class=" language-r"><code class="prism  language-r"><span class="token comment"># sandwich dependencies</span>
+install.packages<span class="token punctuation">(</span><span class="token string">"https://mran.microsoft.com/snapshot/2019-05-24/src/contrib/zoo_1.8-5.tar.gz"</span><span class="token punctuation">,</span> repos<span class="token operator">=</span><span class="token keyword">NULL</span><span class="token punctuation">,</span> method<span class="token operator">=</span><span class="token string">"libcurl"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># multcomp dependencies</span>
+install.packages<span class="token punctuation">(</span><span class="token string">"https://mran.microsoft.com/snapshot/2019-05-24/src/contrib/mvtnorm_1.0-10.tar.gz"</span><span class="token punctuation">,</span> repos<span class="token operator">=</span><span class="token keyword">NULL</span><span class="token punctuation">,</span> method<span class="token operator">=</span><span class="token string">"libcurl"</span><span class="token punctuation">)</span>
+install.packages<span class="token punctuation">(</span><span class="token string">"https://mran.microsoft.com/snapshot/2019-05-24/src/contrib/TH.data_1.0-10.tar.gz"</span><span class="token punctuation">,</span> repos<span class="token operator">=</span><span class="token keyword">NULL</span><span class="token punctuation">,</span> method<span class="token operator">=</span><span class="token string">"libcurl"</span><span class="token punctuation">)</span>
+install.packages<span class="token punctuation">(</span><span class="token string">"https://mran.microsoft.com/snapshot/2019-05-24/src/contrib/sandwich_2.5-1.tar.gz"</span><span class="token punctuation">,</span> repos<span class="token operator">=</span><span class="token keyword">NULL</span><span class="token punctuation">,</span> method<span class="token operator">=</span><span class="token string">"libcurl"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># sensR dependencies</span>
+install.packages<span class="token punctuation">(</span><span class="token string">"https://mran.microsoft.com/snapshot/2019-05-24/src/contrib/multcomp_1.4-10.tar.gz"</span><span class="token punctuation">,</span> repos<span class="token operator">=</span><span class="token keyword">NULL</span><span class="token punctuation">,</span> method<span class="token operator">=</span><span class="token string">"libcurl"</span><span class="token punctuation">)</span>
+install.packages<span class="token punctuation">(</span><span class="token string">"https://mran.microsoft.com/snapshot/2019-05-24/src/contrib/numDeriv_2016.8-1.tar.gz"</span><span class="token punctuation">,</span> repos<span class="token operator">=</span><span class="token keyword">NULL</span><span class="token punctuation">,</span> method<span class="token operator">=</span><span class="token string">"libcurl"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># sensR itself</span>
+install.packages<span class="token punctuation">(</span><span class="token string">"https://mran.microsoft.com/snapshot/2019-05-24/src/contrib/sensR_1.5-1.tar.gz"</span><span class="token punctuation">,</span> repos<span class="token operator">=</span><span class="token keyword">NULL</span><span class="token punctuation">,</span> method<span class="token operator">=</span><span class="token string">"libcurl"</span><span class="token punctuation">)</span>
+</code></pre>
+        <p>This could take some time depending on the speed of your system</p>
+        <p>Or in a cleaner way:</p>
+        <pre class=" language-r"><code class="prism  language-r">base_url <span class="token operator">&lt;-</span> <span class="token string">"https://mran.microsoft.com/snapshot/2019-05-24/src/contrib/"</span>
+files <span class="token operator">&lt;-</span> list<span class="token punctuation">(</span><span class="token string">"zoo_1.8-5.tar.gz"</span><span class="token punctuation">,</span> <span class="token string">"mvtnorm_1.0-10.tar.gz"</span><span class="token punctuation">,</span> <span class="token string">"TH.data_1.0-10.tar.gz"</span><span class="token punctuation">,</span> <span class="token string">"sandwich_2.5-1.tar.gz"</span><span class="token punctuation">,</span> <span class="token string">"multcomp_1.4-10.tar.gz"</span><span class="token punctuation">,</span> <span class="token string">"numDeriv_2016.8-1.tar.gz"</span><span class="token punctuation">,</span> <span class="token string">"sensR_1.5-1.tar.gz"</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>name <span class="token keyword">in</span> files<span class="token punctuation">)</span> install.packages<span class="token punctuation">(</span>paste<span class="token punctuation">(</span>base_url<span class="token punctuation">,</span> name<span class="token punctuation">,</span> sep<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">,</span> repos<span class="token operator">=</span><span class="token keyword">NULL</span><span class="token punctuation">,</span> method<span class="token operator">=</span><span class="token string">"libcurl"</span><span class="token punctuation">)</span>
+</code></pre>
+        <h2 id="test-that-it-worked">4. Test that it worked</h2>
+        <ul>
+            <li>Load the <code>sensR</code> package with:</li>
+        </ul>
+        <pre class=" language-r"><code class="prism  language-r">library<span class="token punctuation">(</span>sensR<span class="token punctuation">)</span>
+</code></pre>
+        <ul>
+            <li>Test with an AnotA distribution plot:</li>
+        </ul>
+        <pre class=" language-r"><code class="prism  language-r">AnotA<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span>  
+<span class="token punctuation">(</span>m1 <span class="token operator">&lt;-</span> AnotA<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  
+<span class="token comment">## plot distributions of sensory intensity:  </span>
+plot<span class="token punctuation">(</span>m1<span class="token punctuation">)</span>  
+</code></pre>
+        <ul>
+            <li>You should see something like the following appear (if you are using Rstudio, this will likely appear in
+                the <code>Plots</code> tab:<br>
+                <img src="distplot.png" alt="AnotA Distribution">
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
