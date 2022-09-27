@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TMUA Necessary and Sufficient</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">TMUA Necessary and Sufficient</h1>
+</header>
+<h1 id="tmua-necessary-and-sufficient">TMUA Necessary and
+Sufficient</h1>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>This work is entirely based off the <a
+href="https://www.admissionstesting.org/images/405848-test-of-mathematics-for-university-admission-notes-on-logic-and-proof-enhanced-test-specification-.pdf">TMUA
+Logic Guide</a>. I can thoroughly recommend reading said page if you
+want a full understanding of these problems.</p>
+<h2 id="quick-look">Quick look</h2>
+<p>If you already know what you are talking about, and just need a
+simple refresher, here you go:</p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 31%" />
+<col style="width: 23%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Short Form</th>
+<th>Long Form</th>
+<th>Mathematical Notation</th>
+<th>English Form</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A if B</td>
+<td>If B then A</td>
+<td><span class="math inline">\(A \Leftarrow B\)</span></td>
+<td>A is sufficient for B</td>
+</tr>
+<tr class="even">
+<td>A only if B</td>
+<td>If A then B</td>
+<td><span class="math inline">\(A \Rightarrow B\)</span></td>
+<td>A is necessary for B</td>
+</tr>
+<tr class="odd">
+<td>A iff B</td>
+<td>(if B then A) and (if A then B)</td>
+<td><span class="math inline">\(A \Leftrightarrow B\)</span></td>
+<td>A is necessary and sufficient for B</td>
+</tr>
+</tbody>
+</table>
+<p>Truth table:</p>
+<table>
+<colgroup>
+<col style="width: 0%" />
+<col style="width: 0%" />
+<col style="width: 26%" />
+<col style="width: 30%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th>A if B<br />if B then A<br /><span class="math inline">\(A
+\Leftarrow B\)</span></th>
+<th>A only if B<br />If A then B<br /><span class="math inline">\(A
+\Rightarrow B\)</span></th>
+<th>A iff B<br />(if B then A) and (if A then B)<br /><span
+class="math inline">\(A \Leftrightarrow B\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr class="even">
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr class="odd">
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p>Converse</p>
+<table>
+<caption>The swapping of A and B</caption>
+<thead>
+<tr class="header">
+<th>Statement</th>
+<th>Converse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A if B</td>
+<td>B if A</td>
+</tr>
+<tr class="even">
+<td>A only if B</td>
+<td>B only if A</td>
+</tr>
+<tr class="odd">
+<td>A iff B</td>
+<td>B iff A</td>
+</tr>
+</tbody>
+</table>
+<p>Contrapositive</p>
+<table>
+<caption>The swapping and negating of A and B</caption>
+<thead>
+<tr class="header">
+<th>Statement</th>
+<th>Contrapositive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A if B</td>
+<td>not A if not B</td>
+</tr>
+<tr class="even">
+<td>A only if B</td>
+<td>not A only if not B</td>
+</tr>
+<tr class="odd">
+<td>A iff B</td>
+<td>not A iff not B</td>
+</tr>
+</tbody>
+</table>
+<p>In the above cases, they are all logically equivalent.</p>
+<h2 id="logic-gates">Logic Gates</h2>
+<p>For logic gates, you only really need to remember the truth tables
+and they are that simple.</p>
+<table>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th>A or B</th>
+<th>A and B</th>
+<th>not A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr class="even">
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr class="odd">
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<h2 id="necessary-and-sufficient">Necessary and Sufficient</h2>
+<p>I believe the best way to consider these problems is to consider them
+as images, and then using these images, simply converting them into
+<code>if/only if/iff</code> statements.</p>
+<p>Take for example, the following statement,
+<code>A is necessary for B</code> , what does this mean? If you don’t
+have a conversion table this could be a difficult question to answer but
+if you translate it into an image in your head, this can become much
+easier. Let’s take the following image:</p>
+<figure>
+<img src="image/TMUANecessaryandSufficient/AinB.png" alt="AinB" />
+<figcaption aria-hidden="true">AinB</figcaption>
+</figure>
+<p>Given we have the <code>B Circle</code> and the
+<code>A Circle</code>, what can you tell me about being in the
+<code>A Circle</code>?</p>
+<p>You should notice that being inside the <code>A Circle</code>
+guarantees that we are in the <code>B Circle</code>. Do you know how we
+can say this in mathematical terms?</p>
+<p><code>If A then B</code> because if we are in the
+<code>A Circle</code> we must be in the <code>B Circle</code>; however,
+if we are in the <code>B Circle</code> we are not necessarily in the
+<code>A Circle</code>.</p>
+<p>There is another term for this statement in maths:
+<code>A is sufficient for B</code>. Therefore
+<code>A is sufficient for B</code> is <strong>logically equivalent
+to</strong> <code>If A then B</code>.</p>
+<p>Let’s look at another circle:</p>
+<figure>
+<img src="image/TMUANecessaryandSufficient/BinA.png" alt="BinA" />
+<figcaption aria-hidden="true">BinA</figcaption>
+</figure>
+<p>You should notice now that this circle has “swapped B and A”, in
+maths we call this the <strong>converse</strong> of the above statement.
+Let’s take the above statement <code>A is sufficient for B</code> and
+look at its converse: <code>B is sufficient for A</code> (because we
+must be in the <code>A Circle</code> if we are in the
+<code>B Circle</code>). Therefore, the statement must be logically
+equivalent to <code>If B then A</code>.</p>
+<p>But, what if I asked you to write this statement in the form
+<code>A ... B</code>. How would you go about doing that?</p>
+<p>An alternative way of writing the above circle in English would be:
+<code>We need A to be true, if we want any chance of B being true</code>.
+In maths we call this <code>A is necessary for B.</code></p>
+<blockquote>
+<p>Note: there is then another statement:
+<code>A is necessary and sufficient for B</code> , this is the same as
+saying <code>(A is necessary for B) and (A is sufficient for B)</code>
+which is logically equivalent to <code>(A if B) and (B if A)</code>
+<code>-&gt;</code> <code>A iff B</code> <code>-&gt;</code> <span
+class="math inline">\(A \Leftrightarrow B\)</span></p>
+</blockquote>
+<h3 id="how-can-i-apply-this">How can I apply this?</h3>
+<p>The following is not true mathematical reasoning, unlike the full
+proofs set out in TMUA it does not entirely prove or disprove it, it is
+merely a way in which you can work things out, without needing to know
+the exact mathematical theory behind it. This method uses (by choice)
+badly drawn diagrams for the graphs because too many solutions in these
+papers are described by using a perfect graph (I am thinking of you
+<span class="math inline">\(\sqrt{x} = \sin (3x)\)</span>) rather than a
+solution you could actually discover with pen and paper.</p>
+<p>On first learning this I really struggled to understand how I could
+remember these, because these words and phrases seem to be plucked from
+thin air. The way I go about this, is that I simply remember one of
+these circles, and draw it whenever I get a question. Let’s go through
+this with a question from TMUA (Paper 2 D413/02 November 2021 Q8):</p>
+<blockquote>
+<p>Consider the following statement about the polynomial <span
+class="math inline">\(p(x)\)</span>, where <span
+class="math inline">\(a\)</span> and <span
+class="math inline">\(b\)</span> are real numbers with <span
+class="math inline">\(a &lt; b\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{(*) There exists a number } c \text{ with } a &lt; c &lt; b \text{
+such that } p&#39;(c) = 0.
+\end{aligned}
+\]</span></p>
+<p>Which of the following is true?</p>
+<ol type="A">
+<li><p>The condition <span class="math inline">\(p(a) = p(b)\)</span> is
+necessary and sufficient</p></li>
+<li><p>The condition <span class="math inline">\(p(a) = p(b)\)</span> is
+necessary but not sufficient</p></li>
+<li><p>The condition <span class="math inline">\(p(a) = p(b)\)</span> is
+sufficient and not necessary</p></li>
+<li><p>The condition <span class="math inline">\(p(a) = p(b)\)</span> is
+not necessary and not sufficient</p></li>
+</ol>
+</blockquote>
+<p>First of all, I would convert ABCD to the equivalent if statements,
+by drawing an image:</p>
+<figure>
+<img src="image/TMUANecessaryandSufficient/AinB.png" alt="AinB" />
+<figcaption aria-hidden="true">AinB</figcaption>
+</figure>
+<p>I then work out from the image what this is actually showing:
+<code>If A then B</code> : <code>A is sufficient for B</code>. I can
+then choose Option C, and substitute A and B from that.</p>
+<p>In circle form this would now look like:</p>
+<figure>
+<img src="image/TMUANecessaryandSufficient/SinStar.png"
+alt="Statement in Star" />
+<figcaption aria-hidden="true">Statement in Star</figcaption>
+</figure>
+<p>Let’s rewrite ABCD in the <code>if statement</code> form:</p>
+<blockquote>
+<ol type="A">
+<li><p>(If <span class="math inline">\((*)\)</span> then <span
+class="math inline">\(p(a) = p(b)\)</span>) and (If <span
+class="math inline">\(p(a) = p(b)\)</span> then (*))</p></li>
+<li><p>If <span class="math inline">\((*)\)</span> then <span
+class="math inline">\(p(a) = p(b)\)</span></p></li>
+<li><p>If <span class="math inline">\(p(a) = p(b)\)</span> then
+(*)</p></li>
+<li><p>not (If <span class="math inline">\((*)\)</span> then <span
+class="math inline">\(p(a) = p(b)\)</span>) or not (If <span
+class="math inline">\(p(a) = p(b)\)</span> then (*))</p></li>
+</ol>
+</blockquote>
+<p>Can you see how all these statements have their roots in (B) and (C)
+so we can forget about (A) and (D) for now. Instead, go through both B
+and C and try and:</p>
+<blockquote>
+<ol type="1">
+<li>Think of a case where it works (True) [If you can’t find one it is
+false]</li>
+<li>Think of a case where it doesn’t work (False) [If you can’t find one
+it is true]</li>
+</ol>
+</blockquote>
+<p>Let’s start by decoding what (*) means:
+<code>There is a value of x named c inbetween a and b which is a turning point.</code></p>
+<p>In order to prove that an <code>if statement</code> is False, you
+must find a case when X is true and Y is false (given
+<code>if X then Y</code>)</p>
+<p>Let’s start with (B):</p>
+<p><span class="math display">\[
+\text{if } (*) \text{ then } p(a) = p(b)
+\]</span></p>
+<ol type="1">
+<li>Find a case where it is True:</li>
+</ol>
+<blockquote>
+<figure>
+<img src="image/TMUANecessaryandSufficient/1664109757800.png"
+alt="Case where (B) is true" />
+<figcaption aria-hidden="true">Case where (B) is true</figcaption>
+</figure>
+<p>Here (*) is true: <span class="math inline">\(a &lt; c &lt;
+b\)</span> and <span class="math inline">\(p&#39;(c)=0\)</span> And
+<span class="math inline">\(p(a) = p(b)\)</span> Therefore it is an
+example where the statement is true ([if True then True] = True)</p>
+</blockquote>
+<ol start="2" type="1">
+<li>Find a case where it is False:</li>
+</ol>
+<blockquote>
+<figure>
+<img src="image/TMUANecessaryandSufficient/1664109979113.png"
+alt="Case where (B) is false" />
+<figcaption aria-hidden="true">Case where (B) is false</figcaption>
+</figure>
+<p>Here (*) is true: <span class="math inline">\(a &lt; c &lt;
+b\)</span> and <span class="math inline">\(p&#39;(c)=0\)</span> But
+<span class="math inline">\(p(a) \neq p(b)\)</span> Therefore it is an
+example where the statement is false ([if True then False] = False)</p>
+</blockquote>
+<p>We can now say, for a fact, that (B) is False. Let’s substitute the
+value of (B) into our previous list of ABCD:</p>
+<blockquote>
+<ol type="A">
+<li><p>False and (If <span class="math inline">\(p(a) = p(b)\)</span>
+then (*))</p></li>
+<li><p>False</p></li>
+<li><p>If <span class="math inline">\(p(a) = p(b)\)</span> then
+(*)</p></li>
+<li><p>True or not (If <span class="math inline">\(p(a) = p(b)\)</span>
+then (*))</p></li>
+</ol>
+</blockquote>
+<p>This means we can instantly discard (A) because False and Anything =
+False.</p>
+<p>So we now have to possibilities:</p>
+<blockquote>
+<ol start="3" type="A">
+<li><p>If <span class="math inline">\(p(a) = p(b)\)</span> then
+(*)</p></li>
+<li><p>True or not (If <span class="math inline">\(p(a) = p(b)\)</span>
+then (*))</p></li>
+</ol>
+</blockquote>
+<p>Let’s take a look at (C) because it is common to both statements:</p>
+<ol type="1">
+<li>Find a case where it is true:</li>
+</ol>
+<blockquote>
+<figure>
+<img src="image/TMUANecessaryandSufficient/1664110796761.png"
+alt="Case where (C) is true" />
+<figcaption aria-hidden="true">Case where (C) is true</figcaption>
+</figure>
+<p>We say <span class="math inline">\(p(a) = p(b)\)</span>, and then
+look at (<em>): For (</em>): <span class="math inline">\(a &lt; b &lt;
+c\)</span> and <span class="math inline">\(p&#39;(c) = 0\)</span>
+Therefore we have found a case where it is true.</p>
+</blockquote>
+<ol start="2" type="1">
+<li>Find a case where it is false:</li>
+</ol>
+<blockquote>
+<p>Now I can’t think of a case where it is False, so I will now attempt
+to prove it to be true.</p>
+</blockquote>
+<p>We know that <span class="math inline">\(p(a) = p(b)\)</span>
+therefore we can give this a variable name: <span
+class="math inline">\(p(a) = p(b) = d\)</span>. Let’s look at the cases
+in which a polynomial could arise:</p>
+<h4 id="case-1-strictly-increasing">Case 1: Strictly increasing</h4>
+<blockquote>
+<figure>
+<img src="image/TMUANecessaryandSufficient/1664111587841.png"
+alt="Strictly Increasing" />
+<figcaption aria-hidden="true">Strictly Increasing</figcaption>
+</figure>
+<p>If the polynomial is (strictly) increasing from point (a, d), at some
+point it needs to start coming down in order to reach (b, d). Therefore,
+it must have a turning point (c).</p>
+</blockquote>
+<h4 id="case-2-strictly-decreasing">Case 2: Strictly decreasing</h4>
+<blockquote>
+<figure>
+<img src="image/TMUANecessaryandSufficient/1664111816858.png"
+alt="Strictly Decreasing" />
+<figcaption aria-hidden="true">Strictly Decreasing</figcaption>
+</figure>
+<p>If the polynomial is (strictly) decreasing from the point (a, d), at
+some point it must come up again to reach (b, d). Therefore, it must
+have a turning point (c).</p>
+</blockquote>
+<h3 id="case-3-multiple-turns">Case 3: Multiple turns</h3>
+<blockquote>
+<figure>
+<img src="image/TMUANecessaryandSufficient/1664122856878.png"
+alt="1664122856878" />
+<figcaption aria-hidden="true">1664122856878</figcaption>
+</figure>
+<p>In this case, the polynomial is going up and down randomly in between
+a and b, yet there are still possible values for c (in fact, there are
+even more possible values!).</p>
+</blockquote>
+<h3 id="case-4-straight-line">Case 4: Straight Line</h3>
+<blockquote>
+<figure>
+<img src="image/TMUANecessaryandSufficient/1664123136108.png"
+alt="Straight Line f(x) = 3" />
+<figcaption aria-hidden="true">Straight Line <span
+class="math inline">\(f(x) = 3\)</span></figcaption>
+</figure>
+<p>Take, for example, the graph <span class="math inline">\(f(x) =
+3\)</span>, <span class="math inline">\(f&#39;(x) = 0\)</span> and
+therefore there is also the possibility of c existing.</p>
+</blockquote>
+<h3 id="case-5-linear-line">Case 5: Linear Line</h3>
+<blockquote>
+<figure>
+<img src="image/TMUANecessaryandSufficient/1664123333764.png"
+alt="Linear Line" />
+<figcaption aria-hidden="true">Linear Line</figcaption>
+</figure>
+<p>The points <span class="math inline">\(p(a) = p(b)\)</span> can’t
+exist on this graph because it is not curved or flat. Moreover, if we
+differentiate this, we will never get 0. Take for example: <span
+class="math inline">\(f(x) = 3x + 1\)</span>. Try and find a value for x
+that is constant: <span class="math inline">\(f(x_1) = f(x_2)\)</span>;
+<span class="math inline">\(3x_1 + 1 = 3x_2 + 1\)</span>; <span
+class="math inline">\(3x_1 = 3x_2\)</span>; <span
+class="math inline">\(x_1 = x_2\)</span>. Therefore we know that the
+only possible value for <span class="math inline">\(p(a) = p(b)\)</span>
+is for <span class="math inline">\(a = b\)</span> but we know that <span
+class="math inline">\(a &lt; b\)</span>, therefore it is False for both
+sides. And <code>if false then false</code> is logically equivalent to
+<code>true</code>.</p>
+</blockquote>
+<p>Therefore the answer is (c).</p>
+<p>I hope this helped you understand the necessary and unnecessary, or
+maybe it helped you learn how to answer Q8 (I hope this might be true at
+least). I would thoroughly recommend going and reading the pdf attached
+at the top of this page, because it excellently describes how to use
+proofs (and it was written by Cambridge so it has to at least be ok
+;)).</p>
+</body>
+</html>
