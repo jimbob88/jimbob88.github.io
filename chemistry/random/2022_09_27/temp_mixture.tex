@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{gensymb}
+\usepackage{amsmath}
+
+\title{Maths formula}
+\author{James Blackburn}
+\date{September 2022}
+
+\begin{document}
+
+\maketitle
+
+\section{The Original Formula}
+
+\[
+t_f = \frac{(c_1 \times m_1 \times t_1) + (c_2 \times m_2 \times t_2)}{(c_1 \times m_1) + (c_2 \times m_2)}
+\]
+
+Where:
+
+\begin{itemize}
+\item \(t_f\) is the final temperature of the mixture (\(\degree C\))
+\item \(c\) is the specific heat capacity of the substance (\(J/kg K\))
+\item \(m\) is the mass of the substance (\(kg\))
+\item \(t\) is the temperature of the substance (\(\degree C\))
+\end{itemize}
+
+You can use this term with as many substances as you like (simply add each term in the pattern shown).
+
+\section{Simplifying for water}
+
+Because the \(c\) is common to both substances (water has a specific heat capacity of \(4184 \; J/kg K\), we can simplify the above equation:
+
+\[
+\begin{aligned}
+    t_f &= \frac{c \times m_1 \times t_1 + c \times m_2 \times t_2}{c \times m_1 + c \times m_2} \\
+    &= \frac{c(m_1 \times t_1 + m_2 \times t_2)}{c(m_1 + m_2)} \\
+    &= \frac{m_1 \times t_1 + m_2 \times t_2}{m_1 + m_2} \\
+\end{aligned}
+\]
+
+In relation to the above statement "\(c\) is common to both substances", this is not strictly true, but it is a good enough approximation for us engineers!
+\end{document}
