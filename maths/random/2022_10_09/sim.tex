@@ -1,0 +1,525 @@
+\documentclass[12pt]{article}
+
+\author{James Blackburn}
+\date{\today}
+
+\title{Arithmetic Sequences in 2-Dimensional Simultaneous Equations}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+%t\usepackage[english]{babel}
+\newtheorem{theorem}{Theorem}
+\usepackage{bm}
+
+\newcommand{\theoremref}[1]{Thorem \ref{#1}}
+
+\begin{document}
+	\maketitle
+	
+	\newpage
+	\tableofcontents
+	
+	\newpage
+	
+	\section{Introduction}
+	I was interested by a video \cite{video} I saw 	about bi-conditional examples and towards the end of the video, the following statement is made:
+	
+	\begin{theorem}
+		\textbf{If} the coefficients of each line of this simultaneous equation are in an arithmetic sequence \textbf{then} the solution is \((-1, 2)\)
+		
+		Where the simultaneous equation takes the form:
+		
+		\begin{align}
+			\label{eq1} a\bm{x} + b\bm{y} &= c \\
+			\label{eq2} d\bm{x} + e\bm{y} &= f
+		\end{align}
+		
+		And \(a, b, c, d, e, f\) is an arithmetic sequence.
+		
+	\end{theorem}
+
+
+	
+	
+	\section{Proving it using matrices}
+
+	Another way of thinking about equations \eqref{eq1} and \eqref{eq2} is by writing them as a matrix multiplication.
+	
+	\begin{equation}\label{matrix solution}
+		\left [ \begin{array}{cc} 
+			a & b \\
+			d & e \\
+		 \end{array} \right ] \times
+	 	\left [ \begin{array}{c}
+	 		x \\
+	 		y \\
+ 		\end{array}\right ] = 
+	 	\left [ \begin{array}{c}
+	 		c \\
+ 			f \\
+ 		\end{array}\right ]
+	\end{equation}
+
+	As we know that the terms \(a, b, c, d, e, f\) are members of an arithmetic progression we can write them using equation \eqref{arithmetic term formula}.
+	
+	\begin{equation}\label{arithmetic term formula}
+		a_k = a_1 + (k - 1)d
+	\end{equation}
+
+	\begin{equation*}
+		\left [ \begin{array}{cc} 
+			a & a + d \\
+			a + 3d & a + 4d \\
+		\end{array} \right ] \times
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] = 
+		\left [ \begin{array}{c}
+			a + 2d \\
+			a + 5d \\
+		\end{array}\right ]
+	\end{equation*}
+
+	We can rearrange this equation for \(x\) and \(y\).
+	
+	
+	\begin{equation*}
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] = 
+		\left [ \begin{array}{cc} 
+			a & a + d \\
+			a + 3d & a + 4d \\
+		\end{array} \right ] ^{-1}
+		\left [ \begin{array}{c}
+			a + 2d \\
+			a + 5d \\
+		\end{array}\right ]
+	\end{equation*}
+
+	If we then do the matrix inverse of the 2x2 matrix:
+	
+	\begin{equation*}
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] = 
+		\frac{1}{a(a+4d) - (a+d)(a+3d)}
+		\left [ \begin{array}{cc} 
+			a + 4d & -a - d \\
+			-a - 3d & a \\
+		\end{array} \right ]
+		\left [ \begin{array}{c}
+			a + 2d \\
+			a + 5d \\
+		\end{array}\right ]
+	\end{equation*}
+
+	We can now collect the terms in the reciprocal determinant.
+	
+	 	\begin{equation*}
+	 	\left [ \begin{array}{c}
+	 		x \\
+	 		y \\
+	 	\end{array}\right ] = 
+	 	\frac{1}{-3a^2}
+	 	\left [ \begin{array}{cc} 
+	 		a + 4d & -a - d \\
+	 		-a - 3d & a \\
+	 	\end{array} \right ]
+	 	\left [ \begin{array}{c}
+	 		a + 2d \\
+	 		a + 5d \\
+	 	\end{array}\right ]
+	 \end{equation*}
+
+	And then multiply the new 2x2 matrix by the 2x1 vector.
+	
+	\begin{equation*}
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] = 
+	 	-\frac{1}{3a^2}
+		\left [ \begin{array}{c} 
+			(a + 4d)(a + 2d) + (-a - d)(a + 5d) \\
+			(-a - 3d)(a + 2d) + a(a + 5d) \\
+		\end{array} \right ]
+	\end{equation*}
+
+	This can be rearranged to make it easier to simplify:
+	
+	\begin{equation*}
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] = 
+		-\frac{1}{3a^2}
+		\left [ \begin{array}{c} 
+			(a + 4d)(a + 2d) - (a + d)(a + 5d) \\
+			a(a + 5d) - (a + 3d)(a + 2d) \\
+		\end{array} \right ]
+	\end{equation*}
+
+	And then expand and simplify.
+	
+	\begin{equation*}
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] = 
+		-\frac{1}{3a^2}
+		\left [ \begin{array}{c} 
+			3a^2 \\
+			-6a^2 \\
+		\end{array} \right ]
+	\end{equation*}
+	
+	If we then multiply the vector by the scale-factor \(\frac{-1}{3a^2}\) we get:
+	
+	\begin{equation*}
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] = 
+		\left [ \begin{array}{c} 
+			-1 \\
+			2 \\
+		\end{array} \right ]
+	\end{equation*}
+	
+	\section{Disproving the converse by counterexample}
+	
+	The video also suggests that the converse should also be checked.
+	
+		
+	\begin{theorem}\label{converse}
+		\textbf{If} the solution is \((-1, 2)\) \textbf{then} the coefficients of each line of this simultaneous equation are in an arithmetic sequence.
+		
+		Where the simultaneous equation takes the form:
+		
+		\begin{align}
+			a\bm{x} + b\bm{y} &= c \\
+			d\bm{x} + e\bm{y} &= f
+		\end{align}
+		
+		Where \(x\) and \(y\) are \(-1\) and \(2\) respectively.
+	\end{theorem}
+
+	The easiest way to come up with a counter example for this is that we can take our previous general formula  \eqref{matrix solution} and simply substitute the known \(x\) and \(y\) values.
+	
+	\begin{equation}\label{one_minus_two}
+		\left [ \begin{array}{cc} 
+			a & b \\
+			d & e \\
+		\end{array} \right ] \times
+		\left [ \begin{array}{c}
+			1 \\
+			-2 \\
+		\end{array}\right ] = 
+		\left [ \begin{array}{c}
+			c \\
+			f \\
+		\end{array}\right ]
+	\end{equation}
+
+	What you should be able to see from this formula is that \theoremref{converse} an only be true if \(a, b, c, d, e, f\) cannot be anything other than an arithmetic series. We can attempt to disprove this by choosing values for \(a, b, d, e\) that can't be an arithmetic series. Given that they are the 1\textsuperscript{st}, 2\textsuperscript{nd}, 4\textsuperscript{th}, 5\textsuperscript{th} terms respectively we can come up with something that can't be arithmetic: \(1, 2, ..., 9, 1\) (where \(...\) is the generic 3\textsuperscript{rd} term).
+	
+	Substituting these values into \eqref{one_minus_two} gives:
+	
+		
+	\begin{align}
+		\left [ \begin{array}{cc} 
+			1 & 2 \\
+			9 & 1 \\
+		\end{array} \right ] \times
+		\left [ \begin{array}{c}
+			1 \\
+			-2 \\
+		\end{array}\right ] &= 
+		\left [ \begin{array}{c}
+			c \\
+			f \\
+		\end{array}\right ] &\\
+		\left [ \begin{array}{c}
+			3 \\
+			-7 \\
+		\end{array}\right ] &= 
+		\left [ \begin{array}{c}
+			c \\
+			f \\
+		\end{array}\right ]
+	\end{align}
+	
+
+	The fact we have plausible values for \(c\) and \(f\) disproves \theoremref{converse} anyway, but if we want further proof we can write the following:
+	
+			
+	\begin{align}
+		1\bm{x} + 2\bm{y} &= 3 \\
+		9\bm{x} + 1\bm{y} &= -7
+	\end{align}
+	
+	Solving this for \(x\) and \(y\):
+	
+	
+	\begin{align}
+		\left [ \begin{array}{cc} 
+			1 & 2 \\
+			9 & 1 \\
+		\end{array} \right ] \times
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] &= 
+		\left [ \begin{array}{c}
+			3 \\
+			-7 \\
+		\end{array}\right ] \\
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] &= 
+		\left [ \begin{array}{cc} 
+			1 & 2 \\
+			9 & 1 \\
+		\end{array} \right ]^{-1} \times
+		\left [ \begin{array}{c}
+			3 \\
+			-7 \\
+		\end{array}\right ] \\
+				\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] &= 
+		\left [ \begin{array}{cc} 
+			-\frac{1}{17} & \frac{2}{17} \\
+			\frac{9}{17} & -\frac{1}{17} \\
+		\end{array} \right ] \times
+		\left [ \begin{array}{c}
+			3 \\
+			-7 \\
+		\end{array}\right ] \\
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] &= 
+		\left [ \begin{array}{c}
+			-1 \\
+			2 \\
+		\end{array}\right ] 
+	\end{align}
+	
+	
+	\subsection{What did we actually do just then?}
+	In fact we showed something different, which is that it doesn't matter whether the two equations are from the same sequence, and in fact, this will work for two separate arithmetic equations and is both necessary and sufficient. We an see in the above that \(a, b, c\) are members of one sequence (first term 1, common difference 1) and \(d, e, f\) are members of another sequence (first term 9, common difference -8). Let's take a look at the new theorem.
+	
+	\section{A new theorem}
+	
+	\begin{theorem}\label{converse2}
+		Each line of the simultaneous equations follows an arithmetic pattern \textbf{if and only if} the solution is \((-1, 2)\)
+		
+		Where the simultaneous equation takes the form:
+		
+		\begin{align}
+			 a\bm{x} + b\bm{y} &= c \\
+			 d\bm{x} + e\bm{y} &= f
+		\end{align}
+		
+		Where \(x\) and \(y\) are \(-1\) and \(2\) respectively and \(a, b, c\) are an arithmetic sequence and \(e, d, f\) are also an arithmetic sequence.
+	\end{theorem}
+
+	Let's write this out in a form we know from \eqref{arithmetic term formula}.
+	
+			
+	\begin{align}
+		 (a)\bm{x} + (a + d_1)\bm{y} &= (a + 2d_1) \\
+		 (b)\bm{x} + (b+d_2)\bm{y} &= (b+2d_2)
+	\end{align}
+
+	And then if we solve with matrices:
+	
+	\begin{align}
+		\left [ \begin{array}{cc} 
+			a & a + d_1 \\
+			b & b + d_2 \\
+		\end{array} \right ] \times
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] &= 
+		\left [ \begin{array}{c}
+			a + 2d_1 \\
+			b + 2d_2 \\
+		\end{array}\right ] \\
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] &= 
+		\left [ \begin{array}{cc} 
+			a & a + d_1 \\
+			b & b + d_2 \\
+		\end{array} \right ]^{-1} \times
+		\left [ \begin{array}{c}
+			a + 2d_1 \\
+			b + 2d_2 \\
+		\end{array}\right ] \\
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] &= 
+		\frac{1}{ad_2 - d_1b}
+		\left [ \begin{array}{cc} 
+			b + d_2 & -(a+d_1) \\
+			-b & a \\
+		\end{array} \right ] \times
+		\left [ \begin{array}{c}
+			a + 2d_1 \\
+			b + 2d_2 \\
+		\end{array}\right ] \\
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] &= 
+		\frac{1}{ad_2 - d_1b}
+		\left [ \begin{array}{c}
+			-(ad_2 - d_1b) \\
+			2(ad_2 - d_1b) \\
+		\end{array}\right ] \\
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+		\end{array}\right ] &= 
+		\left [ \begin{array}{c}
+			-1 \\
+			2 \\
+		\end{array}\right ] 
+	\end{align}
+	
+	Alternatively, one can look at it in terms of the arithmetic sequence. What we are doing here is \(-1 \times a_1 + 2 \times a_2\). We can then rewrite this and see if we get \(a_3\).
+	
+	\begin{equation}
+		-1(a_1) + 2(a_1 + d) = a_1 + 2d = a_3
+	\end{equation}
+
+	We can also look at this formula above to prove that when the solution is (-1, 2) we are guaranteed to get an arithmetic progression. 
+	
+	\begin{align}
+		\text{Where} x \in \mathbb{R} \text{ and } d \in \mathbb {R} \\
+		y = x + d \\
+		\text{ any integer can be represented as one base and one addition}
+	\end{align}
+
+	For example, let's say we have \(a_1 = 3\), and \(a_2 = 1\) then clearly \(d=-2\). And therefore, any two real numbers can represent an arithmetic sequence. \(1, 5\) is simply the start of \(1, 5, 9, 13, 17, 21, ...\)
+	
+	\section{How about 3-way simultaneous equations?}
+	
+			
+	\begin{align}
+		a\bm{x} + b\bm{y} + c\bm{z} &= d \\
+		e\bm{x} + f\bm{y} + g\bm{z} &= h \\
+		i\bm{x} + j\bm{y} + k\bm{z} & = l
+	\end{align}
+	
+	In matrix form:
+	
+	\begin{equation}
+		\left [ \begin{array}{ccc} 
+			a & b & c \\
+			e & f & g \\
+			i & j & k \\
+		\end{array} \right ] \times
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+			z \\
+		\end{array}\right ] = 
+		\left [ \begin{array}{c}
+			d \\
+			h \\
+			l \\
+		\end{array}\right ]
+	\end{equation}
+
+	And then rearrange to give \(x, y, z\):
+	
+	
+	\begin{equation}
+		\left [ \begin{array}{c}
+			x \\
+			y \\
+			z \\
+		\end{array}\right ] = 
+		\left [ \begin{array}{ccc} 
+			a & b & c \\
+			e & f & g \\
+			i & j & k \\
+		\end{array} \right ]^{-1} \times	
+		\left [ \begin{array}{c}
+			d \\
+			h \\
+			l \\
+		\end{array}\right ]
+	\end{equation}
+
+	Let's now substitute our 3 arithmetic sequences.
+	
+	 	\begin{equation}
+	 	\left [ \begin{array}{c}
+	 		x \\
+	 		y \\
+	 		z \\
+	 	\end{array}\right ] = 
+	 	\left [ \begin{array}{ccc} 
+	 		a & a + d_1 & a + 2d_1 \\
+	 		b & b + d_2 & b + 2d_2 \\
+	 		c & c + d_3 & c + 2d_3 \\
+	 	\end{array} \right ]^{-1} \times	
+	 	\left [ \begin{array}{c}
+	 		d \\
+	 		h \\
+	 		l \\
+	 	\end{array}\right ]
+	 \end{equation}
+	
+	Now let's check the determinant of the matrix so we can check in which cases it is invertible (when the determinant of a matrix is 0 it cannot be inverted).
+	
+	\begin{align}
+		\det \bm{M} &= 
+		 \begin{aligned}
+				a  \det \left [ \begin{array}{cc} 
+				b + d_2 & b + 2d_3 \\
+				c + d_3 & c + 2d_3 \end{array} \right ] \\
+			- (a+d_1) \det \left [ \begin{array}{cc} 
+			b  & b + 2d_3 \\
+			c & c + 2d_3 \end{array} \right ] \\
+			+ (a + 2d_1) \det \left [ \begin{array}{cc} 
+			b  & b + d_3 \\
+			c & c + d_3
+		\end{array} \right ] 
+		\end{aligned} \\
+	 	&\begin{aligned}
+			= a [(b+d_2)(c+2d_3) - (c+d_3)(b+2d_2)] \\
+			- (a+d_1)[b(c+2d_3) - c(b+2d_2)]\\
+			 + (a+2d_1)[b(c+d_3) - c(b+d_2)]	
+		\end{aligned} \\
+		&\begin{aligned}
+			= a(-d_2c+bd_3) \\ - (a+d_1)(2bd_3-2cd_2) \\ + (a+2d_1)(bd_3-cd_2)
+		\end{aligned}		 \\
+		 &= 0
+	\end{align}
+
+	And there you go, you learned something new. One cannot inverse a matrix if it is formed from 3 arithmetic progressions (the same is also true for the transpose of the matrix.)
+	
+	\begin{theorem}
+		\textbf{If} a 3x3 matrix is formed from 3 arithmetic progressions \textbf{then} it's determinant is 0.
+	\end{theorem}
+
+	
+
+	\newpage
+	\bibliography{sources}{}
+	\bibliographystyle{abbrv}
+\end{document}
