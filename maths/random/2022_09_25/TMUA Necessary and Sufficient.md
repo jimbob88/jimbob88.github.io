@@ -10,8 +10,8 @@ If you already know what you are talking about, and just need a simple refresher
 
 | Short Form  | Long Form                       | Mathematical Notation   | English Form                        |
 | ----------- | ------------------------------- | ----------------------- | ----------------------------------- |
-| A if B      | If B then A                     | $A \Leftarrow B$      | A is sufficient for B               |
-| A only if B | If A then B                     | $A \Rightarrow B$     | A is necessary for B                |
+| A if B      | If B then A                     | $A \Leftarrow B$      | A is necessary for B               |
+| A only if B | If A then B                     | $A \Rightarrow B$     | A is sufficient for B                |
 | A iff B     | (if B then A) and (if A then B) | $A \Leftrightarrow B$ | A is necessary and sufficient for B |
 
 Truth table:
@@ -60,7 +60,9 @@ For logic gates, you only really need to remember the truth tables and they are 
 
 I believe the best way to consider these problems is to consider them as images, and then using these images, simply converting them into `if/only if/iff` statements.
 
-Take for example, the following statement, `A is necessary for B` , what does this mean? If you don't have a conversion table this could be a difficult question to answer but if you translate it into an image in your head, this can become much easier. Let's take the following image:
+Take for example, the following statement, `A is necessary for B` , what does this mean? If you don't have a conversion table this could be a difficult question to answer but if you translate it into an image in your head, this can become much easier. 
+
+Let's take the following image:
 
 ![AinB](image/TMUANecessaryandSufficient/AinB.png)
 
